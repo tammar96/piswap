@@ -16,12 +16,12 @@ class Reservation extends Migration
         Schema::create('reservations', function (Blueprint $table){
             $table->increments('id');
             $table->dateTime('date');
-            $table->integer('user_id')->unsigned();
+            $table->string('user_id');
             $table->string('book_id');
         });
 
         Schema::table('reservations', function (Blueprint $table){
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('email')->on('users');
             $table->foreign('book_id')->references('isbn')->on('books');
         });
     }

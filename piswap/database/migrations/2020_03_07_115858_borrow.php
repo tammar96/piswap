@@ -16,11 +16,11 @@ class Borrow extends Migration
         Schema::create('borrows', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('date');
-            $table->integer('user_id')->unsigned();
+            $table->string('user_id');
         });
 
         Schema::table('borrows', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('email')->on('users');
         });
     }
 
