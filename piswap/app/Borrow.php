@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Borrow extends Model
 {
-    public $table = "Borrow";
+    public $table = "borrows";
+
+    protected $fillable = [
+        'date', 'user_id'
+    ];
 
     public function user()
     {

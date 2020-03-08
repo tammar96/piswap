@@ -13,14 +13,14 @@ class CategoryHelper extends Migration
      */
     public function up()
     {
-        Schema::create('CategoryHelper', function (Blueprint $table){
+        Schema::create('categoryhelpers', function (Blueprint $table){
             $table->string('book_id');
             $table->integer('category_id')->unsigned();
         });
 
-        Schema::table('CategoryHelper', function (Blueprint $table){
-            $table->foreign('book_id')->references('isbn')->on('Book');
-            $table->foreign('category_id')->references('id')->on('Category');
+        Schema::table('categoryhelpers', function (Blueprint $table){
+            $table->foreign('book_id')->references('isbn')->on('books');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -31,6 +31,6 @@ class CategoryHelper extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('categoryhelpers');
     }
 }

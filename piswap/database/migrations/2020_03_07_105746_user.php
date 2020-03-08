@@ -13,14 +13,16 @@ class User extends Migration
      */
     public function up()
     {
-        Schema::create('User', function (Blueprint $table){
+        Schema::create('users', function (Blueprint $table){
             $table->increments('id');
             $table->string('name');
-            $table->string('surname');
-            $table->string('role');
-            $table->string('adress');
-            $table->string('telephone');
-            $table->boolean('active');
+            $table->string('surname')->nullable();
+            $table->string('email');
+            $table->string('role')->nullable();
+            $table->json('adress')->nullable();
+            $table->string('telephone')->nullable();
+            $table->boolean('active')->nullable();
+            $table->string('password');
         });
     }
 
@@ -31,6 +33,6 @@ class User extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('User');
+        Schema::dropIfExists('users');
     }
 }

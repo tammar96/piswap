@@ -13,16 +13,16 @@ class Reservation extends Migration
      */
     public function up()
     {
-        Schema::create('Reservation', function (Blueprint $table){
+        Schema::create('reservations', function (Blueprint $table){
             $table->increments('id');
             $table->dateTime('date');
             $table->integer('user_id')->unsigned();
-            $table->string('book_id')->nullable();
+            $table->string('book_id');
         });
 
-        Schema::table('Reservation', function (Blueprint $table){
-            $table->foreign('user_id')->references('id')->on('User');
-            $table->foreign('book_id')->references('isbn')->on('Book');
+        Schema::table('reservations', function (Blueprint $table){
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('book_id')->references('isbn')->on('books');
         });
     }
 
@@ -33,6 +33,6 @@ class Reservation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Reservation');
+        Schema::dropIfExists('reservations');
     }
 }

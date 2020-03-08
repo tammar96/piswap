@@ -13,14 +13,14 @@ class Borrow extends Migration
      */
     public function up()
     {
-        Schema::create('Borrow', function (Blueprint $table) {
+        Schema::create('borrows', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('date');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned();
         });
 
-        Schema::table('Borrow', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('User');
+        Schema::table('borrows', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -31,6 +31,6 @@ class Borrow extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Borrow');
+        Schema::dropIfExists('borrows');
     }
 }

@@ -13,7 +13,7 @@ class Book extends Migration
      */
     public function up()
     {
-        Schema::create('Book', function (Blueprint $table){
+        Schema::create('books', function (Blueprint $table){
             $table->string('isbn')->unique();
             $table->string('title');
             $table->string('author');
@@ -26,7 +26,6 @@ class Book extends Migration
             $table->string('genre');
             $table->integer('rack');
             $table->integer('language');
-            /* CATEGORY - I don't think that we need it as a collection, we should use assocation to retrieve categories*/
         });
     }
 
@@ -37,6 +36,6 @@ class Book extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Book');
+        Schema::dropIfExists('books');
     }
 }
