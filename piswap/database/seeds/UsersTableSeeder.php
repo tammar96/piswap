@@ -21,14 +21,14 @@ class UsersTableSeeder extends Seeder
                 'email'     => 'peter.novak@google.com',
                 'role'      => 'user',
                 'address'   => json_encode(array(
-                    "State" => "Slovakia",
-                    "City"  => "Sered",
-                    "Street"=> "Hlavna cesta",
-                    "Number"=> "123"
+                    "state" => "Slovakia",
+                    "city"  => "Sered",
+                    "street"=> "Hlavna cesta",
+                    "number"=> "123"
                 )),
                 'telephone' => '0905636912',
-                'active'    => True,
-                'password'   => bcrypt('123456789')
+                'active'    => False,
+                'password'  => bcrypt('123456789')
             ),
         ));
     }

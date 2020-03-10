@@ -37,7 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest'); // TODO use another middleware
     }
 
     /**
@@ -50,7 +50,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'role' is not an input field ;) TODO
+            'address' => ['required', 'string', 'max:255'],
+            'telephone' => ['string', 'max:16'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,7 +69,17 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'surname' => $data['surname'],
             'email' => $data['email'],
+            // role - TODO
+            'address' => json_encode(array(
+                "state" => $data['state'],
+                "city" => $data['city'],
+                "street" => $data['street'],
+                "number" => $data['number']
+            )),
+            'telephone' => $data['telephone'],
+            'active' => False,
             'password' => Hash::make($data['password']),
         ]);
     }

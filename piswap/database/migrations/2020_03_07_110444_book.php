@@ -19,12 +19,12 @@ class Book extends Migration
             $table->string('author');
             $table->string('publisher');
             $table->date('date');
-            $table->string('bond');
-            $table->integer('numberOfPages');
+            $table->string('bond')->nullable();
+            $table->integer('numberOfPages')->nullable();
             $table->mediumText('description');
-            $table->string('department');
+            $table->string('department')->nullable();
             $table->string('genre');
-            $table->integer('rack');
+            $table->integer('rack')->nullable();
             $table->integer('language');
         });
     }
