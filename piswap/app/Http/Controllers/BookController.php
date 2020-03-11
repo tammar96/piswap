@@ -76,7 +76,7 @@ class BookController extends Controller
         $book->save();
 
         $data = [
-            'book' => $book;
+            'book' => $book
         ];
 
         // return view('books.show')->with('data', $data); TODO frontend
@@ -91,7 +91,7 @@ class BookController extends Controller
     public function show($id)
     {
         $data = [
-            'book' => Book::find($id);
+            'book' => Book::find($id)
         ];
 
         // return view('books.details')->with('data', $data); TODO frontend
