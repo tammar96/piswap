@@ -53,8 +53,12 @@ class RegisterController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             // 'role' is not an input field ;) TODO
-            'address' => ['required', 'string', 'max:255'],
-            'telephone' => ['string', 'max:16'],
+            //'address' => ['required', 'json'],
+            'state' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'street' => ['nullable', 'string', 'max:255'],
+            'number' => ['required', 'string'],
+            'telephone' => ['nullable', 'string', 'max:16'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }

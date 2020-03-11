@@ -15,10 +15,10 @@ class User extends Migration
     {
         Schema::create('users', function (Blueprint $table){
             $table->string('name');
-            $table->string('surname')->nullable();
+            $table->string('surname');
             $table->string('email')->unique();
             $table->string('role')->nullable();
-            $table->json('address')->nullable();
+            $table->json('address');
             $table->string('telephone')->nullable();
             $table->boolean('active')->nullable();
             $table->string('password');
