@@ -32,5 +32,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Reservation');
     }
 
+    public function hasRole($role)
+    {
+        return $this->role == $role ? True : False;
+    }
     // TODO for fine
 }
