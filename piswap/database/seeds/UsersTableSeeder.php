@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
                 'name'      => 'Peter',
                 'surname'   => 'Novak',
                 'role'      => 'user',
-                'address'   => "Mliecna 22, Sered, Slovensko"
+                'address'   => "Mliecna 22, Sered, Slovensko",
                 'telephone' => '0905636912',
                 'active'    => False,
                 'email'     => 'peter.novak@google.com',                

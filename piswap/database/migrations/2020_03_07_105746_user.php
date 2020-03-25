@@ -18,7 +18,7 @@ class User extends Migration
             $table->string('surname');
             $table->string('email')->unique();
             $table->string('role')->nullable();
-            $table->json('address');
+            $table->string('address')->nullable();
             $table->string('telephone')->nullable();
             $table->boolean('active')->nullable();
             $table->string('password');
