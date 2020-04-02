@@ -16,6 +16,16 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert(array(
             array(
+                'name'      => 'admin',
+                'surname'   => 'admin',
+                'role'      => 'administrator',
+                'address'   => "this webpage",
+                'telephone' => '0905636912',
+                'active'    => False,
+                'email'     => 'admin@admin',                
+                'password'  => bcrypt('admin')
+            ),            
+            array(
                 'name'      => 'Peter',
                 'surname'   => 'Novak',
                 'role'      => 'user',

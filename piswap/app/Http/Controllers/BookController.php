@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-namespace App\Http\Controllers\Auth;
+// namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 
 use App\Book;
-
+use DB;
 class BookController extends Controller
 {
     private $_rules = [
@@ -36,7 +36,8 @@ class BookController extends Controller
      */
     public function index()
     {
-
+        $books = DB::select('select * from books');
+        return view('books',['books'=>$books]);
     }
 
     /**

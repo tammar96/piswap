@@ -19,8 +19,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/books', 'BookController@index')->name('book');
 
-// Routes for handling URLs which are not list in this file
 Route::get('/notFoundHttpException', 'ErrorController@index404')->name('errors.notFoundHttpException');
 Route::get('/invalidArgumentException', 'ErrorController@invalidArgumentException')->name('errors.invalidArgumentException');
 
