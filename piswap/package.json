@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "bootstrap-vue": "^2.10.1",
         "vue-axios": "^2.1.5"
     }
 }

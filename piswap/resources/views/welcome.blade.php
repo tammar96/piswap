@@ -42,6 +42,7 @@
 
             .content {
                 text-align: center;
+                padding-top: 10em;
             }
 
             .title {
@@ -64,7 +65,7 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -81,7 +82,6 @@
 
             <div class="content">
                 <div id="app">
-                    <BookList></BookList>
                     <BookList></BookList>
                 </div>
                 <script type="text/javascript" src="js/app.js"></script>
