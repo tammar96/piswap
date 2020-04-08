@@ -1,0 +1,107 @@
+ <html lang="en" class="gr__getbootstrap_com">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Projekt Registrace predmetov">
+    <meta name="author" content="xvasko12, xvasko14, xtamas01">
+    <!-- Bootstrap core CSS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="./template.css" rel="stylesheet">
+    </head>
+
+    <body>
+    <div class="container-fluid" style="">
+      <div class="row">
+        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-slack sidebar" style="">
+            <div style="">
+                <div style="">
+                  <img src="./img/logo_sh.png" style="width:100%;">
+                </div>
+            </div>
+          <ul class="nav nav-pills  flex-column">
+            <li class="nav-item ">
+              <a class="nav-link" href="list-subj.php">List of Books<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="list-field.php">List of Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="list-field.php">Add New Book</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="list-field.php">Borrow Book</a>
+            </li>
+          </ul>
+
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="list-rules.php">Library Rules</a>
+            </li>
+          </ul>
+
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.php">Profil</a>
+            </li>
+          </ul>
+
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="./html/php/logout.php">Log out</a>
+            </li>
+          </ul>
+        </nav>
+
+        <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+          <h1>Profil</h1>
+          <span class=".text-left" style="margin-bottom: 15px; display: block;">
+            On this page you can edit your personal details.
+          </span>
+          <h2>Personal Details</h2>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-3 required">
+                <label class="control-label" for="inputEmail4">Email</label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" required name="email" value="">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputPassword4">Password</label>
+                <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="password">
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputPassword4">Verify Password</label>
+                <input type="password" class="form-control" id="inputPassword4" placeholder="Password" name="heslo_potvrd">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3 required">
+                <label class="control-label" for="inputAddress">Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Street Address & House number" name="address" value="" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3 required">
+                <label class="control-label" for="inputCity">City</label>
+                <input type="text" class="form-control" id="inputCity" placeholder="City" name="city" required="required" value="">
+              </div>
+              <div class="form-group required col-md-3">
+                <label class="control-label" for="inputZip">ZIP code</label>
+                <input type="text" class="form-control" id="inputZip" placeholder="000 00" name="zipcode" required="required" value="">
+              </div>
+            </div>
+            All items with <span style="color: #d00;position: relative; margin-left: 4px; top: -6px;">*</span> are mandatory.
+            <br>
+            <br>
+            <button type="submit" name="Submit" class="btn btn-primary">Save</button>
+          </form>
+        </main>
+      </div>
+    </div>
+    </body>
+</html>
