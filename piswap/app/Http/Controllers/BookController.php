@@ -97,7 +97,7 @@ class BookController extends Controller
         $data = [
             'book' => Book::find($id)
         ];
-
+        return response()->json($data);
         // return view('books.details')->with('data', $data); TODO frontend
     }
 

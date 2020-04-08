@@ -1951,6 +1951,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -79164,19 +79166,25 @@ var render = function() {
         "b-row",
         _vm._l(_vm.books, function(book) {
           return _c("b-col", { key: book.isbn, attrs: { cols: "3" } }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-header" }, [
-                _vm._v(_vm._s(book.title))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(book.description) +
-                    "\n                "
-                )
-              ])
-            ])
+            _c(
+              "a",
+              { attrs: { href: "/books/" + book.isbn, target: "blank" } },
+              [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-header" }, [
+                    _vm._v(_vm._s(book.title))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(book.description) +
+                        "\n                    "
+                    )
+                  ])
+                ])
+              ]
+            )
           ])
         }),
         1

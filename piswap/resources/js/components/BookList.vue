@@ -2,13 +2,15 @@
     <b-container class="bv-example-row" >
         <b-row>
             <b-col cols='3' v-bind:key="book.isbn" v-for="book in books">
-                <div class="card">
-                    <div class="card-header">{{book.title}}</div>
+                <a v-bind:href="'/books/'+ book.isbn" target="blank">
+                    <div class="card" >
+                        <div class="card-header">{{book.title}}</div>
 
-                    <div class="card-body">
-                        {{book.description}}
+                        <div class="card-body">
+                            {{book.description}}
+                        </div>
                     </div>
-                </div>
+                </a>
             </b-col>
         </b-row>
         <b-row>
