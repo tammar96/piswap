@@ -22,10 +22,10 @@ class BookController extends Controller
         'genre' => ['required', 'string'],
         'rack' => ['optional', 'digits:4'],
         'language' => ['required', 'string', 'max:64']
-    ];  
+    ];
 
     public function __construct()
-    {   
+    {
         $this->middleware('auth'); // TODO use another middleware
     }
 
@@ -101,6 +101,11 @@ class BookController extends Controller
         // return view('books.details')->with('data', $data); TODO frontend
     }
 
+    public function list()
+    {
+        return view('booklist');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -141,7 +146,7 @@ class BookController extends Controller
         $book->genre = $request->input('genre');
         $book->rack = $request->input('rack');
         $book->language = $request->input('language');
-        
+
         $book->save();
 
         $data = [
@@ -154,7 +159,7 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id                                                                                                                                                                       
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
