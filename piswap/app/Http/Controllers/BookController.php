@@ -20,7 +20,8 @@ class BookController extends Controller
         'description' => ['required', 'string'],
         'department' => ['nullable', 'string'],
         'genre' => ['required', 'string'],
-        'rack' => ['optional', 'digits:4'],
+        'quantity' => ['required', 'string'],           
+        'rack' => ['optional', 'digits:4'],   
         'language' => ['required', 'string', 'max:64']
     ];  
 
@@ -74,6 +75,7 @@ class BookController extends Controller
         $book->description = $request->input('description');
         $book->department = $request->input('department');
         $book->genre = $request->input('genre');
+        $book->quantity = $request->input('quantity');
         $book->rack = $request->input('rack');
         $book->language = $request->input('language');
 
@@ -139,6 +141,7 @@ class BookController extends Controller
         $book->description = $request->input('description');
         $book->department = $request->input('department');
         $book->genre = $request->input('genre');
+        $book->quantity = $request->input('quantity');
         $book->rack = $request->input('rack');
         $book->language = $request->input('language');
         
