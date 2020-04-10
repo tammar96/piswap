@@ -183,4 +183,16 @@ class BookController extends Controller
     {
         return view('books.ask-delete')->with('book', Book::find($id));
     }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        return view('booksearch');
+    }
+
 }

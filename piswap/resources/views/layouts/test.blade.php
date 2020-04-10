@@ -11,8 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
   <script src="./bootstrap/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  <link href="css/template.css" rel="stylesheet">
-  <link href="../css/template.css" rel="stylesheet">
+  <link href="/css/template.css" rel="stylesheet">
   <title>PIS - @yield('title')</title>
   </head>
 
@@ -43,7 +42,7 @@
             <a class="nav-link" href="/books/create">Add New Book</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/borrow">Borrow Book</a>
+            <a class="nav-link" href="/borrows/create">Borrow Book</a>
           </li>
         </ul>
         <ul class="nav nav-pills flex-column">
@@ -59,11 +58,16 @@
         @endif
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">FIXME Log out</a>
+            {{-- <form class="form-horizontal"  method="POST" action="{{ route('books.update', $data['book']->isbn) }}"> --}}
+            {{-- {{method_field('GET')}} --}}
+            {{-- {{ csrf_field() }} --}}
+              <a class="nav-link" href="logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">FIXME Log out</a>
+            {{-- </form> --}}
           </li>
         </ul>
         </nav>
         @show
+
 
       <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
         @yield('content')
