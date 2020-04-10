@@ -20,8 +20,8 @@ class BookController extends Controller
         'description' => ['required', 'string'],
         'department' => ['nullable', 'string'],
         'genre' => ['required', 'string'],
-        'quantity' => ['required', 'string'],
-        'rack' => ['optional', 'digits:4'],
+        'quantity' => ['required', 'string'],           
+        'rack' => ['optional', 'digits:4'],   
         'language' => ['required', 'string', 'max:64']
     ];
 
