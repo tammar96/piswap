@@ -45,7 +45,7 @@
           <td>{{ $key->language }}</td>
           <td>{{ $key->quantity}}</td>
           <td>
-            <form class="form-horizontal"  method="POST" action="{{ route('books.destroy', $key->id) }}">
+            <form class="form-horizontal"  method="POST" action="{{ route('books.destroy', $key->isbn) }}">
               {{method_field('DELETE')}}
               {{ csrf_field() }}
               <button type="button" onclick="window.location.href='/books/{{ $key->id }}/edit'" class="btn btn-warning" >Edit Book</button>

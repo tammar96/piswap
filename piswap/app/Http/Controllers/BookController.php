@@ -169,14 +169,14 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($isbn)
     {
-        Book::destroy($id);
+        Book::destroy($isbn);
         $data = [
             'books' => Book::get(),
         ];
 
-        return view('books.show')->with('data', $data);
+        return view('booklist')->with('data', $data);
     }
 
     public function askDelete($id)
