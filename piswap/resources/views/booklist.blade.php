@@ -36,30 +36,20 @@
         </tr>
       </thead>
       <tbody>
+        @foreach $data['books'] as $book
         <tr>
-          <td>a</td>
-          <td>a</td>
-          <td>ta</td>
-          <td>rack 1</td>
-          <td>a</td>
-          <td>10</td>
-          <td>
-            <button type="button" onclick="window.location.href='edit-book.html'" class="btn btn-warning" >Edit Book</button>
-            <button type="button" onclick="window.location.href='delete-book.html'" class="btn btn-danger" >Delete Book</button>
-          </td>
-        </tr>
-        <tr>
-          <td>b</td>
-          <td>b</td>
-          <td>db</td>
-          <td>rack 0</td>
-          <td>b</td>
+          <td>{{ $key->isbn }}</td>
+          <td>{{ $key->author }}</td>
+          <td>{{ $key->title }}</td>
+          <td>{{ $key->rack }}</td>
+          <td>{{ $key->language }}</td>
           <td>0</td>
           <td>
             <button type="button" onclick="window.location.href='edit-book.html'" class="btn btn-warning" >Edit Book</button>
             <button type="button" onclick="window.location.href='delete-book.html'" class="btn btn-danger" >Delete Book</button>
           </td>
         </tr>
+        @endforeach
       </tbody>
     </table>
   </div>

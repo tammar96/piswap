@@ -103,7 +103,11 @@ class BookController extends Controller
 
     public function list()
     {
-        return view('booklist');
+        $data = [
+            'books' => Book::get(),
+        ];
+
+        return view('booklist')->with('data', $data);
     }
 
     /**
