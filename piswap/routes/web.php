@@ -20,7 +20,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/books', 'BookController@index')->name('book');
-Route::get('/books/{id}', 'BookController@show')->name('book');
+Route::get('/books/show/{id}', 'BookController@show')->name('book');
 Route::get('/profile', 'ProfileController@show')->name('profile');
 
 Route::get('/notFoundHttpException', 'ErrorController@index404')->name('errors.notFoundHttpException');

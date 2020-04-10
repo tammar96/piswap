@@ -1,0 +1,22 @@
+.book-list .card-deck {
+    display: grid !important; 
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))  !important;
+    grid-gap: 15px  !important;
+    // margin-top: 20px;
+}
+
+.book-list .card-deck .card {
+    margin-right: 0px !important;
+    margin-bottom: 15px !important;
+    margin-top: 0px !important;
+    margin-left: 0px !important;
+}
+
+.book-list .centered-row {
+    flex-direction: column;
+    display: inline-flex;
+}
+
+.book-list .filter {
+    margin-bottom: 20px;
+}

@@ -1953,20 +1953,69 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       books: [],
       page: 0,
       pages: 1,
-      perPage: 20
+      perPage: 16,
+      perRow: 4,
+      filterName: "",
+      filterYear: "",
+      filterAvailable: false,
+      filterString: ""
     };
   },
   mounted: function mounted() {
-    console.log("test");
     this.getBooks(this.page);
   },
+  computed: {
+    cardDecksCount: function cardDecksCount() {
+      return Math.ceil(this.books.length / this.perRow);
+    }
+  },
   methods: {
+    filterBooks: _.debounce(function (e) {
+      var filterParts = [];
+
+      if (this.filterName != "") {
+        filterParts.push("text=" + this.filterName);
+      }
+
+      if (this.filterYear != "") {
+        filterParts.push("year=" + this.filterYear);
+      }
+
+      if (this.filterAvailable != false) {
+        filterParts.push("available=true");
+      }
+
+      this.filterString = filterParts.length > 0 ? "?" + filterParts.join("&") : "";
+      this.getBooks(0);
+    }, 500),
     getBooks: function getBooks(index) {
       var _this = this;
 
@@ -1977,12 +2026,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _this.$http.get('/books');
+                return _this.$http.get('/books' + _this.filterString);
 
               case 2:
                 response = _context.sent;
                 result = response.data.books;
-                _this.pages = result.length / _this.perPage - 1;
+                _this.pages = Math.ceil(result.length / _this.perPage);
                 _this.page = index;
                 _this.books = result.slice(_this.page * _this.perPage, (_this.page + 1) * _this.perPage);
 
@@ -1993,6 +2042,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    booksInDeck: function booksInDeck(deckIndex) {
+      return this.books.slice((deckIndex - 1) * this.perRow, deckIndex * this.perRow);
     }
   }
 });
@@ -79160,56 +79212,202 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "b-container",
-    { staticClass: "bv-example-row" },
+    { staticClass: "book-list" },
     [
       _c(
         "b-row",
-        _vm._l(_vm.books, function(book) {
-          return _c("b-col", { key: book.isbn, attrs: { cols: "3" } }, [
-            _c(
-              "a",
-              { attrs: { href: "/books/" + book.isbn, target: "blank" } },
-              [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-header" }, [
+        { staticClass: "filter justify-content-center" },
+        [
+          _c(
+            "b-col",
+            { attrs: { cols: "3" } },
+            [
+              _c("b-form-input", {
+                attrs: { placeholder: "Názvu/autor/vydavatel" },
+                on: {
+                  input: function($event) {
+                    return _vm.filterBooks()
+                  }
+                },
+                model: {
+                  value: _vm.filterName,
+                  callback: function($$v) {
+                    _vm.filterName = $$v
+                  },
+                  expression: "filterName"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            { attrs: { cols: "3" } },
+            [
+              _c("b-form-input", {
+                attrs: {
+                  placeholder: "Rok vydání",
+                  type: "number",
+                  min: "1900",
+                  max: "2021"
+                },
+                on: {
+                  input: function($event) {
+                    return _vm.filterBooks()
+                  }
+                },
+                model: {
+                  value: _vm.filterYear,
+                  callback: function($$v) {
+                    _vm.filterYear = $$v
+                  },
+                  expression: "filterYear"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-col",
+            { attrs: { cols: "3" } },
+            [
+              _c(
+                "b-form-checkbox",
+                {
+                  attrs: {
+                    id: "cbOnlyAvailable",
+                    name: "cbOnlyAvailable",
+                    value: "true",
+                    "unchecked-value": "false"
+                  },
+                  on: {
+                    input: function($event) {
+                      return _vm.filterBooks()
+                    }
+                  },
+                  model: {
+                    value: _vm.filterAvailable,
+                    callback: function($$v) {
+                      _vm.filterAvailable = $$v
+                    },
+                    expression: "filterAvailable"
+                  }
+                },
+                [_vm._v("\n                Pouze dostupné\n                ")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-row",
+        { staticClass: "centered-row" },
+        _vm._l(_vm.cardDecksCount, function(i) {
+          return _c(
+            "b-card-group",
+            { key: i, attrs: { deck: "" } },
+            _vm._l(_vm.booksInDeck(i), function(book) {
+              return _c(
+                "b-card",
+                {
+                  key: book.isbn,
+                  attrs: {
+                    "no-body": "",
+                    "img-src": "/img/test.jpg",
+                    "img-alt": "Book image",
+                    "img-top": ""
+                  },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "footer",
+                        fn: function() {
+                          return [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "card-link",
+                                attrs: {
+                                  href: "/books/show/" + book.isbn,
+                                  target: "blank"
+                                }
+                              },
+                              [_vm._v("Půjčit si knihu")]
+                            )
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ],
+                    null,
+                    true
+                  )
+                },
+                [
+                  _c("h6", { staticClass: "card-title" }, [
                     _vm._v(_vm._s(book.title))
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(book.description) +
-                        "\n                    "
-                    )
+                  _c("span", { staticClass: "card-subtitle mb-2 text-muted" }, [
+                    _vm._v(_vm._s(book.author))
+                  ]),
+                  _vm._v(" "),
+                  _c("b-card-text", [
+                    _c("small", { staticClass: "text-muted" }, [
+                      _vm._v(
+                        "\n                                    " +
+                          _vm._s(
+                            book.quantity == 0
+                              ? "Momentálně nedostupná"
+                              : "K zapůjčení: " + book.quantity
+                          ) +
+                          "\n                                "
+                      )
+                    ])
                   ])
-                ])
-              ]
-            )
-          ])
+                ],
+                1
+              )
+            }),
+            1
+          )
         }),
         1
       ),
       _vm._v(" "),
-      _c("b-row", [
+      _c("b-row", { staticClass: "justify-content-center" }, [
         _c("nav", [
           _c(
             "ul",
             { staticClass: "pagination" },
             _vm._l(_vm.pages, function(index) {
-              return _c("li", { key: index, staticClass: "page-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "page-link",
-                    on: {
-                      click: function($event) {
-                        return _vm.getBooks(index)
+              return _c(
+                "li",
+                {
+                  key: index,
+                  staticClass: "page-item",
+                  class: { active: index == _vm.page + 1 }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      on: {
+                        click: function($event) {
+                          return _vm.getBooks(index - 1)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v(" " + _vm._s(index))]
-                )
-              ])
+                    },
+                    [_vm._v(" " + _vm._s(index))]
+                  )
+                ]
+              )
             }),
             0
           )
