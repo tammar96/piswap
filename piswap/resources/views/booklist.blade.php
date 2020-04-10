@@ -43,7 +43,7 @@
           <td>{{ $key->title }}</td>
           <td>{{ $key->rack }}</td>
           <td>{{ $key->language }}</td>
-          <td>FIXME</td>
+          <td>{{ $key->quantity}}</td>
           <td>
             <button type="button" onclick="window.location.href='/book/edit/{{ $key->id }}'" class="btn btn-warning" >Edit Book</button>
             <button type="button" onclick="window.location.href='/book/delete/{{ $key->id }}'" class="btn btn-danger" >Delete Book</button>
