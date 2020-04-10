@@ -14,7 +14,7 @@
     Here you can add, edit and delete books
   </span>
   <h2>Add new book to the inventory</h2>
-    <button type="button" onclick="window.location.href='add-book.html'" class="btn btn-success" >Add Book</button>
+    <button type="button" onclick="window.location.href='/book/add'" class="btn btn-success" >Add Book</button>
   <br>
   <br>
 
@@ -43,10 +43,10 @@
           <td>{{ $key->title }}</td>
           <td>{{ $key->rack }}</td>
           <td>{{ $key->language }}</td>
-          <td>0</td>
+          <td>FIXME</td>
           <td>
-            <button type="button" onclick="window.location.href='edit-book.html'" class="btn btn-warning" >Edit Book</button>
-            <button type="button" onclick="window.location.href='delete-book.html'" class="btn btn-danger" >Delete Book</button>
+            <button type="button" onclick="window.location.href='/book/edit/{{ $key->id }}'" class="btn btn-warning" >Edit Book</button>
+            <button type="button" onclick="window.location.href='/book/delete/{{ $key->id }}'" class="btn btn-danger" >Delete Book</button>
           </td>
         </tr>
         @endforeach
