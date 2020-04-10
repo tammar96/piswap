@@ -14,7 +14,7 @@
     Here you can add, edit and delete books
   </span>
   <h2>Add new book to the inventory</h2>
-    <button type="button" onclick="window.location.href='/book/add'" class="btn btn-success" >Add Book</button>
+    <button type="button" onclick="window.location.href='/book/create'" class="btn btn-success" >Add Book</button>
   <br>
   <br>
 
