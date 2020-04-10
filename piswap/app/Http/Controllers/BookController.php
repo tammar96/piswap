@@ -118,13 +118,13 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($isbn)
     {
         $data = [
-            'book' => Book::find($id),
+            'book' => Book::find($isbn),
         ];
 
-        return view('booksedit')->with('data', $data);
+        return view('bookedit')->with('data', $data);
     }
 
     /**
