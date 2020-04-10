@@ -14,7 +14,7 @@
     Here you can add, edit and delete books
   </span>
   <h2>Add new book to the inventory</h2>
-    <button type="button" onclick="window.location.href='/book/create'" class="btn btn-success" >Add Book</button>
+    <button type="button" onclick="window.location.href='/books/create'" class="btn btn-success" >Add Book</button>
   <br>
   <br>
 
@@ -45,8 +45,12 @@
           <td>{{ $key->language }}</td>
           <td>{{ $key->quantity}}</td>
           <td>
-            <button type="button" onclick="window.location.href='/book/edit/{{ $key->id }}'" class="btn btn-warning" >Edit Book</button>
-            <button type="button" onclick="window.location.href='/book/delete/{{ $key->id }}'" class="btn btn-danger" >Delete Book</button>
+            <form class="form-horizontal"  method="POST" action="{{ route('books.destroy', $key->id) }}">
+              {{method_field('DELETE')}}
+              {{ csrf_field() }}
+              <button type="button" onclick="window.location.href='/books/{{ $key->id }}/edit'" class="btn btn-warning" >Edit Book</button>
+              <button type="submit" class="btn btn-danger" >Delete Book</button>
+            </form>
           </td>
         </tr>
         @endforeach

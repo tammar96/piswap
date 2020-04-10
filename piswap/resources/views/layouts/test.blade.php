@@ -34,24 +34,24 @@
         @if(auth()->check())
         <ul class="nav nav-pills  flex-column">
           <li class="nav-item ">
-            <a class="nav-link" href="/books/list">List of Books</a>
+            <a class="nav-link" href="/books">List of Books</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="list-users.html">List of Users</a>
+            <a class="nav-link" href="/users">List of Users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="add-book.html">Add New Book</a>
+            <a class="nav-link" href="/books/create">Add New Book</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="borrow-book.html">Borrow Book</a>
+            <a class="nav-link" href="/borrow">Borrow Book</a>
           </li>
         </ul>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="rentals.html">My Rentals</a>
+            <a class="nav-link" href="/rentals">My Rentals</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="profile.html">Profile</a>
+            <a class="nav-link active" href="/profile">Profile</a>
           </li>
         </ul>
         @else

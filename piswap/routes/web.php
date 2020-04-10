@@ -21,10 +21,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('books', 'BookController');
+// Route::get('/profile', 'ProfileController@show')->name('profile');
 //Route::get('/books', 'BookController@index')->name('book');
 //Route::get('/books/{id}', 'BookController@show')->name('book');
 
-//Route::get('/profile', 'ProfileController@show')->name('profile');
 //Route::get('/book/list', 'BookController@list')->name('profile');
 //Route::get('/user/list', 'ProfileController@show')->name('profile');
 //Route::get('/book/add', 'BookController@show')->name('profile');

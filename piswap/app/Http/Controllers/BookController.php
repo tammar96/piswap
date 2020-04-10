@@ -124,7 +124,7 @@ class BookController extends Controller
             'book' => Book::find($id),
         ];
 
-        // return view('books.edit')->with('data', $data); TODO frontend
+        // return view('books.edit')->with('data', $data);
     }
 
     /**
@@ -160,7 +160,7 @@ class BookController extends Controller
             'books' => Book::get()
         ];
 
-        // return view('books.show')->with('data', $data); TODO frontend
+        return view('books.show')->with('data', $data);
     }
 
     /**
@@ -176,7 +176,7 @@ class BookController extends Controller
             'books' => Book::get(),
         ];
 
-        // return view('books.show')->with('data', $data); TODO frontend
+        return view('books.show')->with('data', $data);
     }
 
     public function askDelete($id)
