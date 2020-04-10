@@ -36,7 +36,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach $data['books'] as $book
+        @foreach($data['books'] as $key)
         <tr>
           <td>{{ $key->isbn }}</td>
           <td>{{ $key->author }}</td>
