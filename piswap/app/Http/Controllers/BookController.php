@@ -37,11 +37,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = DB::select('select * from books');
-        // return view('books',['books'=>$books]);
-        return response()->json([
-            'books' => $books
-        ]);
+        $data = [
+            'books' => Book::get()
+        ];
+
+        return view('booklist')->with('data', $data);
     }
 
     /**
