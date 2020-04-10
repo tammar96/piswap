@@ -124,7 +124,7 @@ class BookController extends Controller
             'book' => Book::find($id),
         ];
 
-        // return view('books.edit')->with('data', $data);
+        return view('booksedit')->with('data', $data);
     }
 
     /**
