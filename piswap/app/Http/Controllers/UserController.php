@@ -20,7 +20,7 @@ class UserController extends Controller
             'users' => User::get()
         ];
 
-        return view('userlist')->with('data', $data);
+        return view('users.list')->with('data', $data);
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('useradd');
+        return view('users.add');
     }
 
     /**

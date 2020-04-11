@@ -41,7 +41,7 @@ class BookController extends Controller
             'books' => Book::get()
         ];
 
-        return view('booklist')->with('data', $data);
+        return view('books.list')->with('data', $data);
     }
 
     /**
@@ -51,7 +51,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('bookadd');
+        return view('books.add');
     }
 
     /**
@@ -109,7 +109,7 @@ class BookController extends Controller
             'books' => Book::get(),
         ];
 
-        return view('booklist')->with('data', $data);
+        return view('books.list')->with('data', $data);
     }
 
     /**
@@ -124,7 +124,7 @@ class BookController extends Controller
             'book' => Book::find($isbn),
         ];
 
-        return view('bookedit')->with('data', $data);
+        return view('books.edit')->with('data', $data);
     }
 
     /**
@@ -192,7 +192,7 @@ class BookController extends Controller
      */
     public function search()
     {
-        return view('booksearch');
+        return view('books.search');
     }
 
 }

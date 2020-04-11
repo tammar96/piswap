@@ -32,7 +32,7 @@ class BorrowController extends Controller
             'borrow' => Book::get()
         ];
 
-        return view('borrowsshow')->with('data', $data);
+        return view('borrows.show')->with('data', $data);
     }
 
     /**
@@ -42,7 +42,7 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        return view('borrowsadd');
+        return view('borrows.add');
     }
 
     /**
@@ -66,7 +66,7 @@ class BorrowController extends Controller
             'borrow' => $borrow
         ];
 
-        return view('borrowsshow')->with('data', $data); // TODO frontend
+        return view('borrows.show')->with('data', $data); // TODO frontend
     }
 
     /**
@@ -120,7 +120,7 @@ class BorrowController extends Controller
             'borrows' => Borrow::get()
         ];
 
-        return view('borrowsshow')->with('data', $data); // TODO frontend
+        return view('borrows.show')->with('data', $data); // TODO frontend
     }
 
     /**
@@ -136,7 +136,7 @@ class BorrowController extends Controller
             'borrows' => Borrow::get(),
         ];
 
-        return view('borrowsshow')->with('data', $data); // TODO frontend
+        return view('borrows.show')->with('data', $data); // TODO frontend
     }
 
     public function askDelete($id)
