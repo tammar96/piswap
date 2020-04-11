@@ -32,6 +32,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('booklist', require('./components/BookList.vue').default);
+Vue.component('bookdetail', require('./components/BookDetail.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

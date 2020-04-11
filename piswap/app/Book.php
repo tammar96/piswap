@@ -11,13 +11,6 @@ class Book extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $primaryKey = 'isbn';
-
-    public $incrementing = false;
-
-    // In Laravel 6.0+ make sure to also set $keyType
-    protected $keyType = 'string';
-
     public function reservations()
     {
         return $this->hasMany('App\Reservation');

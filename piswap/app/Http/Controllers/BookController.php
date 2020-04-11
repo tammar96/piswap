@@ -88,6 +88,15 @@ class BookController extends Controller
         // return view('books.show')->with('data', $data); TODO frontend
     }
 
+    public function listJson()
+    {
+        $data = [
+            'books' => Book::get()
+        ];
+
+        return response()->json($data);
+    }
+
      /**
      * Display the specified resource.
      *

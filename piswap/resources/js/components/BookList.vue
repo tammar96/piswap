@@ -30,7 +30,8 @@
                                     </small>
                             </b-card-text>
                         <template v-slot:footer>       
-                                <a v-bind:href="'/books/show/'+ book.isbn" target="blank" class="card-link">Půjčit si knihu</a>
+                            <a v-on:click="openDetail($event, book.isbn)" href="#" class="card-link">Půjčit si knihu</a>
+     <!-- <a v-bind:href="'/books/show/'+ book.isbn" target="blank" class="card-link">Půjčit si knihu</a> -->
                         </template>
                     </b-card>
             </b-card-group>
@@ -42,6 +43,7 @@
                 </ul>
             </nav>
         </b-row>
+        <bookdetail v-if="showDetail" v-bind:bookISBN="this.selectedISBN" @close="showDetail = false"></bookdetail>
     </b-container>
 </template>
 
@@ -57,7 +59,9 @@
                 filterName: "",
                 filterYear: "",
                 filterAvailable: false,
-                filterString: ""
+                filterString: "",
+                showDetail: false,
+                selectedISBN: ""
             }
         },
 
@@ -70,6 +74,11 @@
           }  
         },
         methods: {
+            openDetail: function(e, isbn){
+                e.preventDefault();
+                this.selectedISBN = isbn;
+                this.showDetail = true; 
+            },
             filterBooks: _.debounce(function (e) {
                 var filterParts = [];
 
@@ -88,7 +97,7 @@
                 this.getBooks(0);
             }, 500),
             async getBooks(index) {
-                const response = await this.$http.get('/books' + this.filterString);
+                const response = await this.$http.get('/api/books' + this.filterString);
                 var result = response.data.books;
                 this.pages = Math.ceil((result.length / this.perPage));
                 this.page = index;

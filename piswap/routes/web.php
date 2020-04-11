@@ -21,6 +21,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('books', 'BookController');
+Route::get('/api/books', 'BookController@listJson');
+Route::get('/api/books/show/{id}', 'BookController@show')->name('book');
+
+Route::resource('books', 'BookController');
 Route::get('/search', 'BookController@search')->name('books.search');
 
 Route::resource('borrows', 'BorrowController');

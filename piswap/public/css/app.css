@@ -10904,3 +10904,37 @@ a.text-dark:focus {
   margin-bottom: 20px;
 }
 
+.book-detail .modal-mask {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.4s ease;
+}
+
+.book-detail .modal-wrapper {
+  overflow: auto;
+  height: 100%;
+}
+
+.book-detail .card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+}
+
+.book-detail .modal-enter {
+  opacity: 0;
+}
+
+.book-detail .modal-leave-active {
+  opacity: 0;
+}
+
+.book-detail .modal-enter .modal-container,
+.book-detail .modal-leave-active .modal-container {
+  transform: scale(1.1);
+}
+
