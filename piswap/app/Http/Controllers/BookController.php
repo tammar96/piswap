@@ -88,13 +88,31 @@ class BookController extends Controller
         // return view('books.show')->with('data', $data); TODO frontend
     }
 
-    public function listJson()
+    public function listJson(Request $request)
     {
-        $data = [
-            'books' => Book::get()
-        ];
-
-        return response()->json($data);
+        $url = $request->fullUrl();
+        $parsed = parse_url($url);
+        // If there is filter selected make it happen, otherwise show all
+        if (isset($parsed['query'])) {
+            // Parse URI
+            parse_str($parsed['query'], $filtratedArray);
+            // Get the fields we expect
+            $text = isset($filtratedArray['text']) ? $filtratedArray['text'] : "";
+            $year = isset($filtratedArray['year']) ? "AND YEAR(date)=" . $filtratedArray['year'] : "";
+            $availability = isset($filtratedArray['available']) ? $filtratedArray['available'] : 0;
+            // Edit the text in form the SQL expects
+            $textParsed = "'%" . $text . "%'";
+            // Prepare the querry
+            $query = "SELECT * FROM `books` WHERE (isbn LIKE " . $textParsed . " OR title LIKE " . $textParsed . " OR publisher LIKE " . $textParsed . "OR genre LIKE " . $textParsed . ")" . $year . " AND quantity>=" . $availability;
+            // Call the query
+            $books = DB::select($query);
+        } else {
+            $query = "SELECT * FROM `books`";
+            $books = DB::select($query);
+        }
+        return response()->json([
+            'books' => $books
+        ]);
     }
 
      /**
