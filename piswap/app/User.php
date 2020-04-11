@@ -10,8 +10,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $primaryKey = 'email';
     public $table = "users";
+
+    protected $primaryKey = 'email';
+    protected $keyType = 'string';
+    public $incrementing = false;
     public $timestamps = false;
 
     protected $fillable = [

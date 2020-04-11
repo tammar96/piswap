@@ -83,11 +83,12 @@ class ReservationController extends Controller
 
     public function storeAPI(Request $request)
     {
+
         $this->validate($request, ['book_id' => ['required', 'exists:books,isbn']]);
 
         $reservation = new Reservation();
         $reservation->date = date("Y-m-d");
-        $user = User::find(auth()->user()->id);
+        $user = User::find(auth()->user()->email); 
         $reservation->user()->associate($user);
         $book = Book::find($request->input('book_id'));
         $reservation->book()->associate($book);
