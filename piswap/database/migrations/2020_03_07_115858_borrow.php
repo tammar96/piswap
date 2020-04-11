@@ -17,10 +17,12 @@ class Borrow extends Migration
             $table->increments('id');
             $table->dateTime('date');
             $table->string('user_id');
+            $table->string('book_id');
         });
 
         Schema::table('borrows', function (Blueprint $table) {
             $table->foreign('user_id')->references('email')->on('users');
+            $table->foreign('book_id')->references('isbn')->on('books');
         });
     }
 

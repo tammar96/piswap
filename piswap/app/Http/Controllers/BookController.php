@@ -102,7 +102,7 @@ class BookController extends Controller
             $availability = isset($filtratedArray['available']) ? $filtratedArray['available'] : 0;
             // Edit the text in form the SQL expects
             $textParsed = "'%" . $text . "%'";
-            // Prepare the querry
+            // Prepare the query
             $query = "SELECT * FROM `books` WHERE (isbn LIKE " . $textParsed . " OR title LIKE " . $textParsed . " OR publisher LIKE " . $textParsed . "OR genre LIKE " . $textParsed . ")" . $year . " AND quantity>=" . $availability;
             // Call the query
             $books = DB::select($query);

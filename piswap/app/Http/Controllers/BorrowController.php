@@ -12,7 +12,8 @@ class BorrowController extends Controller
     private $_rules = [
         'id' => ['optional', 'digits:4'],
         'date' => ['required', 'date_format:Y-m-d H:i:s|nullable'],
-        'user_id' => ['exists:users,email']
+        'user_id' => ['exists:users,email'],
+        'books' => ['exists:isbn']
     ];
 
     public function __contruct()
@@ -29,7 +30,7 @@ class BorrowController extends Controller
     {
 
         $data = [
-            'borrow' => Book::get()
+            'borrow' => Borrow::get()
         ];
 
         return view('borrows.show')->with('data', $data);
