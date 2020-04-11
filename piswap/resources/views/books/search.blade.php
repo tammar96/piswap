@@ -26,6 +26,7 @@
     </form>
   </div>
   <!-- <div class="table-responsive" style="display: none;"> -->
+  @if(count($data) != 0)
   <div class="table-responsive">
     <table class="table table-striped results_summer table-hover">
       <thead>
@@ -60,4 +61,5 @@
       </tbody>
     </table>
   </div>
+  @endif
 @endsection
