@@ -23,7 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('books', 'BookController');
 Route::get('/search', 'BookController@search')->name('books.search');
 
-
 Route::resource('borrows', 'BorrowController');
 
 // Route::get('/profile', 'ProfileController@show')->name('profile');
@@ -31,6 +30,8 @@ Route::resource('borrows', 'BorrowController');
 //Route::get('/user/list', 'ProfileController@show')->name('profile');
 //Route::get('/user/rentals', 'RentalsController@show')->name('profile');
 //Route::get('/admin/rentals', 'RentalsController@show')->name('profile');
+
+Route::get('/profile', 'ProfileController@show')->name('profile');
 
 
 Route::get('/notFoundHttpException', 'ErrorController@index404')->name('errors.notFoundHttpException');
