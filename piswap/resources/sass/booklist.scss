@@ -12,6 +12,7 @@
         margin-bottom: 15px !important;
         margin-top: 0px !important;
         margin-left: 0px !important;
+        border-color: rgba(0, 0, 0, 0.55);
     }
 
     .centered-row {
@@ -20,7 +21,53 @@
     }
 
     .filter {
+        padding: 20px;
         margin-bottom: 20px;
+        background-color: rgba(0, 0, 0, 0.03);    
+        border-radius: 0.25rem;
+        border: 1px solid #ced4da;    
+    }
+
+    .filter-content {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .filter-item {
+        width: 33%;
+        flex-wrap: wrap;
+    }
+
+    .filter-item.input {
+        margin-right: 40px;            
+    }
+
+    .filter-content:last-child {
+        margin-right: 0px !important;            
+    }
+
+    .card-label-yellow {
+        left: 5px;
+        border-radius: 0.25rem;
+        position: absolute;
+        background: $label-yellow;
+        padding: 5px 5px 5px 5px;
+        top: 5px;
+        font-size: 12px;
+    }
+
+    .card-label-blue {
+        left: 5px;
+        border-radius: 0.25rem;
+        position: absolute;
+        background: $label-blue;
+        padding: 5px 5px 5px 5px;
+        top: 35px;
+        font-size: 10px;
+    }
+
+    .img-wrapper {
+        position: relative;
     }
 }
 

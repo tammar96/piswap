@@ -10893,6 +10893,7 @@ a.text-dark:focus {
   margin-bottom: 15px !important;
   margin-top: 0px !important;
   margin-left: 0px !important;
+  border-color: rgba(0, 0, 0, 0.55);
 }
 
 .book-list .centered-row {
@@ -10901,7 +10902,53 @@ a.text-dark:focus {
 }
 
 .book-list .filter {
+  padding: 20px;
   margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+}
+
+.book-list .filter-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.book-list .filter-item {
+  width: 33%;
+  flex-wrap: wrap;
+}
+
+.book-list .filter-item.input {
+  margin-right: 40px;
+}
+
+.book-list .filter-content:last-child {
+  margin-right: 0px !important;
+}
+
+.book-list .card-label-yellow {
+  left: 5px;
+  border-radius: 0.25rem;
+  position: absolute;
+  background: rgba(255, 193, 7, 0.8);
+  padding: 5px 5px 5px 5px;
+  top: 5px;
+  font-size: 12px;
+}
+
+.book-list .card-label-blue {
+  left: 5px;
+  border-radius: 0.25rem;
+  position: absolute;
+  background: rgba(0, 169, 224, 0.8);
+  padding: 5px 5px 5px 5px;
+  top: 35px;
+  font-size: 10px;
+}
+
+.book-list .img-wrapper {
+  position: relative;
 }
 
 .book-detail .modal-mask {
@@ -10936,5 +10983,66 @@ a.text-dark:focus {
 .book-detail .modal-enter .modal-container,
 .book-detail .modal-leave-active .modal-container {
   transform: scale(1.1);
+}
+
+.header {
+  padding: 60px;
+  text-align: center;
+  background: #00a9e0;
+  color: white;
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+html,
+body {
+  background-color: #fff;
+  color: #636b6f;
+  font-family: "Nunito", sans-serif;
+  font-weight: 200;
+  height: 100vh;
+  margin: 0;
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.position-ref {
+  position: relative;
+}
+
+.top-right {
+  position: absolute;
+  right: 10px;
+  top: 18px;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-size: 84px;
+}
+
+.links > a {
+  color: white;
+  padding: 0 25px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.m-b-md {
+  margin-bottom: 30px;
 }
 

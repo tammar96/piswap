@@ -5,60 +5,60 @@
                 <div class="modal-wrapper">
                     <b-row class="justify-content-center">
                         <b-col cols="4">
-                            <b-card>
+                            <b-card v-for="item in result" v-bind:key="item.isbn">
                                 <button type="button" class="close" v-on:click="$emit('close', '')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <img src="/img/test.jpg" class="card-img-top" :alt="book.title">
+                                <img src="/img/test.jpg" class="card-img-top" :alt="item.title">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{book.title}}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{book.author}}</h6>
-                                    <p class="card-text">{{book.description}}</p>
+                                    <h5 class="card-title">{{item.title}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{item.author}}</h6>
+                                    <p class="card-text">{{item.description}}</p>
                                 </div>
                                 <table class="table table-striped">
                                     <tbody>
                                     <tr>
                                         <td>ISBN</td>
-                                        <td>Otto</td>
+                                        <td>{{item.isbn}}</td>
                                     </tr>
                                     <tr>
                                         <td>Publisher</td>
-                                        <td>Thornton</td>
+                                        <td>{{item.publisher}}</td>
                                     </tr>
                                     <tr>
                                         <td>Date of Publishing</td>
-                                        <td>the Bird</td>
+                                        <td>{{item.date}}</td>
                                     </tr>
                                     <tr>
                                         <td>Bond</td>
-                                        <td>Thornton</td>
+                                        <td>{{item.bond}}</td>
                                     </tr>
                                     <tr>
                                         <td>Pages</td>
-                                        <td>Thornton</td>
+                                        <td>{{item.numberOfPages}}</td>
                                     </tr>
                                     <tr>
                                         <td>Department</td>
-                                        <td>Thornton</td>
+                                        <td>{{item.department}}</td>
                                     </tr>
                                     <tr>
                                         <td>Genre</td>
-                                        <td>Thornton</td>
+                                        <td>{{item.genre}}</td>
                                     </tr>
                                     <tr>
                                         <td>Rack</td>
-                                        <td>Thornton</td>
+                                        <td>{{item.rack}}</td>
                                     </tr>
                                     <tr>
                                         <td>Language</td>
-                                        <td>Thornton</td>
+                                        <td>{{item.language}}</td>
                                     </tr>
                                     <tr>
                                         <td>Status</td>
-                                        <td>Available</td>
+                                        <td>{{item.quantity == 0 ? "Not available" : "Available: " + item.quantity}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
                                 <div class="card-body">
-                                    <a href="#" class="btn btn-primary">Reserve</a>
+                                        <a v-on:click="reserveBook" href="#" class="btn btn-primary">Reserve this book</a>
                                 </div>
                             </b-card>
                         </b-col>
@@ -74,7 +74,7 @@
         props: ['bookISBN'],
         data: function() {
             return {
-                book: []
+                result: []
             }
         },
         mounted() {
@@ -83,8 +83,18 @@
         methods: {   
             async getBook() {
                 const response = await this.$http.get('/api/books/show/' + this.bookISBN);
-                var result = response.data;
-                this.book = result;
+                this.result = response.data;
+            },
+            async reserveBook(){
+                await this.$http.post('/api/reservation/store',
+                {
+                    book_id: this.result.book.isbn
+                });
+                this.getBook();
+            },
+            getReservation(){
+                
+                this.getBook();
             }
         }
     }

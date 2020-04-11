@@ -1,37 +1,40 @@
 <template>
     <b-container class="book-list">
-        <b-row class="filter justify-content-center">
-            <b-col cols="3">
-                <b-form-input v-model="filterName" placeholder="Názvu/autor/vydavatel" v-on:input="filterBooks()"></b-form-input>
-            </b-col>
-            <b-col cols="3">
-                 <b-form-input v-model="filterYear" placeholder="Rok vydání" type="number" min="1900" max="2021" v-on:input="filterBooks()"></b-form-input>
-            </b-col>
-            <b-col cols="3">
-                 <b-form-checkbox
-                    id="cbOnlyAvailable"
-                    v-model="filterAvailable"
-                    name="cbOnlyAvailable"
-                    value="true"
-                    unchecked-value="false"
-                    v-on:input="filterBooks()">
-                    Pouze dostupné
-                    </b-form-checkbox>
-            </b-col>
-        </b-row>
+        <div class="filter">
+            <div class="filter-content">
+                <div class="filter-item input">
+                    <b-form-input v-model="filterName" placeholder="Name/Author/Publisher..." v-on:input="filterBooks()"></b-form-input>
+                </div>
+                <div class="filter-item input">
+                    <b-form-input v-model="filterYear" placeholder="Year" type="number" min="1900" max="2021" v-on:input="filterBooks()"></b-form-input>
+                </div>
+                <div class="filter-item checkbox">
+                    <b-form-select v-model="filterAvailable" v-on:input="filterBooks()">
+                         <b-form-select-option value="false">All books</b-form-select-option>
+                         <b-form-select-option value="true">Only available</b-form-select-option>
+                    </b-form-select>
+                </div>
+            </div>
+        </div>
         <b-row class="centered-row">
             <b-card-group deck v-for="i in cardDecksCount" v-bind:key="i">
-                    <b-card v-bind:key="book.isbn" v-for="book in booksInDeck(i)" no-body img-src="/img/test.jpg" img-alt="Book image" img-top>
-                            <h6 class="card-title">{{book.title}}</h6>
-                            <span class="card-subtitle mb-2 text-muted">{{book.author}}</span>
-                            <b-card-text>
-                                  <small class="text-muted">
-                                        {{book.quantity == 0 ? "Momentálně nedostupná" : "K zapůjčení: " + book.quantity}}
-                                    </small>
-                            </b-card-text>
+                    <b-card v-bind:key="book.isbn" v-for="book in booksInDeck(i)" no-body>
+                            <div class="img-wrapper">
+                                <span class="card-label-yellow">{{book.genre}}</span>
+                                <span class="card-label-blue">{{book.numberOfPages}} pages</span>
+                                <img class="card-img-top" src="/img/test.jpg"/>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">{{book.title}}</h6>
+                                <span class="card-subtitle mb-2 text-muted">{{book.author}}</span>
+                                <b-card-text>
+                                    <small class="text-muted">
+                                            {{book.quantity == 0 ? "Not available" : "Available: " + book.quantity}}
+                                        </small>
+                                </b-card-text>
+                            </div>
                         <template v-slot:footer>       
-                            <a v-on:click="openDetail($event, book.isbn)" href="#" class="card-link">Půjčit si knihu</a>
-     <!-- <a v-bind:href="'/books/show/'+ book.isbn" target="blank" class="card-link">Půjčit si knihu</a> -->
+                            <a v-on:click="openDetail($event, book.isbn)" href="#" class="card-link">Show detail</a>
                         </template>
                     </b-card>
             </b-card-group>
@@ -58,7 +61,7 @@
                 perRow: 4,
                 filterName: "",
                 filterYear: "",
-                filterAvailable: false,
+                filterAvailable: 'false',
                 filterString: "",
                 showDetail: false,
                 selectedISBN: ""
@@ -88,7 +91,7 @@
                 if (this.filterYear != ""){
                     filterParts.push("year=" + this.filterYear);
                 }
-                if (this.filterAvailable != false){
+                if (this.filterAvailable != 'false'){
                    filterParts.push("available=true");
                 }
 
