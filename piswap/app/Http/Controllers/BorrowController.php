@@ -10,6 +10,7 @@ use App\Book;
 class BorrowController extends Controller
 {
     private $_rules = [
+        'id' => ['optional', 'digits:4'],
         'date' => ['required', 'date_format:Y-m-d H:i:s|nullable'],
         'user_id' => ['exists:users,email']
     ];
@@ -26,7 +27,12 @@ class BorrowController extends Controller
      */
     public function index()
     {
-        
+
+        $data = [
+            'borrow' => Book::get()
+        ];
+
+        return view('borrows.show')->with('data', $data);
     }
 
     /**
@@ -36,7 +42,7 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        //
+        return view('borrows.add');
     }
 
     /**
@@ -57,10 +63,10 @@ class BorrowController extends Controller
         $borrow->save();
 
         $data = [
-            'borrow' => $borrow;
+            'borrow' => $borrow
         ];
 
-        // return view('borrows.show')->with('data', $data); // TODO frontend
+        return view('borrows.show')->with('data', $data); // TODO frontend
     }
 
     /**
@@ -75,7 +81,7 @@ class BorrowController extends Controller
             'borrow' => Borrow::find($id)
         ];
 
-        // return view('borrows.details')->with('data', $data); // TODO frontend
+        // return view('borrows.show')->with('data', $data); // TODO frontend
     }
 
     /**
@@ -114,7 +120,7 @@ class BorrowController extends Controller
             'borrows' => Borrow::get()
         ];
 
-        // return view('borrows.show')->with('data', $data); TODO frontend
+        return view('borrows.show')->with('data', $data); // TODO frontend
     }
 
     /**
@@ -124,17 +130,17 @@ class BorrowController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {   
+    {
         Borrow::destroy($id);
         $data = [
             'borrows' => Borrow::get(),
-        ];      
+        ];
 
-        // return view('borrows.show')->with('data', $data); TODO frontend
-    }       
+        return view('borrows.show')->with('data', $data); // TODO frontend
+    }
 
     public function askDelete($id)
-    {   
+    {
         // return view('borrows.ask-delete')->with('borrow', Borrow::find($id)); // TODO frontend
-    }   
+    }
 }

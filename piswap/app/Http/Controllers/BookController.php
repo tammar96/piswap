@@ -20,13 +20,13 @@ class BookController extends Controller
         'description' => ['required', 'string'],
         'department' => ['nullable', 'string'],
         'genre' => ['required', 'string'],
-        'quantity' => ['required', 'string'],           
-        'rack' => ['optional', 'digits:4'],   
+        'quantity' => ['required', 'string'],
+        'rack' => ['optional', 'digits:4'],
         'language' => ['required', 'string', 'max:64']
-    ];  
+    ];
 
     public function __construct()
-    {   
+    {
         $this->middleware('auth'); // TODO use another middleware
     }
 
@@ -37,11 +37,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = DB::select('select * from books');
-        // return view('books',['books'=>$books]);
-        return response()->json([
-            'books' => $books
-        ]);
+        $data = [
+            'books' => Book::get()
+        ];
+
+        return view('books.list')->with('data', $data);
     }
 
     /**
@@ -51,7 +51,7 @@ class BookController extends Controller
      */
     public function create()
     {
-
+        return view('books.add');
     }
 
     /**
@@ -103,19 +103,28 @@ class BookController extends Controller
         // return view('books.details')->with('data', $data); TODO frontend
     }
 
+    public function list()
+    {
+        $data = [
+            'books' => Book::get(),
+        ];
+
+        return view('books.list')->with('data', $data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($isbn)
     {
         $data = [
-            'book' => Book::find($id),
+            'book' => Book::find($isbn),
         ];
 
-        // return view('books.edit')->with('data', $data); TODO frontend
+        return view('books.edit')->with('data', $data);
     }
 
     /**
@@ -144,34 +153,47 @@ class BookController extends Controller
         $book->quantity = $request->input('quantity');
         $book->rack = $request->input('rack');
         $book->language = $request->input('language');
-        
+
         $book->save();
 
         $data = [
             'books' => Book::get()
         ];
 
-        // return view('books.show')->with('data', $data); TODO frontend
+        return view('books.show')->with('data', $data);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id                                                                                                                                                                       
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($isbn)
     {
-        Book::destroy($id);
+        Book::destroy($isbn);
         $data = [
             'books' => Book::get(),
         ];
 
-        // return view('books.show')->with('data', $data); TODO frontend
+        return view('booklist')->with('data', $data);
     }
 
     public function askDelete($id)
     {
         return view('books.ask-delete')->with('book', Book::find($id));
     }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        $data = [];
+        return view('books.search')->with('data', $data);
+    }
+
 }
