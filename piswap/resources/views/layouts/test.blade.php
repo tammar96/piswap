@@ -58,11 +58,14 @@
         @endif
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            {{-- <form class="form-horizontal"  method="POST" action="{{ route('books.update', $data['book']->isbn) }}"> --}}
-            {{-- {{method_field('GET')}} --}}
-            {{-- {{ csrf_field() }} --}}
-              <a class="nav-link" href="logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">FIXME Log out</a>
-            {{-- </form> --}}
+            <a class="nav-link" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
           </li>
         </ul>
         </nav>
