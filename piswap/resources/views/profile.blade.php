@@ -14,6 +14,11 @@
           On this page you can edit your personal details.
         </span>
         <h2>Personal Details</h2>
+        @foreach ($data as $key)
+                        <tr>
+                            <td>{{ $key }}</td>
+                        </tr>
+                        @endforeach
         <form>
           <div class="form-row">
             <div class="form-group col-md-3">

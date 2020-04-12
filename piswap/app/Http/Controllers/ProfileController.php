@@ -33,6 +33,12 @@ class ProfileController extends Controller
 
     public function show()
     {
-        return view('profile');
+        if($user = auth()->user())
+        {
+            $data = [
+                'data' => $user
+            ];
+        return view('profile')->with('data', $data);
+        }
     }
 }
