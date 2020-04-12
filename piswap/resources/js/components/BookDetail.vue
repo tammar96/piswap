@@ -5,60 +5,67 @@
                 <div class="modal-wrapper">
                     <b-row class="justify-content-center">
                         <b-col cols="4">
-                            <b-card v-for="item in result" v-bind:key="item.isbn">
+                            <b-card v-if="book != undefined">
                                 <button type="button" class="close" v-on:click="$emit('close', '')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <img src="/img/test.jpg" class="card-img-top" :alt="item.title">
+                                <img src="/img/test.jpg" class="card-img-top">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{item.title}}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{item.author}}</h6>
-                                    <p class="card-text">{{item.description}}</p>
+                                    <h5 class="card-title">{{book.title}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{book.author}}</h6>
+                                    <p class="card-text">{{book.description}}</p>
                                 </div>
                                 <table class="table table-striped">
                                     <tbody>
                                     <tr>
                                         <td>ISBN</td>
-                                        <td>{{item.isbn}}</td>
+                                        <td>{{book.isbn}}</td>
                                     </tr>
                                     <tr>
                                         <td>Publisher</td>
-                                        <td>{{item.publisher}}</td>
+                                        <td>{{book.publisher}}</td>
                                     </tr>
                                     <tr>
                                         <td>Date of Publishing</td>
-                                        <td>{{item.date}}</td>
+                                        <td>{{book.date}}</td>
                                     </tr>
                                     <tr>
                                         <td>Bond</td>
-                                        <td>{{item.bond}}</td>
+                                        <td>{{book.bond}}</td>
                                     </tr>
                                     <tr>
                                         <td>Pages</td>
-                                        <td>{{item.numberOfPages}}</td>
+                                        <td>{{book.numberOfPages}}</td>
                                     </tr>
                                     <tr>
                                         <td>Department</td>
-                                        <td>{{item.department}}</td>
+                                        <td>{{book.department}}</td>
                                     </tr>
                                     <tr>
                                         <td>Genre</td>
-                                        <td>{{item.genre}}</td>
+                                        <td>{{book.genre}}</td>
                                     </tr>
                                     <tr>
                                         <td>Rack</td>
-                                        <td>{{item.rack}}</td>
+                                        <td>{{book.rack}}</td>
                                     </tr>
                                     <tr>
                                         <td>Language</td>
-                                        <td>{{item.language}}</td>
+                                        <td>{{book.language}}</td>
                                     </tr>
                                     <tr>
                                         <td>Status</td>
-                                        <td>{{item.quantity == 0 ? "Not available" : "Available: " + item.quantity}}</td>
+                                        <td>{{book.quantity == 0 ? "Not available" : "Available: " + book.quantity}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div class="card-body">
+                                <div class="card-body" v-if="userMail == undefined">
+                                    <p>In order to reserve this book, please <a href="/login">login.</a></p> 
+                                </div>
+                                <div class="card-body" v-if="userMail != undefined && reservation == undefined">
                                         <a v-on:click="reserveBook" href="#" class="btn btn-primary">Reserve this book</a>
+                                </div>
+                                <div class="card-body" v-if="userMail != undefined && reservation != undefined">
+                                    <p>Your reservation number is {{reservation.id}}. </p>
+                                    <a v-on:click="cancelReservation" href="#" class="btn btn-secondary">Cancel reservation</a>
                                 </div>
                             </b-card>
                         </b-col>
@@ -74,27 +81,45 @@
         props: ['bookISBN'],
         data: function() {
             return {
-                result: []
+                book: this.getBook(),
+                reservation: undefined,
+                userMail: undefined
             }
         },
         mounted() {
            this.getBook();
+           this.loadReservation();
         },
         methods: {   
             async getBook() {
                 const response = await this.$http.get('/api/books/show/' + this.bookISBN);
-                this.result = response.data;
+                this.book = response.data.book;
             },
-            async reserveBook(){
-                await this.$http.post('/api/reservation/store',
+            async reserveBook(e){
+                e.preventDefault();
+                var response = await this.$http.post('/api/reservation/store',
                 {
-                    book_id: this.result.book.isbn
+                    book_isbn: this.book.isbn
                 });
-                this.getBook();
+                this.reservation = response.data.reservation;
             },
-            getReservation(){
-                
-                this.getBook();
+            async getReservation(){
+                const response = await this.$http.get('/api/reservation/show/' + this.bookISBN);
+                this.reservation = response.data.reservation;
+                console.log(this.reservation);
+            },
+            async cancelReservation(e){
+                e.preventDefault();
+                const response = await this.$http.get('/api/reservation/cancel/' + this.reservation.id);
+                this.getReservation();
+            },
+            async loadReservation(){
+                const response = await this.$http.get('/api/user/current');
+                this.userMail = response.data.email;
+
+                if (this.userMail != undefined){
+                    this.getReservation();
+                }   
             }
         }
     }
