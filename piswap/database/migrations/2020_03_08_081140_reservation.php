@@ -16,13 +16,13 @@ class Reservation extends Migration
         Schema::create('reservations', function (Blueprint $table){
             $table->increments('id');
             $table->dateTime('date');
-            $table->string('user_id');
-            $table->string('book_id');
+            $table->string('user_email');
+            $table->string('book_isbn');
         });
 
         Schema::table('reservations', function (Blueprint $table){
-            $table->foreign('user_id')->references('email')->on('users');
-            $table->foreign('book_id')->references('isbn')->on('books');
+            $table->foreign('user_email')->references('email')->on('users');
+            $table->foreign('book_isbn')->references('isbn')->on('books');
         });
     }
 

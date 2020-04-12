@@ -21,8 +21,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('books', 'BookController');
-Route::get('/api/books', 'BookController@listJson');
-Route::get('/api/books/show/{id}', 'BookController@show')->name('book');
 
 Route::resource('books', 'BookController');
 Route::get('/search', 'BookController@search')->name('books.search');
@@ -40,3 +38,9 @@ Route::get('/profile', 'ProfileController@show')->name('profile');
 
 Route::get('/notFoundHttpException', 'ErrorController@index404')->name('errors.notFoundHttpException');
 Route::get('/invalidArgumentException', 'ErrorController@invalidArgumentException')->name('errors.invalidArgumentException');
+
+
+Route::get('/api/books', 'BookController@listAPI');
+Route::get('/api/books/show/{id}', 'BookController@showAPI')->name('book');
+Route::post('/api/reservation/store', 'ReservationController@storeAPI');
+Route::get('/api/reservation/show/{id}', 'ReservationController@showAPI');

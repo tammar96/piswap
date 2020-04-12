@@ -2003,7 +2003,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   props: ['bookISBN'],
   data: function data() {
     return {
-      book: []
+      result: []
     };
   },
   mounted: function mounted() {
@@ -2014,7 +2014,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response, result;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2024,16 +2024,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                result = response.data;
-                _this.book = result;
+                _this.result = response.data;
 
-              case 5:
+              case 4:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    },
+    reserveBook: function reserveBook() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _this2.$http.post('/api/reservation/store', {
+                  book_id: _this2.result.book.isbn
+                });
+
+              case 2:
+                _this2.getBook();
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    getReservation: function getReservation() {
+      this.getBook();
     }
   }
 });
@@ -2106,6 +2132,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2116,7 +2145,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       perRow: 4,
       filterName: "",
       filterYear: "",
-      filterAvailable: false,
+      filterAvailable: 'false',
       filterString: "",
       showDetail: false,
       selectedISBN: ""
@@ -2147,7 +2176,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         filterParts.push("year=" + this.filterYear);
       }
 
-      if (this.filterAvailable != false) {
+      if (this.filterAvailable != 'false') {
         filterParts.push("available=true");
       }
 
@@ -79362,8 +79391,8 @@ var render = function() {
                 _c(
                   "b-col",
                   { attrs: { cols: "4" } },
-                  [
-                    _c("b-card", [
+                  _vm._l(_vm.result, function(item) {
+                    return _c("b-card", { key: item.isbn }, [
                       _c(
                         "button",
                         {
@@ -79384,22 +79413,22 @@ var render = function() {
                       _vm._v(" "),
                       _c("img", {
                         staticClass: "card-img-top",
-                        attrs: { src: "/img/test.jpg", alt: _vm.book.title }
+                        attrs: { src: "/img/test.jpg", alt: item.title }
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
                         _c("h5", { staticClass: "card-title" }, [
-                          _vm._v(_vm._s(_vm.book.title))
+                          _vm._v(_vm._s(item.title))
                         ]),
                         _vm._v(" "),
                         _c(
                           "h6",
                           { staticClass: "card-subtitle mb-2 text-muted" },
-                          [_vm._v(_vm._s(_vm.book.author))]
+                          [_vm._v(_vm._s(item.author))]
                         ),
                         _vm._v(" "),
                         _c("p", { staticClass: "card-text" }, [
-                          _vm._v(_vm._s(_vm.book.description))
+                          _vm._v(_vm._s(item.description))
                         ])
                       ]),
                       _vm._v(" "),
@@ -79408,61 +79437,69 @@ var render = function() {
                           _c("tr", [
                             _c("td", [_vm._v("ISBN")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Otto")])
+                            _c("td", [_vm._v(_vm._s(item.isbn))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", [_vm._v("Publisher")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Thornton")])
+                            _c("td", [_vm._v(_vm._s(item.publisher))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", [_vm._v("Date of Publishing")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("the Bird")])
+                            _c("td", [_vm._v(_vm._s(item.date))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", [_vm._v("Bond")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Thornton")])
+                            _c("td", [_vm._v(_vm._s(item.bond))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", [_vm._v("Pages")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Thornton")])
+                            _c("td", [_vm._v(_vm._s(item.numberOfPages))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", [_vm._v("Department")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Thornton")])
+                            _c("td", [_vm._v(_vm._s(item.department))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", [_vm._v("Genre")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Thornton")])
+                            _c("td", [_vm._v(_vm._s(item.genre))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", [_vm._v("Rack")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Thornton")])
+                            _c("td", [_vm._v(_vm._s(item.rack))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", [_vm._v("Language")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Thornton")])
+                            _c("td", [_vm._v(_vm._s(item.language))])
                           ]),
                           _vm._v(" "),
                           _c("tr", [
                             _c("td", [_vm._v("Status")]),
                             _vm._v(" "),
-                            _c("td", [_vm._v("Available")])
+                            _c("td", [
+                              _vm._v(
+                                _vm._s(
+                                  item.quantity == 0
+                                    ? "Not available"
+                                    : "Available: " + item.quantity
+                                )
+                              )
+                            ])
                           ])
                         ])
                       ]),
@@ -79472,13 +79509,14 @@ var render = function() {
                           "a",
                           {
                             staticClass: "btn btn-primary",
-                            attrs: { href: "#" }
+                            attrs: { href: "#" },
+                            on: { click: _vm.reserveBook }
                           },
-                          [_vm._v("Reserve")]
+                          [_vm._v("Reserve this book")]
                         )
                       ])
                     ])
-                  ],
+                  }),
                   1
                 )
               ],
@@ -79517,16 +79555,14 @@ var render = function() {
     "b-container",
     { staticClass: "book-list" },
     [
-      _c(
-        "b-row",
-        { staticClass: "filter justify-content-center" },
-        [
+      _c("div", { staticClass: "filter" }, [
+        _c("div", { staticClass: "filter-content" }, [
           _c(
-            "b-col",
-            { attrs: { cols: "3" } },
+            "div",
+            { staticClass: "filter-item input" },
             [
               _c("b-form-input", {
-                attrs: { placeholder: "Názvu/autor/vydavatel" },
+                attrs: { placeholder: "Name/Author/Publisher..." },
                 on: {
                   input: function($event) {
                     return _vm.filterBooks()
@@ -79545,12 +79581,12 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "b-col",
-            { attrs: { cols: "3" } },
+            "div",
+            { staticClass: "filter-item input" },
             [
               _c("b-form-input", {
                 attrs: {
-                  placeholder: "Rok vydání",
+                  placeholder: "Year",
                   type: "number",
                   min: "1900",
                   max: "2021"
@@ -79573,18 +79609,12 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "b-col",
-            { attrs: { cols: "3" } },
+            "div",
+            { staticClass: "filter-item checkbox" },
             [
               _c(
-                "b-form-checkbox",
+                "b-form-select",
                 {
-                  attrs: {
-                    id: "cbOnlyAvailable",
-                    name: "cbOnlyAvailable",
-                    value: "true",
-                    "unchecked-value": "false"
-                  },
                   on: {
                     input: function($event) {
                       return _vm.filterBooks()
@@ -79598,14 +79628,22 @@ var render = function() {
                     expression: "filterAvailable"
                   }
                 },
-                [_vm._v("\n                Pouze dostupné\n                ")]
+                [
+                  _c("b-form-select-option", { attrs: { value: "false" } }, [
+                    _vm._v("All books")
+                  ]),
+                  _vm._v(" "),
+                  _c("b-form-select-option", { attrs: { value: "true" } }, [
+                    _vm._v("Only available")
+                  ])
+                ],
+                1
               )
             ],
             1
           )
-        ],
-        1
-      ),
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "b-row",
@@ -79619,12 +79657,7 @@ var render = function() {
                 "b-card",
                 {
                   key: book.isbn,
-                  attrs: {
-                    "no-body": "",
-                    "img-src": "/img/test.jpg",
-                    "img-alt": "Book image",
-                    "img-top": ""
-                  },
+                  attrs: { "no-body": "" },
                   scopedSlots: _vm._u(
                     [
                       {
@@ -79642,7 +79675,7 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("Půjčit si knihu")]
+                              [_vm._v("Show detail")]
                             )
                           ]
                         },
@@ -79654,29 +79687,52 @@ var render = function() {
                   )
                 },
                 [
-                  _c("h6", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(book.title))
+                  _c("div", { staticClass: "img-wrapper" }, [
+                    _c("span", { staticClass: "card-label-yellow" }, [
+                      _vm._v(_vm._s(book.genre))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "card-label-blue" }, [
+                      _vm._v(_vm._s(book.numberOfPages) + " pages")
+                    ]),
+                    _vm._v(" "),
+                    _c("img", {
+                      staticClass: "card-img-top",
+                      attrs: { src: "/img/test.jpg" }
+                    })
                   ]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "card-subtitle mb-2 text-muted" }, [
-                    _vm._v(_vm._s(book.author))
-                  ]),
-                  _vm._v(" "),
-                  _c("b-card-text", [
-                    _c("small", { staticClass: "text-muted" }, [
-                      _vm._v(
-                        "\n                                    " +
-                          _vm._s(
-                            book.quantity == 0
-                              ? "Momentálně nedostupná"
-                              : "K zapůjčení: " + book.quantity
-                          ) +
-                          "\n                                "
-                      )
-                    ])
-                  ])
-                ],
-                1
+                  _c(
+                    "div",
+                    { staticClass: "card-body" },
+                    [
+                      _c("h6", { staticClass: "card-title" }, [
+                        _vm._v(_vm._s(book.title))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        { staticClass: "card-subtitle mb-2 text-muted" },
+                        [_vm._v(_vm._s(book.author))]
+                      ),
+                      _vm._v(" "),
+                      _c("b-card-text", [
+                        _c("small", { staticClass: "text-muted" }, [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(
+                                book.quantity == 0
+                                  ? "Not available"
+                                  : "Available: " + book.quantity
+                              ) +
+                              "\n                                    "
+                          )
+                        ])
+                      ])
+                    ],
+                    1
+                  )
+                ]
               )
             }),
             1

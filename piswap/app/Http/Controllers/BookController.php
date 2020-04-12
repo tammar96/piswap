@@ -88,7 +88,7 @@ class BookController extends Controller
         // return view('books.show')->with('data', $data); TODO frontend
     }
 
-    public function listJson(Request $request)
+    public function listAPI(Request $request)
     {
         $url = $request->fullUrl();
         $parsed = parse_url($url);
@@ -121,13 +121,12 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showAPI($id)
     {
         $data = [
             'book' => Book::find($id)
         ];
         return response()->json($data);
-        // return view('books.details')->with('data', $data); TODO frontend
     }
 
     public function list()

@@ -81,6 +81,35 @@ class ReservationController extends Controller
         // return view('borrows.details')->with('data', $data);
     }
 
+    public function storeAPI(Request $request)
+    {
+
+        $this->validate($request, ['book_id' => ['required', 'exists:books,isbn']]);
+
+        $reservation = new Reservation();
+        $reservation->date = date("Y-m-d");
+        $user = User::find(auth()->user()->email); 
+        $reservation->user()->associate($user);
+        $book = Book::find($request->input('book_id'));
+        $reservation->book()->associate($book);
+        $reservation->save();
+
+        $data = [
+            'reservation' => $reservation
+        ];
+
+        return response()->json($data);
+    }
+
+    public function showAPI($id)
+    {
+        $data = [
+            'reservation' => Reservation::find($id)
+        ];
+
+        return response()->json($data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
