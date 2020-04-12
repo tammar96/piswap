@@ -14,13 +14,13 @@ class BorrowHelper extends Migration
     public function up()
     {
         Schema::create('borrowhelpers', function (Blueprint $table) {
-            $table->integer('borrow_id')->unsigned();
-            $table->string('book_id');
+            $table->integer('borrow_id')->unsigned()->nullable();
+            $table->string('book_isbn')->nullable();
         });
 
         Schema::table('borrowhelpers', function (Blueprint $table) {
-            $table->foreign('borrow_id')->references('id')->on('borrows');
-            $table->foreign('book_id')->references('isbn')->on('books');
+            $table->foreign('borrow_id')->references('id')->on('borrows')->onDelete('cascade');
+            $table->foreign('book_isbn')->references('isbn')->on('books')->onDelete('SET NULL');
         });
     }
 

@@ -85,7 +85,7 @@ class BookController extends Controller
             'book' => $book
         ];
 
-        // return view('books.show')->with('data', $data); TODO frontend
+        return view('books.list')->with('data', $data);
     }
 
     public function listAPI(Request $request)
@@ -127,15 +127,6 @@ class BookController extends Controller
             'book' => Book::find($id)
         ];
         return response()->json($data);
-    }
-
-    public function list()
-    {
-        $data = [
-            'books' => Book::get(),
-        ];
-
-        return view('books.list')->with('data', $data);
     }
 
     /**
@@ -186,7 +177,7 @@ class BookController extends Controller
             'books' => Book::get()
         ];
 
-        return view('books.show')->with('data', $data);
+        return view('books.list')->with('data', $data);
     }
 
     /**
@@ -202,12 +193,15 @@ class BookController extends Controller
             'books' => Book::get(),
         ];
 
-        return view('booklist')->with('data', $data);
+        return view('books.list')->with('data', $data);
     }
 
     public function askDelete($id)
     {
-        return view('books.ask-delete')->with('book', Book::find($id));
+        $data =[
+            'book' => Book::find($id)
+        ];
+        return view('books.ask-delete')->with('data', $data);
     }
 
 

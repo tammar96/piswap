@@ -9,7 +9,7 @@ class Borrow extends Model
     public $table = "borrows";
 
     protected $fillable = [
-        'date', 'user_id'
+        'date', 'user_email'
     ];
 
     public function user()

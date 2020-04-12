@@ -28,10 +28,6 @@ class User extends Authenticatable
         'name', 'surname', 'email', 'role', 'address', 'telephone', 'active', 'password'
     ];
 
-    protected $casts = [
-         'address' => 'json',
-     ];
-
     public function borrows()
     {
         return $this->hasMany('App\Borrow');

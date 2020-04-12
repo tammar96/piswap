@@ -17,12 +17,12 @@ class Reservation extends Migration
             $table->increments('id');
             $table->dateTime('date');
             $table->string('user_email');
-            $table->string('book_isbn');
+            $table->string('book_isbn')->nullable();
         });
 
         Schema::table('reservations', function (Blueprint $table){
-            $table->foreign('user_email')->references('email')->on('users');
-            $table->foreign('book_isbn')->references('isbn')->on('books');
+            $table->foreign('user_email')->references('email')->on('users')->onDelete('cascade');
+            $table->foreign('book_isbn')->references('isbn')->on('books')->onDelete('SET NULL');
         });
     }
 

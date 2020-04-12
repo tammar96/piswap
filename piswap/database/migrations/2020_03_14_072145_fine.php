@@ -17,11 +17,11 @@ class Fine extends Migration
             $table->date('date');
             $table->integer('fine')->unsigned();
             $table->integer('state');
-            $table->integer('borrow_id')->unsigned();
+            $table->integer('borrow_id')->unsigned()->nullable();
         });
 
         Schema::table('fines', function (Blueprint $table) {
-            $table->foreign('borrow_id')->references('id')->on('borrows');
+            $table->foreign('borrow_id')->references('id')->on('borrows')->onDelete('SET NULL');
         });
     }
 
