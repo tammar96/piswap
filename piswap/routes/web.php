@@ -23,7 +23,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('books', 'BookController');
 
 Route::resource('books', 'BookController');
-Route::get('/search', 'BookController@search')->name('books.search');
+
+Route::get('/search', function () {
+    return view('welcome');
+});
 
 Route::resource('borrows', 'BorrowController');
 
