@@ -43,4 +43,5 @@ Route::get('/invalidArgumentException', 'ErrorController@invalidArgumentExceptio
 Route::get('/api/books', 'BookController@listAPI');
 Route::get('/api/books/show/{id}', 'BookController@showAPI')->name('book');
 Route::post('/api/reservation/store', 'ReservationController@storeAPI');
-Route::get('/api/reservation/show/{id}', 'ReservationController@showAPI');
+Route::get('/api/reservation/show/{id}', 'ReservationController@showAPI')->name('reservation');
+Route::get('/api/reservation/cancel/{id}', 'ReservationController@destroyAPI');

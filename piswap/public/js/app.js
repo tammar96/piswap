@@ -1999,15 +1999,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['bookISBN'],
   data: function data() {
     return {
-      result: []
+      book: this.getBook(),
+      reservation: undefined
     };
   },
   mounted: function mounted() {
     this.getBook();
+    this.getReservation();
   },
   methods: {
     getBook: function getBook() {
@@ -2024,7 +2030,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                _this.result = response.data;
+                _this.book = response.data.book;
 
               case 4:
               case "end":
@@ -2034,23 +2040,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    reserveBook: function reserveBook() {
+    reserveBook: function reserveBook(e) {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                e.preventDefault();
+                _context2.next = 3;
                 return _this2.$http.post('/api/reservation/store', {
-                  book_id: _this2.result.book.isbn
+                  book_isbn: _this2.book.isbn
                 });
 
-              case 2:
-                _this2.getBook();
-
               case 3:
+                response = _context2.sent;
+                _this2.reservation = response.data.reservation;
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -2059,7 +2068,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     getReservation: function getReservation() {
-      this.getBook();
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return _this3.$http.get('/api/reservation/show/' + _this3.bookISBN);
+
+              case 2:
+                response = _context3.sent;
+                _this3.reservation = response.data.reservation;
+                console.log(_this3.reservation);
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    cancelReservation: function cancelReservation(e) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                e.preventDefault();
+                _context4.next = 3;
+                return _this4.$http.get('/api/reservation/cancel/' + _this4.reservation.id);
+
+              case 3:
+                response = _context4.sent;
+
+                _this4.getReservation();
+
+              case 5:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     }
   }
 });
@@ -79391,132 +79448,160 @@ var render = function() {
                 _c(
                   "b-col",
                   { attrs: { cols: "4" } },
-                  _vm._l(_vm.result, function(item) {
-                    return _c("b-card", { key: item.isbn }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "close",
-                          attrs: { type: "button", "aria-label": "Close" },
-                          on: {
-                            click: function($event) {
-                              return _vm.$emit("close", "")
-                            }
-                          }
-                        },
-                        [
-                          _c("span", { attrs: { "aria-hidden": "true" } }, [
-                            _vm._v("×")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("img", {
-                        staticClass: "card-img-top",
-                        attrs: { src: "/img/test.jpg", alt: item.title }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("h5", { staticClass: "card-title" }, [
-                          _vm._v(_vm._s(item.title))
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "h6",
-                          { staticClass: "card-subtitle mb-2 text-muted" },
-                          [_vm._v(_vm._s(item.author))]
-                        ),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v(_vm._s(item.description))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("table", { staticClass: "table table-striped" }, [
-                        _c("tbody", [
-                          _c("tr", [
-                            _c("td", [_vm._v("ISBN")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.isbn))])
-                          ]),
+                  [
+                    _vm.book != undefined
+                      ? _c("b-card", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "close",
+                              attrs: { type: "button", "aria-label": "Close" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.$emit("close", "")
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("×")
+                              ])
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Publisher")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.publisher))])
-                          ]),
+                          _c("img", {
+                            staticClass: "card-img-top",
+                            attrs: { src: "/img/test.jpg" }
+                          }),
                           _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Date of Publishing")]),
+                          _c("div", { staticClass: "card-body" }, [
+                            _c("h5", { staticClass: "card-title" }, [
+                              _vm._v(_vm._s(_vm.book.title))
+                            ]),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.date))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Bond")]),
+                            _c(
+                              "h6",
+                              { staticClass: "card-subtitle mb-2 text-muted" },
+                              [_vm._v(_vm._s(_vm.book.author))]
+                            ),
                             _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.bond))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Pages")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.numberOfPages))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Department")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.department))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Genre")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.genre))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Rack")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.rack))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Language")]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(item.language))])
-                          ]),
-                          _vm._v(" "),
-                          _c("tr", [
-                            _c("td", [_vm._v("Status")]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                _vm._s(
-                                  item.quantity == 0
-                                    ? "Not available"
-                                    : "Available: " + item.quantity
-                                )
-                              )
+                            _c("p", { staticClass: "card-text" }, [
+                              _vm._v(_vm._s(_vm.book.description))
                             ])
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("table", { staticClass: "table table-striped" }, [
+                            _c("tbody", [
+                              _c("tr", [
+                                _c("td", [_vm._v("ISBN")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.book.isbn))])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v("Publisher")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.book.publisher))])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v("Date of Publishing")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.book.date))])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v("Bond")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.book.bond))])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v("Pages")]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(_vm._s(_vm.book.numberOfPages))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v("Department")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.book.department))])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v("Genre")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.book.genre))])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v("Rack")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.book.rack))])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v("Language")]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(_vm.book.language))])
+                              ]),
+                              _vm._v(" "),
+                              _c("tr", [
+                                _c("td", [_vm._v("Status")]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.book.quantity == 0
+                                        ? "Not available"
+                                        : "Available: " + _vm.book.quantity
+                                    )
+                                  )
+                                ])
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _vm.reservation == undefined
+                            ? _c("div", { staticClass: "card-body" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-primary",
+                                    attrs: { href: "#" },
+                                    on: { click: _vm.reserveBook }
+                                  },
+                                  [_vm._v("Reserve this book")]
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.reservation != undefined
+                            ? _c("div", { staticClass: "card-body" }, [
+                                _c("p", [
+                                  _vm._v(
+                                    "Your reservation number is " +
+                                      _vm._s(_vm.reservation.id) +
+                                      ". "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-secondary",
+                                    attrs: { href: "#" },
+                                    on: { click: _vm.cancelReservation }
+                                  },
+                                  [_vm._v("Cancel reservation")]
+                                )
+                              ])
+                            : _vm._e()
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { href: "#" },
-                            on: { click: _vm.reserveBook }
-                          },
-                          [_vm._v("Reserve this book")]
-                        )
-                      ])
-                    ])
-                  }),
+                      : _vm._e()
+                  ],
                   1
                 )
               ],
