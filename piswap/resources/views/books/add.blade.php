@@ -15,7 +15,8 @@
   </span>
   <h2>
   </h2>
-  <form method="POST">
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('book.store') }}">
+  {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="author">Author</label>

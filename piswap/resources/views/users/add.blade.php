@@ -14,7 +14,8 @@
     On this page you can edit your personal details.
   </span>
   <h2>Personal Details</h2>
-  <form>
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('user.store') }}">
+  {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-3">
         <label for="name">Name</label>

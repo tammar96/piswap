@@ -15,7 +15,8 @@
   </span>
   <h2>
   </h2>
-  <form method="POST">
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('borrow.store') }}">
+  {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-2">
         <label for="isbn">ISBN</label>

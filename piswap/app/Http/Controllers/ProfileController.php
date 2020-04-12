@@ -35,9 +35,84 @@ class ProfileController extends Controller
     {
         if($user = auth()->user())
         {
+
+            $addr = explode(",", $user->address);
+
+            $street = $addr[0];
+            $city = $addr[1];
+            $country = $addr[2];
+
             $data = [
-                'data' => $user
+                'data' => $user,
+                'street' => $street,
+                'city' => $city,
+                'country' => $country,
             ];
+
+
+        return view('profile')->with('data', $data);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+
+        if($user = auth()->user())
+        {
+
+            $addr = explode(",", $user->address);
+
+            $street = $addr[0];
+            $city = $addr[1];
+            $country = $addr[2];
+
+            $data = [
+                'data' => $user,
+                'street' => $street,
+                'city' => $city,
+                'country' => $country,
+            ];
+
+
+        return view('profile')->with('data', $data);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+        // fixme store
+
+        if($user = auth()->user())
+        {
+
+            $addr = explode(",", $user->address);
+
+            $street = $addr[0];
+            $city = $addr[1];
+            $country = $addr[2];
+
+            $data = [
+                'data' => $user,
+                'street' => $street,
+                'city' => $city,
+                'country' => $country,
+            ];
+
+
         return view('profile')->with('data', $data);
         }
     }
