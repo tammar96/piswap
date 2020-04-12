@@ -14,11 +14,16 @@
           On this page you can edit your personal details.
         </span>
         <h2>Personal Details</h2>
+        @foreach ($data as $key)
+          <tr>
+            <td>{{ $key }}</td>
+          </tr>
+        @endforeach
         <form>
           <div class="form-row">
             <div class="form-group col-md-3">
               <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ $data['user']->name }}">
+              <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="Name">
             </div>
             <div class="form-group col-md-4">
               <label for="surname">Surname</label>

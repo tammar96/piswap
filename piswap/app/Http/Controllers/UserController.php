@@ -53,11 +53,11 @@ class UserController extends Controller
      */
     public function show()
     {
-        $data = [
-            'user' => User::find(Auth::user()->id),
-        ];
+        // $data = [
+        //     'user' => User::find(Auth::user()->id),
+        // ];
 
-        return view('profile')->with('data', $data);
+        // return view('profile')->with('data', $data);
     }
 
     /**
