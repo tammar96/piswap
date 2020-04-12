@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             array(
                 'name'      => 'admin',
                 'surname'   => 'admin',
-                'role'      => 'administrator',
+                'role'      => 'admin',
                 'address'   => "this webpage",
                 'telephone' => '0905636912',
                 'active'    => False,
@@ -33,6 +33,16 @@ class UsersTableSeeder extends Seeder
                 'telephone' => '0905636912',
                 'active'    => False,
                 'email'     => 'peter.novak@google.com',
+                'password'  => bcrypt('123456789')
+            ),
+            array(
+                'name'      => 'Andrej',
+                'surname'   => 'Horvath',
+                'role'      => 'librarian',
+                'address'   => "Mliecna 23, Telgart, Slovensko",
+                'telephone' => '0905636913',
+                'active'    => False,
+                'email'     => 'andy.horvi@dvereabrany.eu',
                 'password'  => bcrypt('123456789')
             ),
             array('name'=>'Callum','surname'=>'Macdonald','role'=>'user','address'=>'P.O. Box 157, 7612 Risus. Road','telephone'=>'+420-263-164-770','active'=>False,'email'=>'eget.ipsum.Donec@necmollisvitae.edu','password'=>bcrypt('123456789')),

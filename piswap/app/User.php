@@ -10,6 +10,13 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    private $_roles = [
+        'guest'     => 0,
+        'user'      => 1,
+        'librarian' => 2,
+        'admin'     => 3
+    ];
+
     public $table = "users";
 
     protected $primaryKey = 'email';
@@ -20,10 +27,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'surname', 'email', 'role', 'address', 'telephone', 'active', 'password'
     ];
-
-    protected $casts = [
-         'address' => 'json',
-     ];
 
     public function borrows()
     {
@@ -37,7 +40,9 @@ class User extends Authenticatable
 
     public function hasRole($role)
     {
-        return $this->role == $role ? True : False;
+        if (!in_array($role, $this->_roles))
+            return false;
+        return $this->_roles[$this->role] >= $this->_roles[$role];
     }
     // TODO for fine
 }

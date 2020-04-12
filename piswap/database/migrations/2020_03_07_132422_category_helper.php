@@ -14,13 +14,13 @@ class CategoryHelper extends Migration
     public function up()
     {
         Schema::create('categoryhelpers', function (Blueprint $table){
-            $table->string('book_id');
-            $table->integer('category_id')->unsigned();
+            $table->string('book_isbn')->nullable();
+            $table->integer('category_id')->unsigned()->nullable();
         });
 
         Schema::table('categoryhelpers', function (Blueprint $table){
-            $table->foreign('book_id')->references('isbn')->on('books');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('book_isbn')->references('isbn')->on('books')->onDelete('SET NULL');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
         });
     }
 

@@ -42,7 +42,7 @@ h1 {
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   border-right: 1px solid #eee;
   padding: 0px;
-  background-color: #3c4d39;
+  background-color: #d7d7d7;
 }
 
 .sidebar div {
@@ -96,8 +96,15 @@ h1 {
   width: 15%;
 }
 
+#logo {
+  width: 80% !important;
+  margin: 0 auto 0 auto;
+  display: block;
+  padding: 10px 0px 10px 0px;
+}
+
 .nav-link {
-  color: rgb(202,196,201);
+  color: rgb(53,53,53);
   font-family: 'Noto Sans', sans-serif;
 }
 
@@ -117,19 +124,19 @@ h1 {
 }
 
 .btn-primary{
-  border-color:#3c4d39 !important;
-  background-color: #3c4d39;
+  border-color:#6babf0 !important;
+  background-color: #6babf0;
 }
 
 .btn-primary:hover{
-  border-color:#3c4d39 !important;
-  background-color: #3c4d39;
+  border-color:#6babf0 !important;
+  background-color: #6babf0;
 }
 
 .btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
   box-shadow: 0 0 0 0.2rem #7d607a !important;
   border-color:#7d607a !important;
-  background-color: #3c4d39;
+  background-color: #6babf0;
 }
 
 .nav-link.active {
@@ -139,16 +146,16 @@ h1 {
 
 .nav-link.active:hover {
   background-color: #d964C4C !important;
-  color: #FFFFFF;
+  color: rgb(53,53,53)
 }
 
 .nav-link:hover{
-  background-color: #6864d9 !important;
-  color: rgb(202,196,201)
+  background-color: #6babf0 !important;
+  color: rgb(53,53,53);
 }
 
 .table-hover tbody tr:hover {
-  background-color: #3c4d39;
+  background-color: #6babf0;
   color:white;
 }
 

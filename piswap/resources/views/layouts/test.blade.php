@@ -22,7 +22,7 @@
         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-slack sidebar" style="">
         <div style="">
           <div style="">
-            <img src="./img/logo_sh.png" style="width:100%;">
+            <img id="logo" src="/img/library.svg" style="width:100%;">
           </div>
         </div>
         <ul class="nav nav-pills  flex-column">
@@ -58,11 +58,14 @@
         @endif
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            {{-- <form class="form-horizontal"  method="POST" action="{{ route('books.update', $data['book']->isbn) }}"> --}}
-            {{-- {{method_field('GET')}} --}}
-            {{-- {{ csrf_field() }} --}}
-              <a class="nav-link" href="logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">FIXME Log out</a>
-            {{-- </form> --}}
+            <a class="nav-link" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
           </li>
         </ul>
         </nav>
