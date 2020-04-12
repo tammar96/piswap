@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             array(
                 'name'      => 'admin',
                 'surname'   => 'admin',
-                'role'      => 'administrator',
+                'role'      => 'admin',
                 'address'   => "this webpage",
                 'telephone' => '0905636912',
                 'active'    => False,

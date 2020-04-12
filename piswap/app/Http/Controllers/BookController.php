@@ -27,7 +27,7 @@ class BookController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth'); // TODO use another middleware
+        $this->middleware('role:librarian')->except(['index', 'listAPI', 'showAPI']);
     }
 
     /**
