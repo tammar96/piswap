@@ -33,9 +33,12 @@ Route::resource('borrows', 'BorrowController');
 //Route::get('/user/rentals', 'RentalsController@show')->name('profile');
 //Route::get('/admin/rentals', 'RentalsController@show')->name('profile');
 
-Route::resource('/profile', 'ProfileController');
+// User content
+Route::resource('users', 'UserController');
+Route::get('/profile', 'UserController@profile')->name('profile');
+Route::post('/profile', 'UserController@update')->name('profile.update');
 
-
+// Invalid url exceptions
 Route::get('/notFoundHttpException', 'ErrorController@index404')->name('errors.notFoundHttpException');
 Route::get('/invalidArgumentException', 'ErrorController@invalidArgumentException')->name('errors.invalidArgumentException');
 

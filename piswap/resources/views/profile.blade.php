@@ -14,22 +14,23 @@
           On this page you can edit your personal details.
         </span>
         <h2>Personal Details</h2>
-        <form class="form-horizontal" role="form" method="POST" action="{{ route('profile.store') }}">
+        <form class="form-horizontal" role="form" method="POST" action="{{ route('profile.update') }}">
           {{ csrf_field() }}
+
           <div class="form-row">
             <div class="form-group col-md-3">
               <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ $data['data']->name }}">
+              <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ Auth::user()->name }}">
             </div>
             <div class="form-group col-md-4">
               <label for="surname">Surname</label>
-              <input type="text" class="form-control" id="surname" placeholder="Surname" name="surname" value="{{ $data['data']->surname }}">
+              <input type="text" class="form-control" id="surname" placeholder="Surname" name="surname" value="{{ Auth::user()->surname }}">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-7 required">
               <label class="control-label" for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Email" required name="email" value="{{ $data['data']->email }}">
+              <input type="email" class="form-control" id="email" placeholder="Email" required name="email" value="{{ Auth::user()->email }}">
             </div>
           </div>
           <div class="form-row">
@@ -44,8 +45,8 @@
           </div>
           <div class="form-row">
             <div class="form-group col-md-7 required">
-              <label class="control-label" for="street">Address</label>
-              <input type="text" class="form-control" id="street" placeholder="Street Address & House number" name="address" value="{{ $data['street'] }}" required>
+              <label class="control-label" for="street">Street & house number</label>
+              <input type="text" class="form-control" id="street" placeholder="Street Address & House number" name="street" value="{{ $data['street'] }}" required>
             </div>
           </div>
           <div class="form-row">
