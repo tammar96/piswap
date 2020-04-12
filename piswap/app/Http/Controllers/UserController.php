@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User;
 use DB;
+use Auth;
 
 class UserController extends Controller
 {
@@ -50,9 +51,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $data = [
+            'user' => User::find(Auth::user()->id),
+        ];
+
+        return view('profile')->with('data', $data);
     }
 
     /**

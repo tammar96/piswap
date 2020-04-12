@@ -18,7 +18,7 @@
           <div class="form-row">
             <div class="form-group col-md-3">
               <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+              <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ $data['user']->name }}">
             </div>
             <div class="form-group col-md-4">
               <label for="surname">Surname</label>
