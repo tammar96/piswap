@@ -16,6 +16,7 @@
   </head>
 
   <body>
+  @if(auth()->check())
   <div class="container-fluid" style="">
     <div class="row">
         @section('sidebar')
@@ -30,7 +31,8 @@
             <a class="nav-link" href="/search">Search</a>
           </li>
         </ul>
-        @if(auth()->check())
+
+        @if (Auth::user()->hasRole('admin'))
         <ul class="nav nav-pills  flex-column">
           <li class="nav-item ">
             <a class="nav-link" href="/books">List of Books</a>
@@ -53,9 +55,40 @@
             <a class="nav-link active" href="/profile">Profile</a>
           </li>
         </ul>
-        @else
-        <p>Je to v pici</p>
+        @elseif (Auth::user()->hasRole('librarian'))
+        <ul class="nav nav-pills  flex-column">
+          <li class="nav-item ">
+            <a class="nav-link" href="/books">List of Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users">List of Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/books/create">Add New Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/borrows/create">Borrow Book</a>
+          </li>
+        </ul>
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/rentals">My Rentals</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/profile">Profile</a>
+          </li>
+        </ul>
+        @elseif (Auth::user()->hasRole('user'))
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link" href="/rentals">My Rentals</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/profile">Profile</a>
+          </li>
+        </ul>
         @endif
+
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
@@ -71,11 +104,13 @@
         </nav>
         @show
 
-
       <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
         @yield('content')
       </main>
     </div>
   </div>
+  @else
+  <p>Je to v pici</p>
+  @endif
   </body>
 </html>
