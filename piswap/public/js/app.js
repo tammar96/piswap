@@ -2003,17 +2003,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['bookISBN'],
   data: function data() {
     return {
       book: this.getBook(),
-      reservation: undefined
+      reservation: undefined,
+      userMail: undefined
     };
   },
   mounted: function mounted() {
     this.getBook();
-    this.getReservation();
+    this.loadReservation();
   },
   methods: {
     getBook: function getBook() {
@@ -2116,6 +2120,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee4);
+      }))();
+    },
+    loadReservation: function loadReservation() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return _this5.$http.get('/api/user/current');
+
+              case 2:
+                response = _context5.sent;
+                _this5.userMail = response.data.email;
+
+                if (_this5.userMail != undefined) {
+                  _this5.getReservation();
+                }
+
+              case 5:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
       }))();
     }
   }
@@ -79564,6 +79596,20 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
+                          _vm.userMail == undefined
+                            ? _c("div", { staticClass: "card-body" }, [
+                                _c("p", [
+                                  _vm._v(
+                                    "In order to reserve this book, please "
+                                  ),
+                                  _c("a", { attrs: { href: "/login" } }, [
+                                    _vm._v("login.")
+                                  ])
+                                ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.userMail != undefined &&
                           _vm.reservation == undefined
                             ? _c("div", { staticClass: "card-body" }, [
                                 _c(
@@ -79578,6 +79624,7 @@ var render = function() {
                               ])
                             : _vm._e(),
                           _vm._v(" "),
+                          _vm.userMail != undefined &&
                           _vm.reservation != undefined
                             ? _c("div", { staticClass: "card-body" }, [
                                 _c("p", [

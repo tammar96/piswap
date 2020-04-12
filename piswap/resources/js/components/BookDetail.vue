@@ -57,10 +57,13 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <div class="card-body" v-if="reservation == undefined">
+                                <div class="card-body" v-if="userMail == undefined">
+                                    <p>In order to reserve this book, please <a href="/login">login.</a></p> 
+                                </div>
+                                <div class="card-body" v-if="userMail != undefined && reservation == undefined">
                                         <a v-on:click="reserveBook" href="#" class="btn btn-primary">Reserve this book</a>
                                 </div>
-                                <div class="card-body" v-if="reservation != undefined">
+                                <div class="card-body" v-if="userMail != undefined && reservation != undefined">
                                     <p>Your reservation number is {{reservation.id}}. </p>
                                     <a v-on:click="cancelReservation" href="#" class="btn btn-secondary">Cancel reservation</a>
                                 </div>
@@ -79,12 +82,13 @@
         data: function() {
             return {
                 book: this.getBook(),
-                reservation: undefined
+                reservation: undefined,
+                userMail: undefined
             }
         },
         mounted() {
            this.getBook();
-           this.getReservation();
+           this.loadReservation();
         },
         methods: {   
             async getBook() {
@@ -108,6 +112,14 @@
                 e.preventDefault();
                 const response = await this.$http.get('/api/reservation/cancel/' + this.reservation.id);
                 this.getReservation();
+            },
+            async loadReservation(){
+                const response = await this.$http.get('/api/user/current');
+                this.userMail = response.data.email;
+
+                if (this.userMail != undefined){
+                    this.getReservation();
+                }   
             }
         }
     }

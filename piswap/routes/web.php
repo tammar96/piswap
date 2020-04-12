@@ -40,8 +40,10 @@ Route::get('/notFoundHttpException', 'ErrorController@index404')->name('errors.n
 Route::get('/invalidArgumentException', 'ErrorController@invalidArgumentException')->name('errors.invalidArgumentException');
 
 
+Route::get('/api/user/current', 'UserController@getCurrentUserAPI');
 Route::get('/api/books', 'BookController@listAPI');
 Route::get('/api/books/show/{id}', 'BookController@showAPI')->name('book');
 Route::post('/api/reservation/store', 'ReservationController@storeAPI');
 Route::get('/api/reservation/show/{id}', 'ReservationController@showAPI')->name('reservation');
 Route::get('/api/reservation/cancel/{id}', 'ReservationController@destroyAPI');
+
