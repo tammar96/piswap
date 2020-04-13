@@ -34,11 +34,16 @@
 
         @if (Auth::user()->hasRole('admin'))
         <ul class="nav nav-pills  flex-column">
-          <li class="nav-item ">
-            <a class="nav-link" href="/books">List of Books</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="/users">List of Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/create">Add New User</a>
+          </li>
+        </ul>
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item ">
+            <a class="nav-link" href="/books">List of Books</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/books/create">Add New Book</a>
@@ -46,25 +51,27 @@
           <li class="nav-item">
             <a class="nav-link" href="/borrows/create">Borrow Book</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/borrows/return">Return Book</a>
-          </li>
         </ul>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
             <a class="nav-link" href="/borrows">Rentals</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/profile">Profile</a>
+            <a class="nav-link" href="/profile">Profile</a>
           </li>
         </ul>
         @elseif (Auth::user()->hasRole('librarian'))
         <ul class="nav nav-pills  flex-column">
-          <li class="nav-item ">
-            <a class="nav-link" href="/books">List of Books</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="/users">List of Users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/create">Add New User</a>
+          </li>
+        </ul>
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item ">
+            <a class="nav-link" href="/books">List of Books</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/books/create">Add New Book</a>
@@ -72,16 +79,13 @@
           <li class="nav-item">
             <a class="nav-link" href="/borrows/create">Borrow Book</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/borrows/return">Return Book</a>
-          </li>
         </ul>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
             <a class="nav-link" href="/borrows">Rentals</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/profile">Profile</a>
+            <a class="nav-link" href="/profile">Profile</a>
           </li>
         </ul>
         @elseif (Auth::user()->hasRole('user'))
@@ -90,7 +94,7 @@
             <a class="nav-link" href="/borrows">My Rentals</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/profile">Profile</a>
+            <a class="nav-link" href="/profile">Profile</a>
           </li>
         </ul>
         @endif
