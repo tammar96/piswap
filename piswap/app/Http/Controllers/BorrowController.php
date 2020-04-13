@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use \Datetime;
 use App\Borrow;
 use App\Book;
+use App\User;
 
 class BorrowController extends Controller
 {
     private $_rules = [
         'id' => ['optional', 'digits:4'],
         'date' => ['required', 'date_format:Y-m-d H:i:s|nullable'],
-        'user_id' => ['exists:users,email'],
-        'books' => ['exists:isbn']
+        'user_email' => ['exists:users,email'],
+        'book_isbn' => ['exists:books,isbn']
     ];
 
     public function __contruct()
@@ -33,7 +34,7 @@ class BorrowController extends Controller
             'borrow' => Borrow::get()
         ];
 
-        return view('borrows.show')->with('data', $data);
+        return view('borrows.list')->with('data', $data);
     }
 
     /**
@@ -43,7 +44,7 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        return view('borrows.add');
+        return view('borrows.create');
     }
 
     /**
@@ -59,15 +60,17 @@ class BorrowController extends Controller
         $borrow = new Borrow();
         $borrow->date = $request->input('date');
 
-        $user = User::find($request->input('user_id'));
+        $user = User::find($request->input('user_email'));
         $borrow->user()->associate($user);
+        $book = Book::find($request->input('book_isbn'));
+        $borrow->book()->associate($book);
         $borrow->save();
 
         $data = [
-            'borrow' => $borrow
+            'borrows' => Borrow::get()
         ];
 
-        return view('borrows.show')->with('data', $data); // TODO frontend
+        return view('borrows.list')->with('data', $data);
     }
 
     /**
@@ -82,7 +85,7 @@ class BorrowController extends Controller
             'borrow' => Borrow::find($id)
         ];
 
-        // return view('borrows.show')->with('data', $data); // TODO frontend
+        return view('borrows.show')->with('data', $data);
     }
 
     /**
@@ -97,7 +100,7 @@ class BorrowController extends Controller
             'borrow' => Borrow::find($id)
         ];
 
-        // return view('borrows.edit')->with('data', $data); // TODO frontend
+        return view('borrows.edit')->with('data', $data)
     }
 
     /**
@@ -109,19 +112,21 @@ class BorrowController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $borrow = Borrow::find($id);
         $this->validate($request, $this->_rules);
+        $borrow = Borrow::find($id);
 
         $borrow->date = $request->input('date');
-        $user = User::find($id);
+        $user = User::find($request->input('user_email'));
         $borrow->user()->associate($user);
+        $book = User::find($request->input('book_isbn'));
+        $borrow->book()->associate($book);
         $borrow->save();
 
         $data = [
             'borrows' => Borrow::get()
         ];
 
-        return view('borrows.show')->with('data', $data); // TODO frontend
+        return view('borrows.show')->with('data', $data);
     }
 
     /**
@@ -137,11 +142,11 @@ class BorrowController extends Controller
             'borrows' => Borrow::get(),
         ];
 
-        return view('borrows.show')->with('data', $data); // TODO frontend
+        return view('borrows.list')->with('data', $data);
     }
 
     public function askDelete($id)
     {
-        // return view('borrows.ask-delete')->with('borrow', Borrow::find($id)); // TODO frontend
+        return view('borrows.ask-delete')->with('borrow', Borrow::find($id));
     }
 }
