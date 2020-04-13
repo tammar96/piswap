@@ -28,13 +28,12 @@ Route::get('/search', function () {
     return view('welcome');
 });
 
-Route::resource('borrows', 'BorrowController');
+Route::get('/borrows', 'BorrowController@index')->name('borrows');
+Route::get('/borrows/create', 'BorrowController@create')->name('borrows.create');
+Route::post('/borrows/create', 'BorrowController@store')->name('borrows.store');
+Route::post('/borrows', 'BorrowController@destory')->name('borrows.destroy');
 
-// Route::get('/profile', 'ProfileController@show')->name('profile');
 
-//Route::get('/user/list', 'ProfileController@show')->name('profile');
-//Route::get('/user/rentals', 'RentalsController@show')->name('profile');
-//Route::get('/admin/rentals', 'RentalsController@show')->name('profile');
 
 // User content
 Route::resource('users', 'UserController');

@@ -12,9 +12,9 @@ class BorrowController extends Controller
 {
     private $_rules = [
         'id' => ['optional', 'digits:4'],
-        'date' => ['required', 'date_format:Y-m-d H:i:s|nullable'],
-        'user_email' => ['exists:users,email'],
-        'book_isbn' => ['exists:books,isbn']
+        //'date' => ['required', 'date_format:Y-m-d H:i:s|nullable'],
+        'reader' => ['exists:users,email'],
+        'isbn' => ['exists:books,isbn']
     ];
 
     public function __contruct()
@@ -31,7 +31,7 @@ class BorrowController extends Controller
     {
 
         $data = [
-            'borrow' => Borrow::get()
+            'borrows' => Borrow::get()
         ];
 
         return view('borrows.list')->with('data', $data);
@@ -58,12 +58,12 @@ class BorrowController extends Controller
         $this->validate($request, $this->_rules);
 
         $borrow = new Borrow();
-        $borrow->date = $request->input('date');
+        $borrow->date = (new DateTime('now'))->format('Y-m-d H:i:s');
 
-        $user = User::find($request->input('user_email'));
+        $user = User::find($request->input('reader'));
         $borrow->user()->associate($user);
-        $book = Book::find($request->input('book_isbn'));
-        $borrow->book()->associate($book);
+        $book = Book::find($request->input('isbn'));
+        $borrow->books->add($book);
         $borrow->save();
 
         $data = [
@@ -97,7 +97,7 @@ class BorrowController extends Controller
     public function edit($id)
     {
         $data = [
-            'borrow' => Borrow::find($id)
+            'borrows' => Borrow::find($id)
         ];
 
         return view('borrows.edit')->with('data', $data);
