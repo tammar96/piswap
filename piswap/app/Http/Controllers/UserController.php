@@ -129,11 +129,13 @@ class UserController extends Controller
         $street = $addr[0];
         $city = $addr[1];
         $zipcode = $addr[2];
+        $country = $addr[3];
 
         $data = [
             'street' => $street,
             'city' => $city,
             'zipcode' => $zipcode,
+            'country' => $country,
             'user' => User::find($id),
         ];
 

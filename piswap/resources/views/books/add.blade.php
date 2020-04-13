@@ -20,39 +20,39 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="author">Author</label>
-        <input type="text" class="form-control" id="author" placeholder="Name Surname" value="" name="author" required>
+        <input type="text" class="form-control" id="author" placeholder="Name Surname" value="{{ old('author') }}" name="author" required>
       </div>
       <div class="form-group col-md-4">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" placeholder="Title" value="" name="title" required>
+        <input type="text" class="form-control" id="title" placeholder="Title" value="{{ old('title') }}" name="title" required>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="publisher">Publisher</label>
-        <input type="text" class="form-control" id="publisher" placeholder="Publisher" value="" name="publisher" required>
+        <input type="text" class="form-control" id="publisher" placeholder="Publisher" value="{{ old('publisher') }}" name="publisher" required>
       </div>
       <div class="form-group col-md-2">
         <label for="date">Date</label>
-        <input type="text" class="form-control" id="date" placeholder="YYYY-MM-DD" value="" name="date" required>
+        <input type="text" class="form-control" id="date" placeholder="YYYY-MM-DD" value="{{ old('date') }}" name="date" required>
       </div>
       <div class="form-group col-md-2">
         <label for="pages">Pages</label>
-        <input type="text" class="form-control" id="pages" placeholder="0" value="" name="pages" required>
+        <input type="text" class="form-control" id="pages" placeholder="0" value="{{ old('pages') }}" name="pages" required>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-1">
         <label for="quantity">Quantity</label>
-        <input type="text" class="form-control" id="quantity" placeholder="4" value="" name="quantity" required>
+        <input type="text" class="form-control" id="quantity" placeholder="4" value="{{ old('quantity') }}" name="quantity" required>
       </div>
       <div class="form-group col-md-1">
         <label for="location">Location</label>
-        <input type="text" class="form-control" id="location" placeholder="rack 1" name="location" value="" required>
+        <input type="text" class="form-control" id="location" placeholder="rack 1" name="location" value="{{ old('location') }}" required>
       </div>
       <div class="form-group col-md-2">
         <label for="isbn">ISBN</label>
-        <input type="text" class="form-control" id="isbn" placeholder="rack 1" name="isbn" value="" required>
+        <input type="text" class="form-control" id="isbn" placeholder="rack 1" name="isbn" value="{{ old('isbn') }}" required>
       </div>
       <div class="form-group col-md-2">
         <label for="language">Language</label>
@@ -74,11 +74,11 @@
     <div class="form-row">
       <div class="form-group col-md-2">
         <label for="genre">Genre</label>
-        <input type="text" class="form-control" id="genre" placeholder="Sci-fi" name="genre" value="" required>
+        <input type="text" class="form-control" id="genre" placeholder="Sci-fi" name="genre" value="{{ old('genre') }}" required>
       </div>
       <div class="form-group col-md-2">
         <label for="department">Department</label>
-        <input type="text" class="form-control" id="department" placeholder="dep no.1" name="department" value="" required>
+        <input type="text" class="form-control" id="department" placeholder="dep no.1" name="department" value="{{ old('department') }}" required>
       </div>
     </div>
     <div class="form-row">

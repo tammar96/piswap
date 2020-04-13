@@ -2,14 +2,14 @@
 
 @extends('layouts.test')
 
-@section('title', 'Add User')
+@section('title', 'Edit User')
 
 @section('sidebar')
     @parent
 @endsection
 
 @section('content')
-  <h1>Add User</h1>
+  <h1>Edit User</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     On this page you can edit your personal details.
   </span>
@@ -56,8 +56,12 @@
             @endforeach
           @elseif (Auth::user()->hasRole('librarian'))
             <option value="user" selected>user</option>
-          @endif
         </select>
+        @elseif
+        <select id="role" class="form-control" name="role">
+          <option value="{{ $data['data']->role }}" selected>{{ $data['data']->role }}</option>
+        </select>
+        @endif
       </div>
     </div>
     <div class="form-row">
@@ -74,6 +78,10 @@
       <div class="form-group required col-md-2">
         <label class="control-label" for="zipcode">ZIP code</label>
         <input type="text" class="form-control" id="zipcode" placeholder="000 00" name="zipcode" required="required" value="{{$data['zipcode']}}">
+      </div>
+      <div class="form-group required col-md-2">
+        <label class="control-label" for="country">Country</label>
+        <input type="text" class="form-control" id="country" placeholder="000 00" name="country" required="required" value="{{ $data['country'] }}">
       </div>
     </div>
     All items with <span style="color: #d00;position: relative; margin-left: 4px; top: -6px;">*</span> are mandatory.
