@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
+    <title>Projekt PIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu
+     podle použitého editoru -->
+
+<!-- Nahraďte prosím názvem tématu -->
+<h1>Knihovna</h1>
+
+<!-- Editujte jména a maily autorů a jejich činnost -->
+<dl>
+	<dt>Autoři</dt>
+	<dd>Bc. Michal Kužela
+	    <a href="mailto:xkuzel06@stud.fit.vutbr.cz">xkuzel06@stud.fit.vutbr.cz</a> -
+		Uživateľské rozhranie vyhľadávania kníh, javascript na vyhľadávanie.
+	</dd>
+	<dd>Bc. Attila Lakatos
+	    <a href="mailto:xlakat01@stud.fit.vutbr.cz">xlakat01@stud.fit.vutbr.cz</a> -
+		správa uživateľov a databázy, kontroléry.
+	</dd>
+	<dd>Bc. Michal Ormoš
+	    <a href="mailto:xormos00@stud.fit.vutbr.cz">xormos00@stud.fit.vutbr.cz</a> -
+		správa uživateľov a databázy, kontroléry.
+	</dd>
+	<dd>Bc. Marek Tamaškovič (Vedúci)
+	    <a href="mailto:xtamas01@stud.fit.vutbr.cz">xtamas01@stud.fit.vutbr.cz</a> -
+		Uživateľské rozhranie administratívy, javascript na vyhľadávanie, dokumentácia.
+	</dd>
+</dl>
+
+<!-- uživatelské účty -->
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin@admin</td><td>admin</td><td>Administrátor</td></tr>
+<tr><td>librarian@job</td><td>librarian</td><td>Zamestnanec knižnice</td></tr>
+<tr><td>peter.novak@google.com</td><td>123456789</td><td>Čitateľ</td></tr>
+</tbody></table>
+
+<h2>Postup instalace</h2>
+<!-- <p>Např. vyžadované prostředky na serveru, datové zdroje, inicializace databáze, apod. Stačí v několika stručných bodech.</p> -->
+<ol>
+	<li>Nainštalujeme si <a href="https://laravel.com/docs/5.4/homestead" rel="nofollow">Homestead</a> kompatibilné prostredie</li>
+	<ol type="a">
+		<li>stiahneme si repozitár <a href="https://github.com/tammar96/piswap">https://github.com/tammar96/piswap</a></li>
+		<li>skopírujeme si z odovzdaného projektu potrebné súbory na vhodné miesta</li>
+	</ol>
+	<li>otvorime si koreňový priečinok s projektom</li>
+	<li>Spustíme '$ composer install'</li>
+	<li>Spustíme '$ cp .env.example .env'</li>
+	<li>Spustíme '$ php artisan key:generate'</li>
+	<li>Spustíme '$ mysql -u root -p # run it as a supervisor'</li>
+	<li>mysql> CREATE DATABASE piswap</li>
+	<li>mysql> CREATE OR REPLACE user 'yoda'@'localhost' identified by '12345';</li>
+	<li>mysql> GRANT ALL PRIVILEGES ON * . * TO 'yoda'@'localhost';</li>
+	<li>mysql> FLUSH PRIVILEGES;</li>
+	<li>mysql> exit</li>
+	<li>Spustíme '$ make check'</li>
+	<li>Spustíme '$ make reset'</li>
+	<li>Ak všetko prebehlo v poriadku môžeme spustiť našu aplikáciu '$ php artisan serve'</li>
+	<li>Pri implicitných nastaveniach sa naša aplikácia nachádza na adrese <a href="localhost:8000" rel="nofollow">localhost:8000</a> </li>
+</ol>
+
+<!-- vyžadované knihovny třetích stran i s verzemi, které byly použity pro testování -->
+<h2>Vyžadované knihovny</h2>
+<ul>
+	<li>Laravel Framework 5.8.37</li>
+	<li>Composer version 1.10.5</li>
+	<li>PHP version 7.4.4</li>
+	<li>Bootstrap jquery-3.2.1</li>
+	<li>Bootstrap popperjs-1.12.3</li>
+	<li>Bootstrap css-4.0.0-beta.2</li>
+</ul>
+
+</body></html>

@@ -26,34 +26,27 @@
     <table class="table table-striped results_users table-hover">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Name</th>
-          <th>Registered from</th>
+          <th>Surname</th>
           <th>No. current rentals</th>
           <th>Tools</th>
         </tr>
       </thead>
       <tbody>
+        @foreach($data['users'] as $key)
         <tr>
-          <td>0</td>
-          <td>Ivan Hubka</td>
-          <td>31.07.1800</td>
-          <td>1</td>
+          <td>{{ $key->name }}</td>
+          <td>{{ $key->surname }}</td>
+          <td>{{ $key->number }}</td>
           <td>
-            <button type="button" onclick="window.location.href='edit-user.html'" class="btn btn-warning" >Edit user</button>
-            <button type="button" onclick="window.location.href='delete-user.html'" class="btn btn-danger" >Delete user</button>
+            <form class="form-horizontal"  method="POST" action="{{ route('users.destroy', $key->id) }}">
+              {{method_field('DELETE')}}
+              {{ csrf_field() }}
+              <button type="submit" class="btn btn-danger" >Delete Book</button>
+            </form>
           </td>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Anton Gaborsky</td>
-          <td>21.04.1900</td>
-          <td>0</td>
-          <td>
-            <button type="button" onclick="window.location.href='edit-user.html'" class="btn btn-warning" >Edit user</button>
-            <button type="button" onclick="window.location.href='delete-user.html'" class="btn btn-danger" >Delete user</button>
-          </td>
-        </tr>
+        @endforeach
       </tbody>
     </table>
   </div>
