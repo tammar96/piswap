@@ -124,13 +124,21 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('librarian')) {
-            $data = [
-                'data' => User::find($id),
-            ];
+        $addr = explode(",", Auth::user()->address);
 
-            return view('users.edit')->with('data', $data);
-        }
+        $street = $addr[0];
+        $city = $addr[1];
+        $zipcode = $addr[2];
+
+        $data = [
+            'street' => $street,
+            'city' => $city,
+            'zipcode' => $zipcode,
+            'user' => User::find($id),
+        ];
+
+
+        return view('users.edit')->with('data', $data);
     }
 
     /**
