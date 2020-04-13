@@ -28,6 +28,7 @@
         <tr>
           <th>ISBN</th>
           <th>Author</th>
+          <th>To be paid</th>
           <th>Tools</th>
         </tr>
       </thead>
@@ -36,6 +37,7 @@
         <tr>
           <td>{{ $key->date }}</td>
           <td>{{ $key->user_id }}</td>
+          <td>0,- &euro;</td>
           <td>
             <form class="form-horizontal"  method="POST" action="{{ route('borrows.destroy', $key->id) }}">
               {{method_field('DELETE')}}

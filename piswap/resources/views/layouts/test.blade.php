@@ -46,6 +46,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/borrows/create">Borrow Book</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/borrows/delete">Return Book</a>
+          </li>
         </ul>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
@@ -68,6 +71,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/borrows/create">Borrow Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/borrows/delete">Return Book</a>
           </li>
         </ul>
         <ul class="nav nav-pills flex-column">

@@ -50,7 +50,11 @@
         <select id="role" class="form-control" name="role">
           @if (Auth::user()->hasRole('admin'))
             @foreach(array("user", "librarian", "admin") as $role)
+              @if( $data['data']->role == $role)
+              <option value="{{$role}}" selected>{{$role}}</option>
+              @else
               <option value="{{$role}}">{{$role}}</option>
+              @endif
             @endforeach
           @elseif (Auth::user()->hasRole('librarian'))
             <option value="user" selected>user</option>
@@ -76,7 +80,11 @@
     All items with <span style="color: #d00;position: relative; margin-left: 4px; top: -6px;">*</span> are mandatory.
     <br>
     <br>
-    <button type="submit" name="Submit" class="btn btn-primary">Save</button>
+    <form class="form-horizontal"  method="POST" action="{{ route('users.update', $data['data']->id) }}">
+      {{method_field('GET')}}
+      {{ csrf_field() }}
+      <button type="submit" class="btn btn-danger" >Save</button>
+    </form>
   </form>
   </div>
 @endsection
