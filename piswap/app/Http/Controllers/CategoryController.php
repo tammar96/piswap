@@ -14,7 +14,7 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('role:librarian')->except([index, show]);
     }
 
     /**
@@ -24,7 +24,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'categories' => Category::get()
+        ];
+
+        return view('categories.list')->with('data', $data);
     }
 
     /**
@@ -34,7 +38,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -53,10 +57,10 @@ class CategoryController extends Controller
         $category->save();
 
         $data = [
-            'category' => $category
+            'categories' => Category::get()
         ];
 
-        // return view('categories.show')->with('data', $data);
+        return view('categories.list')->with('data', $data);
     }
 
     /**
@@ -81,7 +85,7 @@ class CategoryController extends Controller
             'category' => Category::find($id)
         ];
 
-        // return view('categories.edit')->with('data', $data);
+        return view('categories.edit')->with('data', $data);
     }
 
     /**
@@ -100,12 +104,11 @@ class CategoryController extends Controller
         $category->description = $request->input('description');
         $category->save();
 
-        $data = [ 
-            'category' => $category
+        $data = [
+            'categories' => Category::get()
         ];
 
-        // return view('categories.show')->with('data', $data);
-
+        return view('categories.list')->with('data', $data);
     }
 
     /**
@@ -116,7 +119,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $isDestroyed = Category::destroy($id);
+        Category::destroy($id);
         return redirect()->route('categories');
     }
 
