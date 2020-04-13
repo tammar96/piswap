@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\Borrow;
 use DB;
 use Auth;
 
@@ -23,6 +24,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('role:admin')->only(['destroy']);
     }
 
     /**
@@ -32,8 +34,15 @@ class UserController extends Controller
      */
     public function index()
     {
+        $requests = Borrow::groupBy('user_email')->select(DB::raw('user_email, COUNT(*) as user_id_count'))->get();
+        $borrows=[];
+        foreach ($requests as $request) {
+            $borrows[$request->user_email] = $request->user_id_count;
+        }
+
         $data = [
-            'users' => User::get()
+            'users' => User::get(),
+            'borrows' => $borrows,
         ];
 
         return view('users.list')->with('data', $data);
@@ -123,9 +132,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($email)
     {
-        //
+        if ($email != Auth::user()->email) // Delete when it's not the account I am using right now
+            User::Destroy($email);
+
+        $data = [
+            'users' => User::get()
+        ];
+
+        return view('users.list')->with('data', $data);
     }
 
     public function profile()
@@ -143,7 +159,7 @@ class UserController extends Controller
         ];
 
         return view('profile')->with('data', $data);
-
+    }
 
     /**
      * Returns json with current user
