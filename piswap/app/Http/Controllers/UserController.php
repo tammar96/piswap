@@ -143,5 +143,20 @@ class UserController extends Controller
         ];
 
         return view('profile')->with('data', $data);
+
+
+    /**
+     * Returns json with current user
+     */
+    public function getCurrentUserAPI()
+    {
+        if($user = auth()->user())
+        {
+            $data = [
+                'email' => $user->email
+            ];
+
+            return response()->json($data);
+        }
     }
 }

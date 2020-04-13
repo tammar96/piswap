@@ -12,8 +12,8 @@ class ReservationController extends Controller
 {
     private $_rules = [
         'date' => ['required', 'date_format:Y-m-d H:i:s|nullable'],
-        'user_id' => ['required', 'exists:users,email'],
-        'book_id' => ['required', 'exists:books,isbn']
+        'user_email' => ['required', 'exists:users,email'],
+        'book_isbn' => ['required', 'exists:books,isbn']
     ];
 
     public function __construct()
@@ -53,9 +53,9 @@ class ReservationController extends Controller
 
         $reservation = new Reservation();
         $reservation->date = $request->input('date');
-        $user = User::find($request->input('user_id'));
+        $user = User::find($request->input('user_email'));
         $reservation->user()->associate($user);
-        $book = Book::find($request->input('book_id'));
+        $book = Book::find($request->input('book_isbn'));
         $reservation->book()->associate($book);
         $reservation->save();
 
@@ -83,14 +83,13 @@ class ReservationController extends Controller
 
     public function storeAPI(Request $request)
     {
-
-        $this->validate($request, ['book_id' => ['required', 'exists:books,isbn']]);
+        $this->validate($request, ['book_isbn' => ['required', 'exists:books,isbn']]);
 
         $reservation = new Reservation();
         $reservation->date = date("Y-m-d");
         $user = User::find(auth()->user()->email); 
         $reservation->user()->associate($user);
-        $book = Book::find($request->input('book_id'));
+        $book = Book::find($request->input('book_isbn'));
         $reservation->book()->associate($book);
         $reservation->save();
 
@@ -101,13 +100,22 @@ class ReservationController extends Controller
         return response()->json($data);
     }
 
-    public function showAPI($id)
+    public function showAPI($isbn)
     {
+        $reservation = Reservation::where('user_email', '=', auth()->user()->email)->where('book_isbn', '=', $isbn)->first();
         $data = [
-            'reservation' => Reservation::find($id)
+            'reservation' => $reservation
         ];
 
         return response()->json($data);
+    }
+
+    public function destroyAPI($id)
+    {
+        Reservation::destroy($id);
+        $data = [
+            'reservations' => Reservation::get()
+        ];
     }
 
     /**
@@ -138,9 +146,9 @@ class ReservationController extends Controller
 
         $reservation = Reservation::find($id);
         $reservation->date = $request->input('date');
-        $user = User::find($request->input('user_id'));
+        $user = User::find($request->input('user_email'));
         $reservation->user()->associate($user);
-        $book = Book::find($request->input('book_id'));
+        $book = Book::find($request->input('book_isbn'));
         $reservation->book()->associate($book);
         $reservation->save();
 
