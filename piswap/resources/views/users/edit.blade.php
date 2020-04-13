@@ -14,7 +14,7 @@
     On this page you can edit your personal details.
   </span>
   <h2>Personal Details</h2>
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('users.update', $data['user']->email) }}">
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('users.update-someone', $data['user']->email) }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -23,13 +23,13 @@
       </div>
       <div class="form-group col-md-4">
         <label for="surname">Surname</label>
-        <input type="text" class="form-control" id="surname" placeholder="Surname" name="{{$data['user']->surname}}">
+        <input type="text" class="form-control" id="surname" placeholder="Surname" name="surname" value="{{$data['user']->surname}}">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-8 required">
         <label class="control-label" for="email">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Email" required name="email" value="{{$data['user']->email}}">
+        <input type="email" class="form-control" id="email" placeholder="Email" required name="email" value="{{$data['user']->email}}" readonly>
       </div>
     </div>
     <div class="form-row">
@@ -79,7 +79,7 @@
     All items with <span style="color: #d00;position: relative; margin-left: 4px; top: -6px;">*</span> are mandatory.
     <br>
     <br>
-      {{method_field('GET')}}
+      {{method_field('POST')}}
       {{ csrf_field() }}
       <button type="submit" class="btn btn-danger" >Save</button>
     </form>
