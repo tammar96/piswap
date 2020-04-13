@@ -29,12 +29,7 @@ Route::get('/search', function () {
 });
 
 Route::resource('borrows', 'BorrowController');
-
-// Route::get('/profile', 'ProfileController@show')->name('profile');
-
-//Route::get('/user/list', 'ProfileController@show')->name('profile');
-//Route::get('/user/rentals', 'RentalsController@show')->name('profile');
-//Route::get('/admin/rentals', 'RentalsController@show')->name('profile');
+Route::get('/rentals', 'BorrowController@index')->name('rentals');
 
 // User content
 Route::resource('users', 'UserController');
