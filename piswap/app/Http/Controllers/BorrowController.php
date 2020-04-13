@@ -100,7 +100,7 @@ class BorrowController extends Controller
             'borrow' => Borrow::find($id)
         ];
 
-        return view('borrows.edit')->with('data', $data)
+        return view('borrows.edit')->with('data', $data);
     }
 
     /**
