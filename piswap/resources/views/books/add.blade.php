@@ -34,7 +34,7 @@
       </div>
       <div class="form-group col-md-2">
         <label for="date">Date</label>
-        <input type="text" class="form-control" id="date" placeholder="YYYY-MM-DD" value="{{ old('date') }}" name="date" required>
+        <input type="text" class="form-control" id="date" placeholder="YYYY-MM-DD" name="date" value="{{ old('date') }}" name="date" required>
       </div>
       <div class="form-group col-md-2">
         <label for="pages">Pages</label>

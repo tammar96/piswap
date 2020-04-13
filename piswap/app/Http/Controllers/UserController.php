@@ -69,14 +69,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln($request->input('name'));
-        $out->writeln($request->input('surname'));
-        $out->writeln($request->input('email'));
-        $out->writeln($request->input('role'));
-        $out->writeln($request->input('street'));
-        $out->writeln($request->input('city'));
-        $out->writeln($request->input('zipcode'));
         $this->validate($request, $this->_rules);
 
         $user = new User();
@@ -226,11 +218,6 @@ class UserController extends Controller
 
     public function updateSomeone(Request $request, $email)
     {
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln($request->input('name'));
-        $out->writeln($request->input('surname'));
-        $out->writeln($request->input('email'));
-
         $user = User::find($email);
         $this->validate($request, $this->_rules);
         $user->name = $request->input('name');
