@@ -14,7 +14,7 @@
     On this page you can edit your personal details.
   </span>
   <h2>Personal Details</h2>
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('user.store') }}">
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('users.update', $data['data']->id) }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -80,7 +80,6 @@
     All items with <span style="color: #d00;position: relative; margin-left: 4px; top: -6px;">*</span> are mandatory.
     <br>
     <br>
-    <form class="form-horizontal"  method="POST" action="{{ route('users.update', $data['data']->id) }}">
       {{method_field('GET')}}
       {{ csrf_field() }}
       <button type="submit" class="btn btn-danger" >Save</button>

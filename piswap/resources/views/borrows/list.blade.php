@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-  <h1>List of all yours borrows</h1> -->
+  <h1>List of all yours borrows</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Here you can add, edit and delete bottow
   </span>
@@ -48,5 +48,5 @@
         @endforeach
       </tbody>
     </table>
-  </div> -->
+  </div>
 @endsection

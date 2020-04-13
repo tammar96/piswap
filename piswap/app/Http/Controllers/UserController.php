@@ -92,7 +92,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('librarian')) {
+            $data = [
+                'data' => User::find($id),
+            ];
+
+            return view('users.edit')->with('data', $data);
+        }
     }
 
     /**
