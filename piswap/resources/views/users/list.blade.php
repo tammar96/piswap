@@ -14,7 +14,7 @@
     Here you can add, edit and delete users.
   </span>
   <h2>Add new User to the IS</h2>
-    <button type="button" onclick="window.location.href='add-user.html'" class="btn btn-success" >Add User</button>
+    <button type="button" onclick="window.location.href='{{ route('users.create') }}'" class="btn btn-success" >Add User</button>
   <br>
   <br>
 
