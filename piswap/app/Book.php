@@ -10,6 +10,7 @@ class Book extends Model
     protected $primaryKey = 'isbn';
     protected $keyType = 'string';
     public $incrementing = false;
+    public $timestamps = false;
 
     public function reservations()
     {

@@ -14,7 +14,7 @@
     On this page you can edit your personal details.
   </span>
   <h2>Personal Details</h2>
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('user.store') }}">
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('users.store') }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -38,8 +38,8 @@
         <input type="password" class="form-control" id="password" placeholder="Password" name="password">
       </div>
       <div class="form-group col-md-4">
-        <label for="password2">Verify Password</label>
-        <input type="password" class="form-control" id="password2" placeholder="Password" name="heslo_potvrd">
+        <label for="password-confirm">Verify Password</label>
+        <input type="password" class="form-control" id="password-confirm" placeholder="Password" name="password_confirmation">
       </div>
     </div>
     <div class="form-row">
@@ -60,7 +60,7 @@
     <div class="form-row">
       <div class="form-group col-md-8 required">
         <label class="control-label" for="address">Address</label>
-        <input type="text" class="form-control" id="address" placeholder="Street Address & House number" name="address" value="" required>
+        <input type="text" class="form-control" id="address" placeholder="Street Address & House number" name="street" value="" required>
       </div>
     </div>
     <div class="form-row">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Borrow;
 use DB;
@@ -16,8 +17,10 @@ class UserController extends Controller
         'name' => ['required', 'string', 'max:255'],
         'surname' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'address' => ['required', 'string', 'max:255'],
-        'number' => ['required', 'string'],
+        'street' => ['required', 'string', 'max:255'],
+        'city' => ['required', 'string', 'max:255'],
+        'zipcode' => ['required', 'string', 'max:255'],
+        //'number' => ['required', 'string'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],
     ];
 
@@ -66,7 +69,36 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln($request->input('name'));
+        $out->writeln($request->input('surname'));
+        $out->writeln($request->input('email'));
+        $out->writeln($request->input('role'));
+        $out->writeln($request->input('street'));
+        $out->writeln($request->input('city'));
+        $out->writeln($request->input('zipcode'));
+        $this->validate($request, $this->_rules);
+
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->surname = $request->input('surname');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->role = $request->input('role');
+
+        $street = $request->input('street');
+        $city = $request->input('city');
+        //$country = $request->input('country');
+        $zipcode = $request->input('zipcode');
+        $user->address = implode(",", array($street, $city, $zipcode));
+        $user->save();
+
+
+        $data = [
+            'users' => User::get()
+        ];
+
+        return view('users.list')->with('data', $data);
     }
 
     /**

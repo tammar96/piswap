@@ -10,18 +10,18 @@ use DB;
 class BookController extends Controller
 {
     private $_rules = [
-        'isbn' => ['required', 'digits:16', 'unique:books'],
+        'isbn' => ['required','unique:books'],
         'title' => ['required', 'string', 'max:255'],
         'author' =>  ['required', 'string', 'max:64'],
         'publisher' => ['required', 'string', 'max:64'],
-        'date' => ['required', 'date'],
+        'date' => ['required', 'date_format:Y-m-d'],
         'bond' => ['nullable', 'string'],
-        'numberOfPages' => ['nullable', 'digits:6'],
+        'numberOfPages' => ['nullable'],
         'description' => ['required', 'string'],
         'department' => ['nullable', 'string'],
         'genre' => ['required', 'string'],
         'quantity' => ['required', 'string'],
-        'rack' => ['optional', 'digits:4'],
+        'rack' => ['optional'],
         'language' => ['required', 'string', 'max:64']
     ];
 
@@ -62,7 +62,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->_rules);
+        //$this->validate($request, $this->_rules);
 
         $book = new Book();
         $book->isbn = $request->input('isbn');
@@ -82,7 +82,7 @@ class BookController extends Controller
         $book->save();
 
         $data = [
-            'book' => $book
+            'books' => Book::get()
         ];
 
         return view('books.list')->with('data', $data);

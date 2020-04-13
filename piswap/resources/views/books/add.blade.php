@@ -15,7 +15,7 @@
   </span>
   <h2>
   </h2>
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('book.store') }}">
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('books.store') }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -34,7 +34,7 @@
       </div>
       <div class="form-group col-md-2">
         <label for="date">Date</label>
-        <input type="text" class="form-control" id="date" placeholder="DD-MM-YYYY" value="" name="date" required>
+        <input type="text" class="form-control" id="date" placeholder="YYYY-MM-DD" value="" name="date" required>
       </div>
       <div class="form-group col-md-2">
         <label for="pages">Pages</label>
@@ -84,7 +84,7 @@
     <div class="form-row">
       <div class="form-group col-md-8">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="5"></textarea>
+        <textarea class="form-control" id="description" name="description" rows="5"></textarea>
       </div>
     </div>
     <button type="submit" name="Submit" class="btn btn-primary">Save</button>
