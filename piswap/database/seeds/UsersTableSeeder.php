@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
                 'name'      => 'admin',
                 'surname'   => 'admin',
                 'role'      => 'admin',
-                'address'   => "this webpage",
+                'address'   => 'Hlavna 134, Komarno, Slovakia',
                 'telephone' => '0905636912',
                 'active'    => False,
                 'email'     => 'admin@admin',
