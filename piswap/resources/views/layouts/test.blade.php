@@ -49,7 +49,7 @@
         </ul>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="/rentals">My Rentals</a>
+            <a class="nav-link" href="/rentals">Rentals</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/profile">Profile</a>
@@ -72,7 +72,7 @@
         </ul>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="/rentals">My Rentals</a>
+            <a class="nav-link" href="/rentals">Rentals</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/profile">Profile</a>
