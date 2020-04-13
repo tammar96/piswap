@@ -149,4 +149,9 @@ class BorrowController extends Controller
     {
         return view('borrows.ask-delete')->with('borrow', Borrow::find($id));
     }
+
+    public function returnBookForm($id)
+    {
+        return view('borrows.return')->with('borrow', Borrow::find($id));
+    }
 }
