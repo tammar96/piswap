@@ -39,7 +39,7 @@
           <td>{{ $key->surname }}</td>
           <td>{{ $data['borrows'][$key->email] ?? 'No rentals' }}</td>
           <td>
-            <form class="form-horizontal"  method="POST" action="{{ route('users.destroy', $key->id) }}">
+            <form class="form-horizontal"  method="POST" action="{{ route('users.destroy', $key->email) }}">
               {{method_field('DELETE')}}
               {{ csrf_field() }}
               <button type="button" onclick="window.location.href='/users/{{ $key->id }}/edit'" class="btn btn-warning" >Edit User</button>

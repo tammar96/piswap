@@ -11,32 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('welcome'); });
 
-// Routes for handling authentication, e.g. register/login/reset pwd,...
+// Authentication
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('books', 'BookController');
+Route::get('/search', function () {return view('welcome'); });
 
+// Books
 Route::resource('books', 'BookController');
 
-Route::resource('books', 'BookController');
-
-Route::get('/search', function () {
-    return view('welcome');
-});
-
+// Borrows
 Route::get('/borrows', 'BorrowController@index')->name('borrows');
 Route::get('/borrows/create', 'BorrowController@create')->name('borrows.create');
 Route::post('/borrows/create', 'BorrowController@store')->name('borrows.store');
 Route::delete('/borrows/delete/{id}', 'BorrowController@destroy')->name('borrows.destroy');
 Route::get('/borrows/return', 'BorrowController@returnBookForm')->name('borrows.returnForm');
 
-
-
-// User content
+// User
 Route::resource('users', 'UserController');
 Route::get('/profile', 'UserController@profile')->name('profile');
 Route::post('/profile', 'UserController@update')->name('profile.update');
