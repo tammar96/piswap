@@ -44,9 +44,7 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-
-      </div>
-      <label for="role">Role</label>
+        <label for="role">Role</label>
         <select id="role" class="form-control" name="role">
           @if (Auth::user()->hasRole('admin'))
             @foreach(array("user", "librarian", "admin") as $role)
@@ -56,6 +54,7 @@
             <option value="user" selected>user</option>
           @endif
         </select>
+      </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-8 required">
