@@ -34,6 +34,7 @@ Route::get('/borrows/return', 'BorrowController@returnBookForm')->name('borrows.
 Route::resource('users', 'UserController');
 Route::get('/profile', 'UserController@profile')->name('profile');
 Route::post('/profile', 'UserController@update')->name('profile.update');
+Route::post('/update-someone/{email}', 'UserController@updateSomeone')->name('users.update-someone');
 
 // Invalid url exceptions
 Route::get('/notFoundHttpException', 'ErrorController@index404')->name('errors.notFoundHttpException');

@@ -16,7 +16,7 @@ class UserController extends Controller
     private $_rules = [
         'name' => ['required', 'string', 'max:255'],
         'surname' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        'email' => ['required', 'string', 'email', 'max:255'],
         'street' => ['required', 'string', 'max:255'],
         'city' => ['required', 'string', 'max:255'],
         'zipcode' => ['required', 'string', 'max:255'],
@@ -151,7 +151,7 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        //$this->validate($request, $this->_rules);
+        $this->validate($request, $this->_rules);
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
         $user->email = $request->input('email');
@@ -220,5 +220,32 @@ class UserController extends Controller
 
             return response()->json($data);
         }
+    }
+
+    public function updateSomeone(Request $request, $email)
+    {
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln($request->input('name'));
+        $out->writeln($request->input('surname'));
+        $out->writeln($request->input('email'));
+
+        $user = User::find($email);
+        $this->validate($request, $this->_rules);
+        $user->name = $request->input('name');
+        $user->surname = $request->input('surname');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $street = $request->input('street');
+        $city = $request->input('city');
+        $zipcode = $request->input('zipcode');
+        $user->address = implode(",", array($street, $city, $zipcode));
+
+        $user->save();
+
+        $data = [
+            'users' => User::get()
+        ];
+
+        return view('users.list')->with('data', $data);
     }
 }
