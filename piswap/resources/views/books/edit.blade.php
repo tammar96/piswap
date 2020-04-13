@@ -2,7 +2,7 @@
 
 @extends('layouts.test')
 
-@section('title', 'Profile')
+@section('title', 'Edit Book')
 
 @section('sidebar')
     @parent

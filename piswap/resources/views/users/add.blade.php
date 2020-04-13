@@ -19,17 +19,17 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+        <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ old('name') }}">
       </div>
       <div class="form-group col-md-4">
         <label for="surname">Surname</label>
-        <input type="text" class="form-control" id="surname" placeholder="Surname" name="surname">
+        <input type="text" class="form-control" id="surname" placeholder="Surname" name="surname" value="{{ old('surname') }}">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-8 required">
         <label class="control-label" for="email">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Email" required name="email" value="">
+        <input type="email" class="form-control" id="email" placeholder="Email" required name="email" value="{{ old('email') }}">
       </div>
     </div>
     <div class="form-row">
@@ -58,18 +58,22 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-8 required">
-        <label class="control-label" for="address">Address</label>
-        <input type="text" class="form-control" id="address" placeholder="Street Address & House number" name="street" value="" required>
+        <label class="control-label" for="street">Street</label>
+        <input type="text" class="form-control" id="street" placeholder="Street Address & House number" name="street" value="{{ old('street') }}" required>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-4 required">
         <label class="control-label" for="city">City</label>
-        <input type="text" class="form-control" id="city" placeholder="City" name="city" required="required" value="">
+        <input type="text" class="form-control" id="city" placeholder="City" name="city" required="required" value="{{ old('city') }}">
       </div>
       <div class="form-group required col-md-2">
         <label class="control-label" for="zipcode">ZIP code</label>
-        <input type="text" class="form-control" id="zipcode" placeholder="000 00" name="zipcode" required="required" value="">
+        <input type="text" class="form-control" id="zipcode" placeholder="000 00" name="zipcode" required="required" value="{{ old('zipcode') }}">
+      </div>
+      <div class="form-group required col-md-2">
+        <label class="control-label" for="coutnry">Country</label>
+        <input type="text" class="form-control" id="coutnry" placeholder="United Kingdom" name="coutnry" required="required" value="{{ old('coutnry') }}">
       </div>
     </div>
     All items with <span style="color: #d00;position: relative; margin-left: 4px; top: -6px;">*</span> are mandatory.
