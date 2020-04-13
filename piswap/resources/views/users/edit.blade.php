@@ -44,7 +44,6 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-      </div>
       <label for="role">Role</label>
         <select id="role" class="form-control" name="role" value="{{$data['user']->role}}">
           @if (Auth::user()->hasRole('admin'))
