@@ -37,7 +37,7 @@
           <td>{{ $key->date }}</td>
           <td>{{ $key->user_id }}</td>
           <td>
-            <form class="form-horizontal"  method="POST" action="{{ route('borrows.destroy', $key->id) }}">
+            <form class="form-horizontal"  method="POST" action="/borrows/delete/{{$key->id}}">
               {{method_field('DELETE')}}
               {{ csrf_field() }}
               <button type="button" onclick="window.location.href='/borrow/{{ $key->id }}/edit'" class="btn btn-warning" >Prolong Borrow</button>

@@ -31,7 +31,8 @@ Route::get('/search', function () {
 Route::get('/borrows', 'BorrowController@index')->name('borrows');
 Route::get('/borrows/create', 'BorrowController@create')->name('borrows.create');
 Route::post('/borrows/create', 'BorrowController@store')->name('borrows.store');
-Route::post('/borrows', 'BorrowController@destory')->name('borrows.destroy');
+Route::delete('/borrows/delete/{id}', 'BorrowController@destroy')->name('borrows.destroy');
+Route::get('/borrows/return/{id}', 'BorrowController@returnBookForm')->name('borrows.returnForm');
 
 
 
