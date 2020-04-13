@@ -15,7 +15,7 @@
   </span>
   <h2>
   </h2>
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('book.update') }}">
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('books.update', $data['book']->isbn) }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -95,7 +95,6 @@
         <textarea class="form-control" id="description" rows="5">{{ $data['book']->description }}</textarea>
       </div>
     </div>
-    <form class="form-horizontal"  method="POST" action="{{ route('books.update', $data['book']->isbn) }}">
       {{method_field('GET')}}
       {{ csrf_field() }}
       <button type="submit" class="btn btn-danger" >Save</button>
