@@ -15,7 +15,7 @@
   </span>
   <h2>
   </h2>
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('borrow.store') }}">
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('borrows.store') }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-2">
