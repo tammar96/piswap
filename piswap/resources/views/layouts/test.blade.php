@@ -52,7 +52,7 @@
         </ul>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="/rentals">Rentals</a>
+            <a class="nav-link" href="/borrows">Rentals</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/profile">Profile</a>
@@ -78,7 +78,7 @@
         </ul>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="/rentals">Rentals</a>
+            <a class="nav-link" href="/borrows">Rentals</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/profile">Profile</a>
@@ -87,7 +87,7 @@
         @elseif (Auth::user()->hasRole('user'))
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="/rentals">My Rentals</a>
+            <a class="nav-link" href="/borrows">My Rentals</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/profile">Profile</a>
