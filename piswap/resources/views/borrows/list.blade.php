@@ -32,7 +32,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($data['borrow'] as $key)
+        @foreach($data['borrows'] as $key)
         <tr>
           <td>{{ $key->date }}</td>
           <td>{{ $key->user_id }}</td>

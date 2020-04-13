@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Borrow extends Model
 {
     public $table = "borrows";
+    public $timestamps = false;
 
     protected $fillable = [
         'date', 'user_email'
