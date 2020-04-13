@@ -47,7 +47,7 @@
             <a class="nav-link" href="/borrows/create">Borrow Book</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/borrows/delete">Return Book</a>
+            <a class="nav-link" href="/borrows/return">Return Book</a>
           </li>
         </ul>
         <ul class="nav nav-pills flex-column">
@@ -73,7 +73,7 @@
             <a class="nav-link" href="/borrows/create">Borrow Book</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/borrows/delete">Return Book</a>
+            <a class="nav-link" href="/borrows/return">Return Book</a>
           </li>
         </ul>
         <ul class="nav nav-pills flex-column">
