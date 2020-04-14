@@ -23,6 +23,9 @@ Route::get('/search', function () {return view('welcome'); });
 // Books
 Route::resource('books', 'BookController');
 
+// Reservations
+Route::resource('reservations', 'ReservationController');
+
 // Borrows
 Route::get('/borrows', 'BorrowController@index')->name('borrows');
 Route::get('/borrows/create', 'BorrowController@create')->name('borrows.create');

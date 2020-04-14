@@ -57,6 +57,9 @@
             <li class="nav-item">
               <a class="nav-link" href="/borrows">Rentals</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/reservations">Reservations</a>
+            </li>
           </ul>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
@@ -86,6 +89,9 @@
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
               <a class="nav-link" href="/borrows">Rentals</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/reservations">Reservations</a>
             </li>
           </ul>
           <ul class="nav nav-pills flex-column">
