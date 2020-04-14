@@ -162,9 +162,9 @@ class BorrowController extends Controller
     {
         $borrow = Borrow::find($id);
         // increment the quantity of this book available
-        $book = Book::find($borrow->$book_isbn);
-        $quantity = $book->quantity;
-        $book->quantity = $quantity + 1;
+        $book = Book::find($borrow['book_isbn']);
+        $quantity = $book['quantity'];
+        $book['quantity'] = $quantity + 1;
         $book->save();
         // destroy the borrow
         Borrow::destroy($id);
@@ -194,6 +194,13 @@ class BorrowController extends Controller
             $fine = $datediff;
             return view('borrows.return')->with('borrow', $borrow)->with('fine', $fine);
         } else {
+            $borrow = Borrow::find($id);
+            // increment the quantity of this book available
+            $book = Book::find($borrow['book_isbn']);
+            $quantity = $book['quantity'];
+            $book['quantity'] = $quantity + 1;
+            $book->save();
+            // destroy the borrow
             Borrow::destroy($id);
             $data = [
                 'borrows' => Borrow::get(),
