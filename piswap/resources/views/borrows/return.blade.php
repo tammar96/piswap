@@ -29,7 +29,7 @@
     <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.destroy', $borrow->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
-              <button type="submit" class="btn btn-warning" >Payed</button>
+              <button type="submit" class="btn btn-warning" >Paid</button>
             </form>
   </form>
 @endsection
