@@ -222,8 +222,8 @@ class BorrowController extends Controller
         $data = [
             'borrows' => Borrow::get(),
         ];
-
-        return view('borrows.list')->with('data', $data);
+        $fine = $this->countFine($data);
+        return view('borrows.list')->with('data', $data)->with('fine', $fine);
 
     }
 }

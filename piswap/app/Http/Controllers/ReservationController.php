@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Datetime;
-use App\Reservation;
+use \DateInterval;
+use App\Reservations;
 use App\Book;
 use App\User;
+use App\Borrow;
 
 class ReservationController extends Controller
 {
@@ -28,7 +30,19 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'reservations' => Reservations::get()
+        ];
+        foreach($data['reservations'] as $key) {
+            $now = time();
+            $your_date = strtotime($key['date']);
+            $datediff = $now - $your_date;
+            $datediff = round($datediff / (60 * 60 * 24));
+            if ($datediff > 7) {
+                Reservations::destroy($key['id']);
+            }
+        }
+        return view('reservations.list')->with('data', $data);
     }
 
     /**
@@ -38,7 +52,12 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'user_email' => User::get(),
+            'book_isbn' => Book::get(),
+            'date' => (new DateTime('now'))->format('Y-m-d H:i:s')
+        ];
+        return view('reservations.create')->with('data', $data);
     }
 
     /**
@@ -87,7 +106,7 @@ class ReservationController extends Controller
 
         $reservation = new Reservation();
         $reservation->date = date("Y-m-d");
-        $user = User::find(auth()->user()->email); 
+        $user = User::find(auth()->user()->email);
         $reservation->user()->associate($user);
         $book = Book::find($request->input('book_isbn'));
         $reservation->book()->associate($book);
@@ -152,9 +171,9 @@ class ReservationController extends Controller
         $reservation->book()->associate($book);
         $reservation->save();
 
-        $data = [ 
+        $data = [
             'reservation' => $reservation
-        ];  
+        ];
 
         // return view('reservations.show')->with('data', $data);
 
@@ -168,12 +187,31 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        Reservation::destroy($id);
+        Reservations::destroy($id);
         $data = [
-            'reservations' => Reservation::get()
+            'reservations' => Reservations::get()
         ];
+        return view('reservations.list')->with('data', $data);
+    }
 
-        //return view('reservations.show')->with('data', $data);
+    public function approve($id)
+    {
+        $reservation = Reservations::find($id);
+        $user = User::find($reservation['user_email']);
+        $book = Book::find($reservation['book_isbn']);
+
+        $borrow = new Borrow();
+        $borrow->date_from = (new DateTime('now'))->format('Y-m-d H:i:s');
+        $borrow->date_to = (new DateTime('now'))->add(new DateInterval('P30D'))->format('Y-m-d H:i:s');
+        $borrow->user()->associate($user);
+        $borrow->book()->associate($book);
+        $borrow->save();
+
+        Reservations::destroy($id);
+        $data = [
+            'reservations' => Reservations::get()
+        ];
+        return view('reservations.list')->with('data', $data);
     }
 
     public function askDelete($id)

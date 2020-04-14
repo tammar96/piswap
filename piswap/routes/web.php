@@ -23,6 +23,12 @@ Route::get('/search', function () {return view('welcome'); });
 // Books
 Route::resource('books', 'BookController');
 
+// Reservations
+Route::resource('reservations', 'ReservationController');
+Route::post('/reservations/destroy/{id}', 'ReservationController@destroy')->name('reservations.destroy');
+Route::post('/reservations/approve/{id}', 'ReservationController@approve')->name('reservations.approve');
+
+
 // Borrows
 Route::get('/borrows', 'BorrowController@index')->name('borrows');
 Route::get('/borrows/create', 'BorrowController@create')->name('borrows.create');
