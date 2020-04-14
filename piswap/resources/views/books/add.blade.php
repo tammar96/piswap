@@ -13,8 +13,17 @@
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Add book to database.
   </span>
-  <h2>
-  </h2>
+  <h2>Book Details</h2>
+  @if ($errors->any())
+  <div class="alert alert-danger col-md-8">
+    <h4>These errors were found in the form:</h2>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+  </div>
+  @endif
   <form class="form-horizontal" role="form" method="POST" action="{{ route('books.store') }}">
   {{ csrf_field() }}
     <div class="form-row">
@@ -52,7 +61,7 @@
       </div>
       <div class="form-group col-md-2">
         <label for="isbn">ISBN</label>
-        <input type="text" class="form-control" id="isbn" placeholder="rack 1" name="isbn" value="{{ old('isbn') }}" required>
+        <input type="text" class="form-control" id="isbn" placeholder="0-0000-0000" name="isbn" value="{{ old('isbn') }}" required>
       </div>
       <div class="form-group col-md-2">
         <label for="language">Language</label>

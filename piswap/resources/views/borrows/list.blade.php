@@ -2,14 +2,14 @@
 
 @extends('layouts.test')
 
-@section('title', 'Borrow')
+@section('title', 'Borrowings list')
 
 @section('sidebar')
     @parent
 @endsection
 
 @section('content')
-  <h1>List of all yours borrows</h1>
+  <h1>List of all borrowings</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Here you can add, edit and delete bottow
   </span>
@@ -45,7 +45,7 @@
             <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.prolong', $key->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
-              <button type="submit" class="btn btn-warning" >Prolong Borrow</button>
+              <button type="submit" class="btn btn-warning" >Prolong Borrowing</button>
             </form>
 
             <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.returnBookForm', $key->id)}}">

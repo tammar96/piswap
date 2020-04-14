@@ -15,14 +15,15 @@ class UserController extends Controller
 
     private $_rules = [
         'name' => ['required', 'string', 'max:255'],
-        'surname' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255'],
-        'street' => ['required', 'string', 'max:255'],
-        'city' => ['required', 'string', 'max:255'],
-        'zipcode' => ['required', 'string', 'max:255'],
-        //'number' => ['required', 'string'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'surname' => ['required', 'alpha_dash', 'max:255'],
+        'email' => ['required', 'email', 'string', 'max:255'],
+        // 'password' => ['password:api'],
+        'street' => ['required', 'regex:/[A-z0-9\s\/]*/i', 'string', 'max:255'],
+        'city' => ['required', 'alpha', 'max:255'],
+        'zipcode' => ['required', 'digits:5', 'string'],
+        'country' => ['required', 'alpha', 'max:255]'],
     ];
+
 
     public function __construct()
     {
@@ -80,7 +81,7 @@ class UserController extends Controller
 
         $street = $request->input('street');
         $city = $request->input('city');
-        //$country = $request->input('country');
+        $country = $request->input('country');
         $zipcode = $request->input('zipcode');
         $user->address = implode(",", array($street, $city, $zipcode));
         $user->save();
@@ -116,7 +117,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $addr = explode(",", Auth::user()->address);
+        $addr = explode(", ", User::find($id)->address);
 
         $street = $addr[0];
         $city = $addr[1];
@@ -146,20 +147,23 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $this->validate($request, $this->_rules);
+
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $street = $request->input('street');
         $city = $request->input('city');
+        $zipcode = $request->input('zipcode');
         $country = $request->input('country');
-        $user->address = implode(",", array($street, $city, $country));
+        $user->address = implode(",", array($street, $city, $zipcode, $country));
 
         $user->save();
 
         $data = [
             'street' => $street,
             'city' => $city,
+            'zipcode' => $zipcode,
             'country' => $country,
         ];
 
@@ -186,15 +190,17 @@ class UserController extends Controller
 
     public function profile()
     {
-        $addr = explode(",", Auth::user()->address);
+        $addr = explode(", ", Auth::user()->address);
 
         $street = $addr[0];
         $city = $addr[1];
-        $country = $addr[2];
+        $zipcode = $addr[2];
+        $country = $addr[3];
 
         $data = [
             'street' => $street,
             'city' => $city,
+            'zipcode' => $zipcode,
             'country' => $country,
         ];
 
@@ -227,7 +233,8 @@ class UserController extends Controller
         $street = $request->input('street');
         $city = $request->input('city');
         $zipcode = $request->input('zipcode');
-        $user->address = implode(",", array($street, $city, $zipcode));
+        $country = $request->input('country');
+        $user->address = implode(",", array($street, $city, $zipcode, $country));
 
         $user->save();
 
