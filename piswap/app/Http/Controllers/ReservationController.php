@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Datetime;
-use App\Reservation;
+use App\Reservations;
 use App\Book;
 use App\User;
 
@@ -29,7 +29,7 @@ class ReservationController extends Controller
     public function index()
     {
         $data = [
-            'borrows' => Reservations::get()
+            'data' => Reservations::get()
         ];
         return view('reservations.list')->with('data', $data);
     }
