@@ -13,8 +13,17 @@
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Edit book attributes.
   </span>
-  <h2>
-  </h2>
+  <h2>Book Details</h2>
+  @if ($errors->any())
+  <div class="alert alert-danger col-md-8">
+    <h4>These errors were found in the form:</h2>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+  </div>
+  @endif
   <form class="form-horizontal" role="form" method="POST" action="{{ route('books.update', $data['book']->isbn) }}">
   {{ csrf_field() }}
     <div class="form-row">
