@@ -29,39 +29,63 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="author">Author</label>
-        <input type="text" class="form-control" id="author" placeholder="Name Surname" value="{{ $data['book']->author }}" name="author" required>
+        <input type="text" class="form-control" id="author" placeholder="Name Surname" value="{{ $data['book']->author }}" name="author" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[A-z\s\.]+$"
+         data-bv-regexp-message="The Author can consist alphanumerical characters, spaces and dots only">
       </div>
       <div class="form-group col-md-4">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" placeholder="Title" value="{{ $data['book']->title }}" name="title" required>
+        <input type="text" class="form-control" id="title" placeholder="Title" value="{{ $data['book']->title }}" name="title" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[A-z\s\.]+$"
+         data-bv-regexp-message="The Title can consist alphanumerical characters, spaces and dots only">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="publisher">Publisher</label>
-        <input type="text" class="form-control" id="publisher" placeholder="Publisher" value="{{ $data['book']->publisher }}" name="publisher" required>
+        <input type="text" class="form-control" id="publisher" placeholder="Publisher" value="{{ $data['book']->publisher }}" name="publisher" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[A-z\s\.]+$"
+         data-bv-regexp-message="The Publisher can consist alphanumerical characters, spaces and dots only">
       </div>
       <div class="form-group col-md-2">
         <label for="date">Date</label>
-        <input type="text" class="form-control" id="date" placeholder="DD-MM-YYYY" value="{{ $data['book']->date }}" name="date" required>
+        <input type="text" class="form-control" id="date" placeholder="DD-MM-YYYY" value="{{ $data['book']->date }}" name="date" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[0-9]{2}\-[0-9]{2}\-[0-9]{4}$"
+         data-bv-regexp-message="The Date can consist numerical charactersand dashes only">
       </div>
       <div class="form-group col-md-2">
         <label for="pages">Pages</label>
-        <input type="text" class="form-control" id="pages" placeholder="0" value="{{ $data['book']->numberOfPages }}" name="pages" required>
+        <input type="text" class="form-control" id="pages" placeholder="0" value="{{ $data['book']->numberOfPages }}" name="pages" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[0-9]+$"
+         data-bv-regexp-message="The Pages can consist numerical characters only">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-1">
         <label for="quantity">Quantity</label>
-        <input type="text" class="form-control" id="quantity" placeholder="4" value="{{ $data['book']->quantity }}" name="quantity" required>
+        <input type="text" class="form-control" id="quantity" placeholder="4" value="{{ $data['book']->quantity }}" name="quantity" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[0-9]+$"
+         data-bv-regexp-message="The Quantity can consist numerical characters only">
       </div>
       <div class="form-group col-md-1">
         <label for="location">Location</label>
-        <input type="text" class="form-control" id="location" placeholder="rack 1" name="location" value="{{ $data['book']->rack }}" required>
+        <input type="text" class="form-control" id="location" placeholder="rack 1" name="location" value="{{ $data['book']->rack }}" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[A-z\s0-9]+$"
+         data-bv-regexp-message="The Location can consist alphanumerical characters and spaces only">
       </div>
       <div class="form-group col-md-2">
         <label for="isbn">ISBN</label>
-        <input type="text" class="form-control" id="isbn" placeholder="rack 1" name="isbn" value="{{ $data['book']->isbn }}" required>
+        <input type="text" class="form-control" id="isbn" placeholder="rack 1" name="isbn" value="{{ $data['book']->isbn }}" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[0-9\-]+$"
+         data-bv-regexp-message="The ISBN can consist numerical characters and dashes only">
       </div>
       <div class="form-group col-md-2">
         <label for="language">Language</label>
@@ -91,11 +115,17 @@
     <div class="form-row">
       <div class="form-group col-md-2">
         <label for="genre">Genre</label>
-        <input type="text" class="form-control" id="genre" placeholder="Sci-fi" name="genre" value="{{ $data['book']->genre }}" required>
+        <input type="text" class="form-control" id="genre" placeholder="Sci-fi" name="genre" value="{{ $data['book']->genre }}" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[A-z\s\-]+$"
+         data-bv-regexp-message="The Genre can consist alphanumerical characters only">
       </div>
       <div class="form-group col-md-2">
         <label for="department">Department</label>
-        <input type="text" class="form-control" id="department" placeholder="dep no.1" name="department" value="{{ $data['book']->department }}" required>
+        <input type="text" class="form-control" id="department" placeholder="dep no.1" name="department" value="{{ $data['book']->department }}" required
+        data-bv-regexp="true"
+         data-bv-regexp-regexp="^[A-z\s\-0-9]+$"
+         data-bv-regexp-message="The Department can consist alphanumerical characters only">
       </div>
     </div>
     <div class="form-row">
