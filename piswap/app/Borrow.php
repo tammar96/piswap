@@ -18,7 +18,7 @@ class Borrow extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function books()
+    public function book()
     {
         return $this->belongsTo('App\Book');
     }

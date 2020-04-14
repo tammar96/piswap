@@ -24,7 +24,7 @@ class Book extends Migration
             $table->mediumText('description');
             $table->string('department')->nullable();
             $table->string('genre');
-            $table->string('quantity');
+            $table->integer('quantity');
             $table->integer('rack')->nullable();
             $table->string('language');
         });

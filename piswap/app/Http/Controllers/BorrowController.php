@@ -44,7 +44,11 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        return view('borrows.create');
+        $data = [
+            'users' => User::get(),
+            'books' => Book::where('quantity', '>', 0)->get()
+        ];
+        return view('borrows.create')->with('data', $data);
     }
 
     /**
@@ -60,10 +64,13 @@ class BorrowController extends Controller
         $borrow = new Borrow();
         $borrow->date = (new DateTime('now'))->format('Y-m-d H:i:s');
 
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $out->writeln($request->input('isbn'));
+        $out->writeln($request->input('reader'));
         $user = User::find($request->input('reader'));
         $borrow->user()->associate($user);
         $book = Book::find($request->input('isbn'));
-        $borrow->books->add($book);
+        $borrow->book()->associate($book);
         $borrow->save();
 
         $data = [
