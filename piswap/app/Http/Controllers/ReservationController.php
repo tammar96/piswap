@@ -29,8 +29,17 @@ class ReservationController extends Controller
     public function index()
     {
         $data = [
-            'data' => Reservations::get()
+            'reservations' => Reservations::get()
         ];
+        foreach($data['reservations'] as $key) {
+            $now = time();
+            $your_date = strtotime($key['date']);
+            $datediff = $now - $your_date;
+            $datediff = round($datediff / (60 * 60 * 24));
+            if ($datediff > 7) {
+                Reservations::destroy($key['id']);
+            }
+        }
         return view('reservations.list')->with('data', $data);
     }
 
@@ -178,7 +187,7 @@ class ReservationController extends Controller
     {
         Reservations::destroy($id);
         $data = [
-            'data' => Reservations::get()
+            'reservations' => Reservations::get()
         ];
         return view('reservations.list')->with('data', $data);
     }

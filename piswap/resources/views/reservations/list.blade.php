@@ -33,13 +33,17 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($data['data'] as $key)
+        @foreach($data['reservations'] as $key)
         <tr>
           <td>{{ $key->book_isbn }}</td>
           <td>{{ $key->user_email }}</td>
-          <td>{{ $key->date_to }}</td>
+          <td>{{ $key->date }}</td>
           <td>
-
+          <form class="form-horizontal"  role="form" method="POST" action="{{route('reservations.approve', $key->id)}}">
+              {{method_field('POST')}}
+              {{ csrf_field() }}
+              <button type="submit" class="btn btn-warning" >Approve Reservation</button>
+            </form>
             <form class="form-horizontal"  role="form" method="POST" action="{{route('reservations.destroy', $key->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
