@@ -35,8 +35,20 @@ class BorrowController extends Controller
         $data = [
             'borrows' => Borrow::get()
         ];
-
-        return view('borrows.list')->with('data', $data);
+        $count = 1;
+        foreach($data['borrows'] as $key) {
+            $now = time();
+            $your_date = strtotime($key['date_to']);
+            $datediff = $now - $your_date;
+            $datediff = round($datediff / (60 * 60 * 24));
+            if ($datediff > 0) {
+                $fine[$count] = ($datediff);
+            } else {
+                $fine[$count] = 0;
+            }
+            $count = $count + 1;
+        }
+        return view('borrows.list')->with('data', $data)->with('fine', $fine);
     }
 
     /**

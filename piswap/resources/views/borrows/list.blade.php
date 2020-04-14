@@ -39,7 +39,7 @@
           <td>{{ $key->book_isbn }}</td>
           <td>{{ $key->user_email }}</td>
           <td>{{ $key->date_to }}</td>
-          <td>0,- &euro;</td>
+          <td>{{ $fine[($key->id)] }},- &euro;</td>
           <td>
 
             <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.prolong', $key->id)}}">
