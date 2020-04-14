@@ -28,7 +28,10 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'borrows' => Reservations::get()
+        ];
+        return view('reservations.list')->with('data', $data);
     }
 
     /**
@@ -38,7 +41,12 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'user_email' => User::get(),
+            'book_isbn' => Book::get(),
+            'date' => (new DateTime('now'))->format('Y-m-d H:i:s')
+        ];
+        return view('reservations.create')->with('data', $data);
     }
 
     /**
@@ -87,7 +95,7 @@ class ReservationController extends Controller
 
         $reservation = new Reservation();
         $reservation->date = date("Y-m-d");
-        $user = User::find(auth()->user()->email); 
+        $user = User::find(auth()->user()->email);
         $reservation->user()->associate($user);
         $book = Book::find($request->input('book_isbn'));
         $reservation->book()->associate($book);
@@ -152,9 +160,9 @@ class ReservationController extends Controller
         $reservation->book()->associate($book);
         $reservation->save();
 
-        $data = [ 
+        $data = [
             'reservation' => $reservation
-        ];  
+        ];
 
         // return view('reservations.show')->with('data', $data);
 
