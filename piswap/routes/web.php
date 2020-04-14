@@ -25,6 +25,8 @@ Route::resource('books', 'BookController');
 
 // Reservations
 Route::resource('reservations', 'ReservationController');
+Route::post('/reservations/destroy/{id}', 'ReservationController@destroy')->name('reservations.destroy');
+
 
 // Borrows
 Route::get('/borrows', 'BorrowController@index')->name('borrows');

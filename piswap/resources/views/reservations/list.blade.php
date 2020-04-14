@@ -40,13 +40,7 @@
           <td>{{ $key->date_to }}</td>
           <td>
 
-            {{-- <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.prolong', $key->id)}}">
-              {{method_field('POST')}}
-              {{ csrf_field() }}
-              <button type="submit" class="btn btn-warning" >Edit Reservation</button>
-            </form> --}}
-
-            <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.returnBookForm', $key->id)}}">
+            <form class="form-horizontal"  role="form" method="POST" action="{{route('reservations.destroy', $key->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger" >Delete Reservation</button>

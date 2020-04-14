@@ -176,12 +176,11 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        Reservation::destroy($id);
+        Reservations::destroy($id);
         $data = [
-            'reservations' => Reservation::get()
+            'data' => Reservations::get()
         ];
-
-        //return view('reservations.show')->with('data', $data);
+        return view('reservations.list')->with('data', $data);
     }
 
     public function askDelete($id)
