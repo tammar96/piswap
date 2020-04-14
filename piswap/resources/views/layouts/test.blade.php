@@ -12,6 +12,10 @@
     <script src="./bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
+
     <link href="/css/template.css" rel="stylesheet">
     <title>PIS - @yield('title')</title>
   </head>
@@ -124,11 +128,16 @@
         </main>
       </div>
     </div>
+    <script>
+    $(document).ready(function() {
+        $('#form2val').bootstrapValidator();
+    });
+    </script>
     @else
     <script type="text/javascript">
       window.onload = function() {
         // similar behavior as clicking on a link
-        window.location.href = "http://stackoverflow.com";
+        window.location.href = '{{route('home')}}';
       }
     </script>
     @endif
