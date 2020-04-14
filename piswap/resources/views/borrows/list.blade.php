@@ -48,8 +48,8 @@
               <button type="submit" class="btn btn-warning" >Prolong Borrow</button>
             </form>
 
-            <form class="form-horizontal"  method="POST" action="/borrows/delete/{{$key->id}}">
-              {{method_field('DELETE')}}
+            <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.returnBookForm', $key->id)}}">
+              {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger" >Return Book</button>
             </form>

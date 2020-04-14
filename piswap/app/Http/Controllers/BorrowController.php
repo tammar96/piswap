@@ -24,6 +24,22 @@ class BorrowController extends Controller
         $this->middleware('auth');
     }
 
+    public function countFine($data) {
+        $fine[0] = 0;
+        foreach($data['borrows'] as $key) {
+            $now = time();
+            $your_date = strtotime($key['date_to']);
+            $datediff = $now - $your_date;
+            $datediff = round($datediff / (60 * 60 * 24));
+            if ($datediff > 0) {
+                $fine[$key['id']] = $datediff;
+            } else {
+                $fine[$key['id']] = 0;
+            }
+        }
+        return $fine;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,23 +47,10 @@ class BorrowController extends Controller
      */
     public function index()
     {
-
         $data = [
             'borrows' => Borrow::get()
         ];
-        $count = 1;
-        foreach($data['borrows'] as $key) {
-            $now = time();
-            $your_date = strtotime($key['date_to']);
-            $datediff = $now - $your_date;
-            $datediff = round($datediff / (60 * 60 * 24));
-            if ($datediff > 0) {
-                $fine[$count] = ($datediff);
-            } else {
-                $fine[$count] = 0;
-            }
-            $count = $count + 1;
-        }
+        $fine = $this->countFine($data);
         return view('borrows.list')->with('data', $data)->with('fine', $fine);
     }
 
@@ -88,8 +91,8 @@ class BorrowController extends Controller
         $data = [
             'borrows' => Borrow::get()
         ];
-
-        return view('borrows.list')->with('data', $data);
+        $fine = $this->countFine($data);
+        return view('borrows.list')->with('data', $data)->with('fine', $fine);
     }
 
     /**
@@ -103,8 +106,8 @@ class BorrowController extends Controller
         $data = [
             'borrow' => Borrow::find($id)
         ];
-
-        return view('borrows.show')->with('data', $data);
+        $fine = $this->countFine($data);
+        return view('borrows.list')->with('data', $data)->with('fine', $fine);
     }
 
     /**
@@ -145,7 +148,8 @@ class BorrowController extends Controller
             'borrows' => Borrow::get()
         ];
 
-        return view('borrows.show')->with('data', $data);
+        $fine = $this->countFine($data);
+        return view('borrows.list')->with('data', $data)->with('fine', $fine);
     }
 
     /**
@@ -160,8 +164,9 @@ class BorrowController extends Controller
         $data = [
             'borrows' => Borrow::get(),
         ];
-
-        return view('borrows.list')->with('data', $data);
+        // TODO quantity + 1
+        $fine = $this->countFine($data);
+        return view('borrows.list')->with('data', $data)->with('fine', $fine);
     }
 
     public function askDelete($id)
@@ -169,9 +174,26 @@ class BorrowController extends Controller
         return view('borrows.ask-delete')->with('borrow', Borrow::find($id));
     }
 
-    public function returnBookForm()
+    public function returnBookForm($id)
     {
-        return view('borrows.return');
+        $borrow = Borrow::find($id);
+
+        $now = time();
+        $your_date = strtotime($borrow['date_to']);
+        $datediff = $now - $your_date;
+        $datediff = round($datediff / (60 * 60 * 24));
+        if ($datediff > 0) {
+            // Fine! Where is the money Lebowsky
+            $fine = $datediff;
+            return view('borrows.return')->with('borrow', $borrow)->with('fine', $fine);
+        } else {
+            Borrow::destroy($id);
+            $data = [
+                'borrows' => Borrow::get(),
+            ];
+            $fine = $this->countFine($data);
+            return view('borrows.list')->with('data', $data)->with('fine', $fine);
+        }
     }
 
     public function prolong($id)
