@@ -160,6 +160,13 @@ class BorrowController extends Controller
      */
     public function destroy($id)
     {
+        $borrow = Borrow::find($id);
+        // increment the quantity of this book available
+        $book = Book::find($borrow->$book_isbn);
+        $quantity = $book->quantity;
+        $book->quantity = $quantity + 1;
+        $book->save();
+        // destroy the borrow
         Borrow::destroy($id);
         $data = [
             'borrows' => Borrow::get(),
