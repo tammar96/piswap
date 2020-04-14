@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Datetime;
+use \DateInterval;
 use App\Reservations;
 use App\Book;
 use App\User;
+use App\Borrow;
 
 class ReservationController extends Controller
 {
@@ -185,6 +187,26 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
+        Reservations::destroy($id);
+        $data = [
+            'reservations' => Reservations::get()
+        ];
+        return view('reservations.list')->with('data', $data);
+    }
+
+    public function approve($id)
+    {
+        $reservation = Reservations::find($id);
+        $user = User::find($reservation['user_email']);
+        $book = Book::find($reservation['book_isbn']);
+
+        $borrow = new Borrow();
+        $borrow->date_from = (new DateTime('now'))->format('Y-m-d H:i:s');
+        $borrow->date_to = (new DateTime('now'))->add(new DateInterval('P30D'))->format('Y-m-d H:i:s');
+        $borrow->user()->associate($user);
+        $borrow->book()->associate($book);
+        $borrow->save();
+
         Reservations::destroy($id);
         $data = [
             'reservations' => Reservations::get()
