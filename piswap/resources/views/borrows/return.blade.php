@@ -11,31 +11,25 @@
 @section('content')
   <h1>Return Book</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
-    Return book from reader.
+    Late return on this books was identified. Please ask for payment.
   </span>
-  <h2>Information about borrowing</h2>
-  @if ($errors->any())
-  <div class="alert alert-danger col-md-8">
-    <h4>These errors were found in the form:</h2>
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-  </div>
-  @endif
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('borrows.store') }}">
-  {{ csrf_field() }}
+  <h2>
+  </h2>
     <div class="form-row">
-      <div class="form-group col-md-2">
-        <label for="isbn">ISBN</label>
-        <input type="text" class="form-control" id="isbn" placeholder="ISBN" name="isbn" value="" required>
+      <div class="form-group col-md-3">
+        <label for="isbn">User</label>
+        <p>{{ $borrow->user_email }}</p>
       </div>
+      <br>
       <div class="form-group col-md-2">
-        <label for="reader">Reader ID</label>
-        <input type="text" class="form-control" id="reader" placeholder="0000-0000" name="reader" value="" required>
+        <label for="reader">Fine</label>
+        <p>{{ $fine }},- &euro;</p>
       </div>
     </div>
-    <button type="submit" name="Submit" class="btn btn-primary">Return</button>
+    <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.destroy', $borrow->id)}}">
+              {{method_field('POST')}}
+              {{ csrf_field() }}
+              <button type="submit" class="btn btn-warning" >Paid</button>
+            </form>
   </form>
 @endsection

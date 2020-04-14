@@ -39,7 +39,7 @@
           <td>{{ $key->book_isbn }}</td>
           <td>{{ $key->user_email }}</td>
           <td>{{ $key->date_to }}</td>
-          <td>0,- &euro;</td>
+          <td>{{ $fine[($key->id)] }},- &euro;</td>
           <td>
 
             <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.prolong', $key->id)}}">
@@ -48,8 +48,8 @@
               <button type="submit" class="btn btn-warning" >Prolong Borrowing</button>
             </form>
 
-            <form class="form-horizontal"  method="POST" action="/borrows/delete/{{$key->id}}">
-              {{method_field('DELETE')}}
+            <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.returnBookForm', $key->id)}}">
+              {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger" >Return Book</button>
             </form>

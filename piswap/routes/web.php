@@ -26,9 +26,9 @@ Route::resource('books', 'BookController');
 // Borrows
 Route::get('/borrows', 'BorrowController@index')->name('borrows');
 Route::get('/borrows/create', 'BorrowController@create')->name('borrows.create');
+Route::post('/borrows/destroy/{id}', 'BorrowController@destroy')->name('borrows.destroy');
 Route::post('/borrows/create', 'BorrowController@store')->name('borrows.store');
-Route::delete('/borrows/delete/{id}', 'BorrowController@destroy')->name('borrows.destroy');
-Route::get('/borrows/return', 'BorrowController@returnBookForm')->name('borrows.returnForm');
+Route::post('/borrows/return/{id}', 'BorrowController@returnBookForm')->name('borrows.returnBookForm');
 Route::post('/borrows/prolong/{id}', 'BorrowController@prolong')->name('borrows.prolong');
 
 // User
