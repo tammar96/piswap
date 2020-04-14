@@ -14,6 +14,16 @@
     On this page you can edit your personal details.
   </span>
   <h2>Personal Details</h2>
+  @if ($errors->any())
+  <div class="alert alert-danger col-md-8">
+    <h4>These errors were found in the form:</h2>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+  </div>
+  @endif
   <form class="form-horizontal" role="form" method="POST" action="{{ route('users.store') }}">
   {{ csrf_field() }}
     <div class="form-row">
@@ -72,8 +82,8 @@
         <input type="text" class="form-control" id="zipcode" placeholder="000 00" name="zipcode" required="required" value="{{ old('zipcode') }}">
       </div>
       <div class="form-group required col-md-2">
-        <label class="control-label" for="coutnry">Country</label>
-        <input type="text" class="form-control" id="coutnry" placeholder="United Kingdom" name="coutnry" required="required" value="{{ old('coutnry') }}">
+        <label class="control-label" for="country">Country</label>
+        <input type="text" class="form-control" id="country" placeholder="United Kingdom" name="country" required="required" value="{{ old('country') }}">
       </div>
     </div>
     All items with <span style="color: #d00;position: relative; margin-left: 4px; top: -6px;">*</span> are mandatory.

@@ -14,6 +14,16 @@
     On this page you can edit your personal details.
   </span>
   <h2>Personal Details</h2>
+  @if ($errors->any())
+  <div class="alert alert-danger col-md-8">
+    <h4>These errors were found in the form:</h2>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+  </div>
+  @endif
   <form class="form-horizontal" role="form" method="POST" action="{{ route('users.update-someone', $data['user']->email) }}">
   {{ csrf_field() }}
     <div class="form-row">
@@ -35,7 +45,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="">
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password_confirmation" value="">
       </div>
       <div class="form-group col-md-4">
         <label for="password2">Verify Password</label>
@@ -54,19 +64,15 @@
               <option value="{{$role}}">{{$role}}</option>
               @endif
             @endforeach
-          @elseif (Auth::user()->hasRole('librarian'))
+          @else
             <option value="user" selected>user</option>
+          @endif
         </select>
-        @elseif
-        <select id="role" class="form-control" name="role">
-          <option value="{{ $data['data']->role }}" selected>{{ $data['data']->role }}</option>
-        </select>
-        @endif
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-8 required">
-        <label class="control-label" for="address">Address</label>
+        <label class="control-label" for="address">Street</label>
         <input type="text" class="form-control" id="address" placeholder="Street Address & House number" name="street" value="{{$data['street']}}" required>
       </div>
     </div>
