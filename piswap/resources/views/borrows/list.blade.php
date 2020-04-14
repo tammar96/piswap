@@ -27,7 +27,7 @@
       <thead>
         <tr>
           <th>ISBN</th>
-          <th>Author</th>
+          <th>User</th>
           <th>Valid until</th>
           <th>To be paid</th>
           <th>Tools</th>
