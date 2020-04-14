@@ -29,6 +29,7 @@ Route::get('/borrows/create', 'BorrowController@create')->name('borrows.create')
 Route::post('/borrows/create', 'BorrowController@store')->name('borrows.store');
 Route::delete('/borrows/delete/{id}', 'BorrowController@destroy')->name('borrows.destroy');
 Route::get('/borrows/return', 'BorrowController@returnBookForm')->name('borrows.returnForm');
+Route::post('/borrows/prolong/{id}', 'BorrowController@prolong')->name('borrows.prolong');
 
 // User
 Route::resource('users', 'UserController');
@@ -39,7 +40,6 @@ Route::post('/update-someone/{email}', 'UserController@updateSomeone')->name('us
 // Invalid url exceptions
 Route::get('/notFoundHttpException', 'ErrorController@index404')->name('errors.notFoundHttpException');
 Route::get('/invalidArgumentException', 'ErrorController@invalidArgumentException')->name('errors.invalidArgumentException');
-
 
 Route::get('/api/user/current', 'UserController@getCurrentUserAPI');
 Route::get('/api/books', 'BookController@listAPI');

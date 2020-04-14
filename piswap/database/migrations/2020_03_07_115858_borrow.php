@@ -15,7 +15,8 @@ class Borrow extends Migration
     {
         Schema::create('borrows', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('date');
+            $table->dateTime('date_from');
+            $table->dateTime('date_to');
             $table->string('user_email');
             $table->string('book_isbn')->nullable();
         });

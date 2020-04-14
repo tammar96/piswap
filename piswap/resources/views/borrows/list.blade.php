@@ -28,6 +28,7 @@
         <tr>
           <th>ISBN</th>
           <th>Author</th>
+          <th>Valid until</th>
           <th>To be paid</th>
           <th>Tools</th>
         </tr>
@@ -35,14 +36,21 @@
       <tbody>
         @foreach($data['borrows'] as $key)
         <tr>
-          <td>{{ $key->date }}</td>
-          <td>{{ $key->user_id }}</td>
+          <td>{{ $key->book_isbn }}</td>
+          <td>{{ $key->user_email }}</td>
+          <td>{{ $key->date_to }}</td>
           <td>0,- &euro;</td>
           <td>
+
+            <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.prolong', $key->id)}}">
+              {{method_field('POST')}}
+              {{ csrf_field() }}
+              <button type="submit" class="btn btn-warning" >Prolong Borrow</button>
+            </form>
+
             <form class="form-horizontal"  method="POST" action="/borrows/delete/{{$key->id}}">
               {{method_field('DELETE')}}
               {{ csrf_field() }}
-              <button type="button" onclick="window.location.href='/borrow/{{ $key->id }}/edit'" class="btn btn-warning" >Prolong Borrow</button>
               <button type="submit" class="btn btn-danger" >Return Book</button>
             </form>
           </td>

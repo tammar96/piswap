@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \Datetime;
+use \DateInterval;
 use App\Borrow;
 use App\Book;
 use App\User;
@@ -12,7 +13,8 @@ class BorrowController extends Controller
 {
     private $_rules = [
         'id' => ['optional', 'digits:4'],
-        //'date' => ['required', 'date_format:Y-m-d H:i:s|nullable'],
+        //'date_from' => ['required', 'date_format:Y-m-d H:i:s|nullable'],
+        //'date_to' => ['required', 'date_format:Y-m-d H:i:s|nullable'],
         'reader' => ['exists:users,email'],
         'isbn' => ['exists:books,isbn']
     ];
@@ -62,11 +64,9 @@ class BorrowController extends Controller
         $this->validate($request, $this->_rules);
 
         $borrow = new Borrow();
-        $borrow->date = (new DateTime('now'))->format('Y-m-d H:i:s');
+        $borrow->date_from = (new DateTime('now'))->format('Y-m-d H:i:s');
+        $borrow->date_to = (new DateTime('now'))->add(new DateInterval('P30D'))->format('Y-m-d H:i:s');
 
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln($request->input('isbn'));
-        $out->writeln($request->input('reader'));
         $user = User::find($request->input('reader'));
         $borrow->user()->associate($user);
         $book = Book::find($request->input('isbn'));
@@ -160,5 +160,22 @@ class BorrowController extends Controller
     public function returnBookForm()
     {
         return view('borrows.return');
+    }
+
+    public function prolong($id)
+    {
+        $borrow = Borrow::find($id);
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $date = new DateTime($borrow->date_to);
+        $date->add(new DateInterval('P1M'));
+        $borrow->date_to = $date;
+        $borrow->save();
+
+        $data = [
+            'borrows' => Borrow::get(),
+        ];
+
+        return view('borrows.list')->with('data', $data);
+
     }
 }

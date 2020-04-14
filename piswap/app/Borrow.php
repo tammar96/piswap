@@ -10,7 +10,7 @@ class Borrow extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'date', 'user_email'
+        'date_from', 'date_to', 'user_email'
     ];
 
     public function user()
