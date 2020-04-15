@@ -16,11 +16,11 @@ Route::get('/', function () { return view('welcome'); });
 // Authentication
 Auth::routes();
 
-Route::resource('books', 'BookController');
 Route::get('/search', function () {return view('welcome'); });
 
 // Books
 Route::resource('books', 'BookController');
+Route::post('/update-book/{isbn}', 'BookController@updateBook')->name('books.update-book');
 
 // Reservations
 Route::resource('reservations', 'ReservationController');
