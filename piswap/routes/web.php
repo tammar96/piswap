@@ -16,7 +16,6 @@ Route::get('/', function () { return view('welcome'); });
 // Authentication
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('books', 'BookController');
 Route::get('/search', function () {return view('welcome'); });
 
