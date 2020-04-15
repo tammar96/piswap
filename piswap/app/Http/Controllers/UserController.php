@@ -17,11 +17,11 @@ class UserController extends Controller
         'name' => ['required', 'string', 'max:255'],
         'surname' => ['required', 'alpha_dash', 'max:255'],
         'email' => ['required', 'email', 'string', 'max:255'],
-        // 'password' => ['password:api'],
+        'password' => ['required', 'confirmed'],
         'street' => ['required', 'regex:/[A-z0-9\s\/]*/i', 'string', 'max:255'],
-        'city' => ['required', 'alpha', 'max:255'],
+        'city' => ['required', 'regex:/[A-z\s]/i', 'max:255'],
         'zipcode' => ['required', 'digits:5', 'string'],
-        'country' => ['required', 'alpha', 'max:255]'],
+        'country' => ['required', 'regex:/[A-z\s]/i', 'max:255]'],
     ];
 
 
@@ -117,7 +117,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $addr = explode(", ", User::find($id)->address);
+        $addr = explode(",", User::find($id)->address);
 
         $street = $addr[0];
         $city = $addr[1];
@@ -190,7 +190,7 @@ class UserController extends Controller
 
     public function profile()
     {
-        $addr = explode(", ", Auth::user()->address);
+        $addr = explode(",", Auth::user()->address);
 
         $street = $addr[0];
         $city = $addr[1];

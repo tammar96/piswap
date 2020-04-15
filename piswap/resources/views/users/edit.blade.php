@@ -52,7 +52,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" name="password_confirmation" value="">
+        <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="">
       </div>
       <div class="form-group col-md-4">
         <label for="password2">Verify Password</label>
@@ -99,7 +99,7 @@
         <input type="text" class="form-control" id="zipcode" placeholder="000 00" name="zipcode" required="required" value="{{$data['zipcode']}}"
         data-bv-regexp="true"
          data-bv-regexp-regexp="^[0-9]{5}$"
-         data-bv-regexp-message="The zipcode can consist 5 digits only">>
+         data-bv-regexp-message="The zipcode can consist 5 digits only">
       </div>
       <div class="form-group required col-md-2">
         <label class="control-label" for="country">Country</label>
