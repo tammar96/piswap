@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
                 'address'   => 'Hlavna 134, Komarno, 94501, Slovakia',
                 'telephone' => '+420-263-164-770',
                 'active'    => False,
-                'email'     => 'admin@admin',
+                'email'     => 'admin@admin.com',
                 'password'  => bcrypt('admin')
             ),
             array(
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
                 'address'   => 'Mliecna 23, Hacienda, 34608, Slovensko',
                 'telephone' => '+420-263-164-773',
                 'active'    => False,
-                'email'     => 'librarian@job',
+                'email'     => 'librarian@job.eu',
                 'password'  => bcrypt('librarian')
             ),
             array('name'=>'Callum','surname'=>'Macdonald','role'=>'user','address'=>'P.O. Box 157, 7612 Risus. Road, Azonosto, 15469, Maldives','telephone'=>'+420-263-164-770','active'=>False,'email'=>'eget.ipsum.Donec@necmollisvitae.edu','password'=>bcrypt('123456789')),

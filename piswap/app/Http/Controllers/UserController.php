@@ -71,6 +71,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->_rules);
+        $this->validate($request, ['email' => 'unique:users']);
 
         $user = new User();
         $user->name = $request->input('name');
@@ -83,7 +84,7 @@ class UserController extends Controller
         $city = $request->input('city');
         $country = $request->input('country');
         $zipcode = $request->input('zipcode');
-        $user->address = implode(",", array($street, $city, $zipcode));
+        $user->address = implode(", ", array($street, $city, $zipcode));
         $user->save();
 
 
@@ -117,7 +118,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $addr = explode(",", User::find($id)->address);
+        $addr = explode(", ", User::find($id)->address);
 
         $street = $addr[0];
         $city = $addr[1];
@@ -156,7 +157,7 @@ class UserController extends Controller
         $city = $request->input('city');
         $zipcode = $request->input('zipcode');
         $country = $request->input('country');
-        $user->address = implode(",", array($street, $city, $zipcode, $country));
+        $user->address = implode(", ", array($street, $city, $zipcode, $country));
 
         $user->save();
 
@@ -190,7 +191,7 @@ class UserController extends Controller
 
     public function profile()
     {
-        $addr = explode(",", Auth::user()->address);
+        $addr = explode(", ", Auth::user()->address);
 
         $street = $addr[0];
         $city = $addr[1];
@@ -234,7 +235,7 @@ class UserController extends Controller
         $city = $request->input('city');
         $zipcode = $request->input('zipcode');
         $country = $request->input('country');
-        $user->address = implode(",", array($street, $city, $zipcode, $country));
+        $user->address = implode(", ", array($street, $city, $zipcode, $country));
 
         $user->save();
 

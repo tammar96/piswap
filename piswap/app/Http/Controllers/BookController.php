@@ -62,7 +62,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //$this->validate($request, $this->_rules);
+        $this->validate($request, $this->_rules);
 
         $book = new Book();
         $book->isbn = $request->input('isbn');
