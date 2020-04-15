@@ -104,7 +104,7 @@ class ReservationController extends Controller
     {
         $this->validate($request, ['book_isbn' => ['required', 'exists:books,isbn']]);
 
-        $reservation = new Reservation();
+        $reservation = new Reservations();
         $reservation->date = date("Y-m-d");
         $user = User::find(auth()->user()->email);
         $reservation->user()->associate($user);
@@ -121,7 +121,7 @@ class ReservationController extends Controller
 
     public function showAPI($isbn)
     {
-        $reservation = Reservation::where('user_email', '=', auth()->user()->email)->where('book_isbn', '=', $isbn)->first();
+        $reservation = Reservations::where('user_email', '=', auth()->user()->email)->where('book_isbn', '=', $isbn)->first();
         $data = [
             'reservation' => $reservation
         ];
