@@ -28,7 +28,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:admin')->only(['destroy']);
+        $this->middleware('role:librarian')->only(['destroy']);
     }
 
     /**
@@ -113,7 +113,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $addr = explode(", ", User::find($id)->address);
+        $user = User::find($id);
+        if (Auth::user()->role == 'librarian' && $user->role == 'admin') {
+            $data = [
+                'users' => User::get(),
+                'borrows' => $this->getRentalAmounts(),
+            ];
+
+            return view('users.list')->with('data', $data);
+        }
+        $addr = explode(", ", $user->address);
 
         $street = $addr[0];
         $city = $addr[1];
@@ -125,7 +134,7 @@ class UserController extends Controller
             'city' => $city,
             'zipcode' => $zipcode,
             'country' => $country,
-            'user' => User::find($id),
+            'user' => $user,
         ];
 
 
@@ -174,7 +183,11 @@ class UserController extends Controller
      */
     public function destroy($email)
     {
-        if ($email != Auth::user()->email) // Delete when it's not the account I am using right now
+        // Delete when it's not the account I am using right now
+        // and
+        // a librarian can not destory a user
+        $user = User::find($email);
+        if ($email != Auth::user()->email && (Auth::user()->role == 'librarian' && $user->role == 'admin'))
             User::Destroy($email);
 
         $data = [

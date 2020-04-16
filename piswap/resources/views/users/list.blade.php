@@ -42,8 +42,10 @@
             <form class="form-horizontal"  method="POST" action="{{ route('users.destroy', $key->email) }}">
               {{method_field('DELETE')}}
               {{ csrf_field() }}
+              @if (Auth::user()->hasRole('admin') || (Auth::user()->role == 'librarian' && $key->role != 'admin'))
               <button type="button" onclick="window.location.href='/users/{{ $key->email }}/edit'" class="btn btn-warning" >Edit User</button>
               <button type="submit" class="btn btn-danger" >Delete User</button>
+              @endif
             </form>
           </td>
         </tr>
