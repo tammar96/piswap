@@ -57,7 +57,7 @@
       </div>
       <div class="form-group col-md-3">
         <label for="password2">Verify Password</label>
-        <input type="password" class="form-control" id="password2" placeholder="Password" name="heslo_potvrd">
+        <input type="password" class="form-control" id="password2" placeholder="Password" name="password_confirmation">
       </div>
     </div>
     <div class="form-row">

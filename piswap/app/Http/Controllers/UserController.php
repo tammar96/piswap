@@ -38,15 +38,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $requests = Borrow::groupBy('user_email')->select(DB::raw('user_email, COUNT(*) as user_id_count'))->get();
-        $borrows=[];
-        foreach ($requests as $request) {
-            $borrows[$request->user_email] = $request->user_id_count;
-        }
-
         $data = [
             'users' => User::get(),
-            'borrows' => $borrows,
+            'borrows' => $this->getRentalAmounts(),
         ];
 
         return view('users.list')->with('data', $data);
@@ -89,7 +83,8 @@ class UserController extends Controller
 
 
         $data = [
-            'users' => User::get()
+            'users' => User::get(),
+            'borrows' => $this->getRentalAmounts(),
         ];
 
         return view('users.list')->with('data', $data);
@@ -183,7 +178,8 @@ class UserController extends Controller
             User::Destroy($email);
 
         $data = [
-            'users' => User::get()
+            'users' => User::get(),
+            'borrows' => $this->getRentalAmounts(),
         ];
 
         return view('users.list')->with('data', $data);
@@ -240,9 +236,21 @@ class UserController extends Controller
         $user->save();
 
         $data = [
-            'users' => User::get()
+            'users' => User::get(),
+            'borrows' => $this->getRentalAmounts(),
         ];
 
         return view('users.list')->with('data', $data);
+    }
+
+    private function getRentalAmounts()
+    {
+        $requests = Borrow::groupBy('user_email')->select(DB::raw('user_email, COUNT(*) as user_id_count'))->get();
+        $borrows=[];
+        foreach ($requests as $request) {
+            $borrows[$request->user_email] = $request->user_id_count;
+        }
+
+        return $borrows;
     }
 }
