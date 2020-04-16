@@ -47,7 +47,7 @@
       </div>
       <div class="form-group col-md-2">
         <label for="pages">Pages</label>
-        <input type="text" class="form-control" id="pages" placeholder="0" value="{{ old('pages') }}" name="pages" required>
+        <input type="text" class="form-control" id="pages" placeholder="0" value="{{ old('numberOfPages') }}" name="numberOfPages" required>
       </div>
     </div>
     <div class="form-row">

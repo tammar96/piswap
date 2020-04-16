@@ -24,7 +24,7 @@
     </ul>
   </div>
   @endif
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('books.update', $data['book']->isbn) }}">
+  <form class="form-horizontal" role="form" method="POST" action="{{ route('books.update-book', $data['book']->isbn) }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -59,7 +59,7 @@
       </div>
       <div class="form-group col-md-2">
         <label for="pages">Pages</label>
-        <input type="text" class="form-control" id="pages" placeholder="0" value="{{ $data['book']->numberOfPages }}" name="pages" required
+        <input type="text" class="form-control" id="pages" placeholder="0" value="{{ $data['book']->numberOfPages }}" name="numberOfPages" required
         data-bv-regexp="true"
          data-bv-regexp-regexp="^[0-9]+$"
          data-bv-regexp-message="The Pages can consist numerical characters only">
@@ -131,10 +131,9 @@
     <div class="form-row">
       <div class="form-group col-md-8">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="5">{{ $data['book']->description }}</textarea>
+        <textarea class="form-control" id="description" name="description" rows="5">{{ $data['book']->description }}</textarea>
       </div>
     </div>
-      {{method_field('GET')}}
       {{ csrf_field() }}
       <button type="submit" class="btn btn-danger" >Save</button>
     </form>

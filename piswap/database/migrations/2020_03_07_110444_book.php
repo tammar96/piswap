@@ -27,6 +27,7 @@ class Book extends Migration
             $table->integer('quantity');
             $table->integer('rack')->nullable();
             $table->string('language');
+            $table->string('location')->nullable();
         });
     }
 

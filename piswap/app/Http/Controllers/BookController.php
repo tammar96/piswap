@@ -10,7 +10,7 @@ use DB;
 class BookController extends Controller
 {
     private $_rules = [
-        'isbn' => ['required','unique:books'],
+        'isbn' => ['required'],
         'title' => ['required', 'string', 'max:255'],
         'author' =>  ['required', 'string', 'max:64'],
         'publisher' => ['required', 'string', 'max:64'],
@@ -22,7 +22,8 @@ class BookController extends Controller
         'genre' => ['required', 'string'],
         'quantity' => ['required', 'string'],
         'rack' => ['optional'],
-        'language' => ['required', 'string', 'max:64']
+        'language' => ['required', 'string', 'max:64'],
+        'location' => ['required', 'string', 'max:64'],
     ];
 
     public function __construct()
@@ -63,6 +64,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->_rules);
+        $this->validate($request, ['isbn' => 'unique:books']);
 
         $book = new Book();
         $book->isbn = $request->input('isbn');
@@ -78,6 +80,7 @@ class BookController extends Controller
         $book->quantity = $request->input('quantity');
         $book->rack = $request->input('rack');
         $book->language = $request->input('language');
+        $book->location = $request->input('location');
 
         $book->save();
 
@@ -151,7 +154,7 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateBook(Request $request, $id)
     {
 
         $book = Book::find($id);
@@ -170,6 +173,7 @@ class BookController extends Controller
         $book->quantity = $request->input('quantity');
         $book->rack = $request->input('rack');
         $book->language = $request->input('language');
+        $book->location = $request->input('location');
 
         $book->save();
 
