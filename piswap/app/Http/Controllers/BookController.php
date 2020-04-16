@@ -101,17 +101,29 @@ class BookController extends Controller
             parse_str($parsed['query'], $filtratedArray);
             // Get the fields we expect
             $text = isset($filtratedArray['text']) ? $filtratedArray['text'] : "";
-            $year = isset($filtratedArray['year']) ? "AND YEAR(date)=" . $filtratedArray['year'] : "";
+            $year = isset($filtratedArray['year']) ? "YEAR(date)=" . $filtratedArray['year'] : "1=1";
             $availability = isset($filtratedArray['available']) ? $filtratedArray['available'] : 0;
             // Edit the text in form the SQL expects
-            $textParsed = "'%" . $text . "%'";
-            // Prepare the query
-            $query = "SELECT * FROM `books` WHERE (isbn LIKE " . $textParsed . " OR title LIKE " . $textParsed . " OR publisher LIKE " . $textParsed . "OR genre LIKE " . $textParsed . ")" . $year . " AND quantity>=" . $availability;
+            $textParsed = "%" . $text . "%";
+            
+            // prepare order by
+            $sortField = isset($filtratedArray['sortBy']) ? $filtratedArray['sortBy'] : "title";
+            $sortDirection = isset($filtratedArray['sortDirection']) ? $filtratedArray['sortDirection'] : "";
+
             // Call the query
-            $books = DB::select($query);
+            $books = Book::where('quantity', '>=', $availability)
+                ->where(function ($query) use ($textParsed) {
+                    $query->where('isbn', 'like', $textParsed)
+                      ->orWhere('title', 'like', $textParsed)
+                      ->orWhere('genre', 'like', $textParsed)
+                      ->orWhere('author', 'like', $textParsed)
+                      ->orWhere('publisher', 'like', $textParsed);
+                    })
+                    ->whereRaw($year)
+                    ->orderBy($sortField, $sortDirection)
+                    ->get();
         } else {
-            $query = "SELECT * FROM `books`";
-            $books = DB::select($query);
+            $books = Book::get();
         }
         return response()->json([
             'books' => $books

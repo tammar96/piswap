@@ -22,28 +22,46 @@
 
     .filter {
         padding: 20px;
-        margin-bottom: 20px;
         background-color: rgba(0, 0, 0, 0.03);    
         border-radius: 0.25rem;
-        border: 1px solid #ced4da;    
+        border: 1px solid $light-gray;    
     }
 
     .filter-content {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     .filter-item {
-        width: 33%;
-        flex-wrap: wrap;
+        box-sizing: border-box;
+        flex-grow: 0.3;
+        flex-basis: 0;
+        padding: 10px;
     }
 
-    .filter-item.input {
-        margin-right: 40px;            
+    .sorter-content {
+        display: inline-grid;
+        grid-auto-flow: column;
+        grid-gap: 20px;
+        width: 40%;
+        padding: 20px;
     }
 
-    .filter-content:last-child {
-        margin-right: 0px !important;            
+    .sorter-item {
+        &.desc::after {
+            content:'↓';
+        }
+        &.asc::after {
+            content:'↑';
+        }
+        &.active {
+            font-weight: bold;
+        }
+        &.inactive {
+           color: $light-gray;
+        }
     }
 
     .card-label-yellow {

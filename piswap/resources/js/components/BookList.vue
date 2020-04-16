@@ -2,18 +2,24 @@
     <b-container class="book-list">
         <div class="filter">
             <div class="filter-content">
-                <div class="filter-item input">
+                <div class="filter-item">
                     <b-form-input v-model="filterName" placeholder="Name/Author/Publisher..." v-on:input="filterBooks()"></b-form-input>
                 </div>
-                <div class="filter-item input">
+                <div class="filter-item">
                     <b-form-input v-model="filterYear" placeholder="Year" type="number" min="1900" max="2021" v-on:input="filterBooks()"></b-form-input>
                 </div>
-                <div class="filter-item checkbox">
+                <div class="filter-item">
                     <b-form-select v-model="filterAvailable" v-on:input="filterBooks()">
                          <b-form-select-option value="false">All books</b-form-select-option>
                          <b-form-select-option value="true">Only available</b-form-select-option>
                     </b-form-select>
                 </div>
+                <div class="flex-break"/>
+            </div>
+        </div>
+        <div class="sorter-content">
+            <div class="sorter-item" v-on:click="sortByField($event, sorter.field)" v-bind:class="[sorter.active ? classActive : classInactive, sorter.directionASC ? classASC : classDESC]" v-for="sorter in sorters" v-bind:key="sorter.field">
+                {{sorter.text}}
             </div>
         </div>
         <b-row class="centered-row">
@@ -64,7 +70,17 @@
                 filterAvailable: 'false',
                 filterString: "",
                 showDetail: false,
-                selectedISBN: ""
+                selectedISBN: "",
+                sorters: 
+                [
+                    {field:"title", text: "Title", directionASC: true, active: true},
+                    {field:"numberOfPages", text: "Page count", directionASC: true, active: false},
+                    {field:"date", text: "Published date", directionASC: true, active: false},
+                ],
+                classASC: "asc",
+                classDESC: "desc",
+                classActive: "active",
+                classInactive: "inactive"
             }
         },
 
@@ -77,6 +93,19 @@
           }  
         },
         methods: {
+            sortByField: function(e, fieldName){
+                $.each(this.sorters, function (id, obj) {
+                    if (obj.field === fieldName) {
+                        obj.active = true;
+                        obj.directionASC = !obj.directionASC;
+                    }
+                    else {
+                        obj.active = false;
+                    }
+                });
+
+                this.filterBooks();
+            },
             openDetail: function(e, isbn){
                 e.preventDefault();
                 this.selectedISBN = isbn;
@@ -94,6 +123,13 @@
                 if (this.filterAvailable != 'false'){
                    filterParts.push("available=true");
                 }
+                
+                var activeSorter = this.sorters.filter(p => p.active)[0];
+
+                if (activeSorter != undefined){
+                    filterParts.push("sortBy=" + activeSorter.field);
+                    filterParts.push("sortDirection=" + (activeSorter.directionASC ? "asc" : "desc"));
+                }
 
                 this.filterString = filterParts.length > 0 ? "?" + filterParts.join("&") : "";
 
@@ -102,9 +138,11 @@
             async getBooks(index) {
                 const response = await this.$http.get('/api/books' + this.filterString);
                 var result = response.data.books;
-                this.pages = Math.ceil((result.length / this.perPage));
-                this.page = index;
-                this.books = result.slice(this.page * this.perPage, (this.page + 1) * this.perPage);
+                if (result != undefined){
+                    this.pages = Math.ceil((result.length / this.perPage));
+                    this.page = index;
+                    this.books = result.slice(this.page * this.perPage, (this.page + 1) * this.perPage);
+                }
             },
             booksInDeck: function(deckIndex){
                 return this.books.slice((deckIndex-1) * this.perRow, deckIndex * this.perRow);

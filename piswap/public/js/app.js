@@ -2224,6 +2224,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2237,7 +2243,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       filterAvailable: 'false',
       filterString: "",
       showDetail: false,
-      selectedISBN: ""
+      selectedISBN: "",
+      sorters: [{
+        field: "title",
+        text: "Title",
+        directionASC: true,
+        active: true
+      }, {
+        field: "numberOfPages",
+        text: "Page count",
+        directionASC: true,
+        active: false
+      }, {
+        field: "date",
+        text: "Published date",
+        directionASC: true,
+        active: false
+      }],
+      classASC: "asc",
+      classDESC: "desc",
+      classActive: "active",
+      classInactive: "inactive"
     };
   },
   mounted: function mounted() {
@@ -2249,6 +2275,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    sortByField: function sortByField(e, fieldName) {
+      $.each(this.sorters, function (id, obj) {
+        if (obj.field === fieldName) {
+          obj.active = true;
+          obj.directionASC = !obj.directionASC;
+        } else {
+          obj.active = false;
+        }
+      });
+      this.filterBooks();
+    },
     openDetail: function openDetail(e, isbn) {
       e.preventDefault();
       this.selectedISBN = isbn;
@@ -2269,6 +2306,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         filterParts.push("available=true");
       }
 
+      var activeSorter = this.sorters.filter(function (p) {
+        return p.active;
+      })[0];
+
+      if (activeSorter != undefined) {
+        filterParts.push("sortBy=" + activeSorter.field);
+        filterParts.push("sortDirection=" + (activeSorter.directionASC ? "asc" : "desc"));
+      }
+
       this.filterString = filterParts.length > 0 ? "?" + filterParts.join("&") : "";
       this.getBooks(0);
     }, 500),
@@ -2287,11 +2333,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context.sent;
                 result = response.data.books;
-                _this.pages = Math.ceil(result.length / _this.perPage);
-                _this.page = index;
-                _this.books = result.slice(_this.page * _this.perPage, (_this.page + 1) * _this.perPage);
 
-              case 7:
+                if (result != undefined) {
+                  _this.pages = Math.ceil(result.length / _this.perPage);
+                  _this.page = index;
+                  _this.books = result.slice(_this.page * _this.perPage, (_this.page + 1) * _this.perPage);
+                }
+
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -79691,7 +79740,7 @@ var render = function() {
         _c("div", { staticClass: "filter-content" }, [
           _c(
             "div",
-            { staticClass: "filter-item input" },
+            { staticClass: "filter-item" },
             [
               _c("b-form-input", {
                 attrs: { placeholder: "Name/Author/Publisher..." },
@@ -79714,7 +79763,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "filter-item input" },
+            { staticClass: "filter-item" },
             [
               _c("b-form-input", {
                 attrs: {
@@ -79742,7 +79791,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "filter-item checkbox" },
+            { staticClass: "filter-item" },
             [
               _c(
                 "b-form-select",
@@ -79773,9 +79822,36 @@ var render = function() {
               )
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex-break" })
         ])
       ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "sorter-content" },
+        _vm._l(_vm.sorters, function(sorter) {
+          return _c(
+            "div",
+            {
+              key: sorter.field,
+              staticClass: "sorter-item",
+              class: [
+                sorter.active ? _vm.classActive : _vm.classInactive,
+                sorter.directionASC ? _vm.classASC : _vm.classDESC
+              ],
+              on: {
+                click: function($event) {
+                  return _vm.sortByField($event, sorter.field)
+                }
+              }
+            },
+            [_vm._v("\n            " + _vm._s(sorter.text) + "\n        ")]
+          )
+        }),
+        0
+      ),
       _vm._v(" "),
       _c(
         "b-row",
