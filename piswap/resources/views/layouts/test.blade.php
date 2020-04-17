@@ -114,12 +114,7 @@
           </ul>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="/userborrows">My borrows</a>
-            </li>
-          </ul>
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/userreservations">My reservations</a>
+              <a class="nav-link" href="/userborrows">My rentals</a>
             </li>
           </ul>
           @endif

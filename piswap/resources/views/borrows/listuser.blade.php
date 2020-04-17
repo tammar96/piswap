@@ -9,23 +9,20 @@
 @endsection
 
 @section('content')
-  <h1>List of all borrowings</h1>
+  <h1>List of all borrowings and reservations</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
-    Here is your borrowed books
   </span>
   <br>
 
   <h2>List of Borrows</h2>
   <div class="table-responsive">
-    <div class="form-group float-lg-right col-md-3" style="margin-top:5px;">
-      <input type="text" class="search_summer form-control" onkeyup="myFunction('summer', 0, 2)" placeholder="What you looking for?">
-    </div>
     <table class="table table-striped results_summer table-hover">
       <thead>
         <tr>
           <th>ISBN</th>
           <th>Valid until</th>
           <th>Fine</th>
+          <th>Tools</th>
         </tr>
       </thead>
       <tbody>
@@ -36,11 +33,32 @@
           <td>{{ $fine[($key->id)] }},- &euro;</td>
           <td>
 
-            <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.prolong', $key->id)}}">
+            <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.userprolong', $key->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-warning" >Prolong Borrowing</button>
             </form>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+  <h2>List of Reservations</h2>
+  <div class="table-responsive">
+    <table class="table table-striped results_summer table-hover">
+      <thead>
+        <tr>
+          <th>ISBN</th>
+          <th>Valid until</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($reservations['reservations'] as $key)
+        <tr>
+          <td>{{ $key->book_isbn }}</td>
+          <td>{{ $key->date }}</td>
+          <td>
           </td>
         </tr>
         @endforeach

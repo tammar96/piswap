@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \Datetime;
 use \DateInterval;
 use App\Borrow;
+use App\Reservations;
 use App\Book;
 use App\User;
 use Auth;
@@ -58,12 +59,18 @@ class BorrowController extends Controller
     public function userindex()
     {
         $user = Auth::user();
-            $borrows = Borrow::where('user_email', 'like', $user['email'])->get();
+
+        $borrows = Borrow::where('user_email', 'like', $user['email'])->get();
         $data = [
             'borrows' => $borrows
         ];
+
+        $reservations = Reservations::where('user_email', 'like', $user['email'])->get();
+        $datares = [
+            'reservations' => $reservations
+        ];
         $fine = $this->countFine($data);
-        return view('borrows.listuser')->with('data', $data)->with('fine', $fine);
+        return view('borrows.listuser')->with('data', $data)->with('fine', $fine)->with('reservations', $datares);
     }
 
 
@@ -238,5 +245,28 @@ class BorrowController extends Controller
         $fine = $this->countFine($data);
         return view('borrows.list')->with('data', $data)->with('fine', $fine);
 
+    }
+    public function userprolong($id)
+    {
+        $borrow = Borrow::find($id);
+        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $date = new DateTime($borrow->date_to);
+        $date->add(new DateInterval('P1M'));
+        $borrow->date_to = $date;
+        $borrow->save();
+
+        $user = Auth::user();
+
+        $borrows = Borrow::where('user_email', 'like', $user['email'])->get();
+        $data = [
+            'borrows' => $borrows
+        ];
+
+        $reservations = Reservations::where('user_email', 'like', $user['email'])->get();
+        $datares = [
+            'reservations' => $reservations
+        ];
+        $fine = $this->countFine($data);
+        return view('borrows.listuser')->with('data', $data)->with('fine', $fine)->with('reservations', $datares);
     }
 }
