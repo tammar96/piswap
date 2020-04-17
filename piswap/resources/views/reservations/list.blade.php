@@ -13,9 +13,6 @@
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Here you can check and delete reservations
   </span>
-  <h2>Add new book to the inventory</h2>
-    {{-- <button type="button" onclick="window.location.href='/borrows/create'" class="btn btn-success" >Add Borrow</button> --}}
-  <br>
   <br>
 
   <h2>List of Reservations</h2>
