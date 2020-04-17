@@ -30,6 +30,7 @@ Route::post('/reservations/approve/{id}', 'ReservationController@approve')->name
 
 // Borrows
 Route::get('/borrows', 'BorrowController@index')->name('borrows');
+Route::get('/userborrows', 'BorrowController@userindex')->name('borrows');
 Route::get('/borrows/create', 'BorrowController@create')->name('borrows.create');
 Route::post('/borrows/destroy/{id}', 'BorrowController@destroy')->name('borrows.destroy');
 Route::post('/borrows/create', 'BorrowController@store')->name('borrows.store');

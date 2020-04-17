@@ -8,6 +8,7 @@ use \DateInterval;
 use App\Borrow;
 use App\Book;
 use App\User;
+use Auth;
 
 class BorrowController extends Controller
 {
@@ -53,6 +54,18 @@ class BorrowController extends Controller
         $fine = $this->countFine($data);
         return view('borrows.list')->with('data', $data)->with('fine', $fine);
     }
+
+    public function userindex()
+    {
+        $user = Auth::user();
+            $borrows = Borrow::where('user_email', 'like', $user['email'])->get();
+        $data = [
+            'borrows' => $borrows
+        ];
+        $fine = $this->countFine($data);
+        return view('borrows.listuser')->with('data', $data)->with('fine', $fine);
+    }
+
 
     /**
      * Show the form for creating a new resource.
