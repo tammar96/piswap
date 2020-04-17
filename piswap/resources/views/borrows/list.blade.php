@@ -11,9 +11,9 @@
 @section('content')
   <h1>List of all borrowings</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
-    Here you can add, edit and delete bottow
+    Here you can add, edit and delete borrows
   </span>
-  <h2>Add new book to the inventory</h2>
+  <h2>Add new borrow</h2>
     <button type="button" onclick="window.location.href='/borrows/create'" class="btn btn-success" >Add Borrow</button>
   <br>
   <br>
