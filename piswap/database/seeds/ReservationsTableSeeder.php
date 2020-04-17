@@ -13,9 +13,9 @@ class ReservationsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         DB::table('reservations')->insert(array(
-            array('date' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now'), 'user_email' => 'sit.amet@tristique.net', 'book_isbn' => '939-8-09-194620-6'),
-            array('date' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now'), 'user_email' => 'sit.amet@tristique.net', 'book_isbn' => '151-3-36-637737-0'),
-            array('date' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now'), 'user_email' => 'sit.amet@tristique.net', 'book_isbn' => '007-6-04-713537-2'),
+            array('date' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now'), 'user_email' => 'peter.novak@google.com', 'book_isbn' => '939-8-09-194620-6'),
+            array('date' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now'), 'user_email' => 'peter.novak@google.com', 'book_isbn' => '151-3-36-637737-0'),
+            array('date' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now'), 'user_email' => 'peter.novak@google.com', 'book_isbn' => '007-6-04-713537-2'),
             array('date' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now'), 'user_email' => 'sit.amet@tristique.net', 'book_isbn' => '044-2-40-494884-0'),
             array('date' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now'), 'user_email' => 'sit.amet@tristique.net', 'book_isbn' => '945-8-05-519602-7'),
             array('date' => $faker->dateTimeBetween($startDate = '-30 days', $endDate = 'now'), 'user_email' => 'a.scelerisque.sed@urnasuscipit.ca', 'book_isbn' => '945-8-05-519602-7'),

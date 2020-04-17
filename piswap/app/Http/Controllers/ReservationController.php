@@ -9,6 +9,7 @@ use App\Reservations;
 use App\Book;
 use App\User;
 use App\Borrow;
+use Auth;
 
 class ReservationController extends Controller
 {

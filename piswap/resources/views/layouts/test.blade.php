@@ -112,6 +112,11 @@
               <a class="nav-link" href="/profile">Profile</a>
             </li>
           </ul>
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/userborrows">My rentals</a>
+            </li>
+          </ul>
           @endif
 
           <ul class="nav nav-pills flex-column">

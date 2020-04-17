@@ -23,18 +23,20 @@ Route::resource('books', 'BookController');
 Route::post('/update-book/{isbn}', 'BookController@updateBook')->name('books.update-book');
 
 // Reservations
-Route::resource('reservations', 'ReservationController');
+Route::resource('/reservations', 'ReservationController');
 Route::post('/reservations/destroy/{id}', 'ReservationController@destroy')->name('reservations.destroy');
 Route::post('/reservations/approve/{id}', 'ReservationController@approve')->name('reservations.approve');
 
 
 // Borrows
 Route::get('/borrows', 'BorrowController@index')->name('borrows');
+Route::get('/userborrows', 'BorrowController@userindex')->name('borrows');
 Route::get('/borrows/create', 'BorrowController@create')->name('borrows.create');
 Route::post('/borrows/destroy/{id}', 'BorrowController@destroy')->name('borrows.destroy');
 Route::post('/borrows/create', 'BorrowController@store')->name('borrows.store');
 Route::post('/borrows/return/{id}', 'BorrowController@returnBookForm')->name('borrows.returnBookForm');
 Route::post('/borrows/prolong/{id}', 'BorrowController@prolong')->name('borrows.prolong');
+Route::post('/borrows/userprolong/{id}', 'BorrowController@userprolong')->name('borrows.userprolong');
 
 // User
 Route::resource('users', 'UserController');
