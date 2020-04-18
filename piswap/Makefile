@@ -92,3 +92,6 @@ clean:
 	@php artisan auth:clear-resets -vvv --no-interaction
 	@composer clearcache -vvv --no-interaction
 
+.PHONY: pack
+pack: app/* database/* public/* resources/* routes/web.php Makefile .env packages.txt dokumentacia.html
+	zip -r -9 xtamas01_xormos00_xkuzel06_xlakat01.zip $^
