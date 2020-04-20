@@ -1,14 +1,3 @@
-<!-- Stored in resources/views/child.blade.php -->
-
-@extends('layouts.test')
-
-@section('title', 'Return Book')
-
-@section('sidebar')
-    @parent
-@endsection
-
-@section('content')
   <h1>Return Book</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Late return on this books was identified. Please ask for payment.
@@ -26,10 +15,9 @@
         <p>{{ $fine }},- &euro;</p>
       </div>
     </div>
-    <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.destroy', $borrow->id)}}">
+    <form class="form-horizontal ajax-form" role="form" method="POST" data-url=="{{route('borrows.destroy', $borrow->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-warning" >Paid</button>
             </form>
   </form>
-@endsection

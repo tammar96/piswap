@@ -1,14 +1,5 @@
-<!-- Stored in resources/views/child.blade.php -->
 
-@extends('layouts.test')
 
-@section('title', 'Edit User')
-
-@section('sidebar')
-    @parent
-@endsection
-
-@section('content')
   <h1>Edit User</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     On this page you can edit your personal details.
@@ -24,7 +15,7 @@
     </ul>
   </div>
   @endif
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('users.update-someone', $data['user']->email) }}">
+  <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('users.update-someone', $data['user']->email) }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -118,4 +109,3 @@
     </form>
   </form>
   </div>
-@endsection

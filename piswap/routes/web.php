@@ -41,8 +41,14 @@ Route::post('/borrows/userprolong/{id}', 'BorrowController@userprolong')->name('
 // User
 Route::resource('users', 'UserController');
 Route::get('/profile', 'UserController@profile')->name('profile');
-Route::post('/profile', 'UserController@update')->name('profile.update');
+Route::post('/profile/update', 'UserController@update')->name('profile.update');
 Route::post('/update-someone/{email}', 'UserController@updateSomeone')->name('users.update-someone');
+
+//admin route
+Route::get('/admin/{category}/{view}/{someid}', 'UserController@indexAdmin'); // is there better way to register FE routes?
+Route::get('/admin/{category}/{view}', 'UserController@indexAdmin');
+Route::get('/admin/{view}', 'UserController@indexAdmin');
+Route::get('/admin', 'UserController@indexAdmin');
 
 // Invalid url exceptions
 Route::get('/notFoundHttpException', 'ErrorController@index404')->name('errors.notFoundHttpException');

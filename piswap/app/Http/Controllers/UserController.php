@@ -9,6 +9,7 @@ use App\User;
 use App\Borrow;
 use DB;
 use Auth;
+use Validator;
 
 class UserController extends Controller
 {
@@ -151,7 +152,12 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        $this->validate($request, $this->_rules);
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('profile')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
@@ -235,7 +241,12 @@ class UserController extends Controller
     public function updateSomeone(Request $request, $email)
     {
         $user = User::find($email);
-        $this->validate($request, $this->_rules);
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('/users/'.$email.'/edit')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
         $user->email = $request->input('email');
@@ -265,5 +276,10 @@ class UserController extends Controller
         }
 
         return $borrows;
+    }
+
+    public function indexAdmin()
+    {
+        return view('layouts/test');
     }
 }

@@ -1,14 +1,4 @@
-<!-- Stored in resources/views/child.blade.php -->
 
-@extends('layouts.test')
-
-@section('title', 'Reservations list')
-
-@section('sidebar')
-    @parent
-@endsection
-
-@section('content')
   <h1>List of all Reservations</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Here you can check and delete reservations
@@ -18,7 +8,7 @@
   <h2>List of Reservations</h2>
   <div class="table-responsive">
     <div class="form-group float-lg-right col-md-3" style="margin-top:5px;">
-      <input type="text" class="search_summer form-control" onkeyup="myFunction('summer', 0, 2)" placeholder="What you looking for?">
+      <input type="text" class="search_summer form-control" onkeyup="admin.filter('summer', 0, 2)" placeholder="What you looking for?">
     </div>
     <table class="table table-striped results_summer table-hover">
       <thead>
@@ -36,12 +26,12 @@
           <td>{{ $key->user_email }}</td>
           <td>{{ $key->date }}</td>
           <td>
-          <form class="form-horizontal"  role="form" method="POST" action="{{route('reservations.approve', $key->id)}}">
+          <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{route('reservations.approve', $key->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-warning" >Approve Reservation</button>
             </form>
-            <form class="form-horizontal"  role="form" method="POST" action="{{route('reservations.destroy', $key->id)}}">
+            <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{route('reservations.destroy', $key->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-danger" >Delete Reservation</button>
@@ -52,4 +42,3 @@
       </tbody>
     </table>
   </div>
-@endsection

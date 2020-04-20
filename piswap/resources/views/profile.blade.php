@@ -1,14 +1,3 @@
-<!-- Stored in resources/views/child.blade.php -->
-
-@extends('layouts.test')
-
-@section('title', 'Profile')
-
-@section('sidebar')
-    @parent
-@endsection
-
-@section('content')
   <h1>Profil</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     On this page you can edit your personal details.
@@ -24,7 +13,7 @@
     </ul>
   </div>
   @endif
-  <form id="form2val" class="form-horizontal" data-toggle="validator" role="form" method="POST" action="{{ route('profile.update') }}">
+  <form id="form2val" data-toggle="validator" class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('profile.update') }}" action="javascript:return;">
     {{ csrf_field() }}
 
     <div class="form-row">
@@ -98,4 +87,3 @@
     <br>
     <button type="submit" name="Submit" class="btn btn-primary">Save</button>
   </form>
-@endsection

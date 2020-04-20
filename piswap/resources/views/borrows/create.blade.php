@@ -1,14 +1,4 @@
-<!-- Stored in resources/views/child.blade.php -->
 
-@extends('layouts.test')
-
-@section('title', 'Lend')
-
-@section('sidebar')
-    @parent
-@endsection
-
-@section('content')
   <h1>Lend Book</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Lend book to reader.
@@ -24,7 +14,7 @@
     </ul>
   </div>
   @endif
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('borrows.store') }}">
+  <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('borrows.store') }}">
   {{ csrf_field() }}
     <div class="form-row">
 
@@ -49,4 +39,3 @@
     </div>
     <button type="submit" name="Submit" class="btn btn-primary">Lend</button>
   </form>
-@endsection

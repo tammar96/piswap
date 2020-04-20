@@ -1,14 +1,3 @@
-<!-- Stored in resources/views/child.blade.php -->
-
-@extends('layouts.test')
-
-@section('title', 'Search')
-
-@section('sidebar')
-    @parent
-@endsection
-
-@section('content')
   <h1>Search</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Here you can search for books, that we can provide.
@@ -50,10 +39,10 @@
           <td>{{ $key->language }}</td>
           <td>{{ $key->quantity}}</td>
           <td>
-            <form class="form-horizontal"  method="POST" action="{{ route('books.reserve', $key->isbn) }}">
+            <form class="form-horizontal ajax-form" role="form" method="POST" data-url=="{{ route('books.reserve', $key->isbn) }}">
               {{method_field('POST')}}
               {{ csrf_field() }}
-              <button type="button" onclick="window.location.href='/books/{{ $key->isbn }}/reserve'" class="btn btn-secondary" >Reserve Book</button>
+              <button type="button" onclick="window.location.href='/admin/books/{{ $key->isbn }}/reserve'" class="btn btn-secondary" >Reserve Book</button>
             </form>
           </td>
         </tr>
@@ -62,4 +51,3 @@
     </table>
   </div>
   @endif
-@endsection

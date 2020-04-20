@@ -1,14 +1,3 @@
-<!-- Stored in resources/views/child.blade.php -->
-
-@extends('layouts.test')
-
-@section('title', 'Add User')
-
-@section('sidebar')
-    @parent
-@endsection
-
-@section('content')
   <h1>Add User</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     On this page you can edit your personal details.
@@ -24,7 +13,7 @@
     </ul>
   </div>
   @endif
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('users.store') }}">
+  <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('users.store') }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -111,4 +100,3 @@
     <button type="submit" name="Submit" class="btn btn-primary">Save</button>
   </form>
   </div>
-@endsection

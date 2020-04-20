@@ -6,10 +6,11 @@
     <meta name="description" content="Projekt Kniznicny System">
       <meta name="author" content="xtamas01, xormos00, xlakat01, xkuzel06">
     <!-- Bootstrap core CSS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
@@ -40,81 +41,81 @@
           @if (Auth::user()->hasRole('admin'))
           <ul class="nav nav-pills  flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="/users">List of Users</a>
+              <a class="nav-link ajax-route" data-url="/users" data-title="User list">List of Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/users/create">Add New User</a>
+              <a class="nav-link ajax-route" data-url="/users/create">Add New User</a>
             </li>
           </ul>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item ">
-              <a class="nav-link" href="/books">List of Books</a>
+              <a class="nav-link ajax-route" data-url="/books">List of Books</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/books/create">Add New Book</a>
-            </li>
-          </ul>
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/borrows/create">Lend Book</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/borrows">Rentals</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/reservations">Reservations</a>
+              <a class="nav-link ajax-route" data-url="/books/create">Add New Book</a>
             </li>
           </ul>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
+              <a class="nav-link ajax-route" data-url="/borrows/create">Lend Book</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ajax-route" data-url="/borrows">Rentals</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ajax-route" data-url="/reservations">Reservations</a>
+            </li>
+          </ul>
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link ajax-route" data-url="/profile">Profile</a>
             </li>
           </ul>
           @elseif (Auth::user()->hasRole('librarian'))
           <ul class="nav nav-pills  flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="/users">List of Users</a>
+              <a class="nav-link ajax-route" data-url="/users">List of Users</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/users/create">Add New User</a>
+              <a class="nav-link ajax-route" data-url="/users/create">Add New User</a>
             </li>
           </ul>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item ">
-              <a class="nav-link" href="/books">List of Books</a>
+              <a class="nav-link ajax-route" data-url="/books">List of Books</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/books/create">Add New Book</a>
+              <a class="nav-link ajax-route" data-url="/books/create">Add New Book</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/borrows/create">Lend Book</a>
-            </li>
-          </ul>
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="/borrows">Rentals</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/reservations">Reservations</a>
+              <a class="nav-link ajax-route" data-url="/borrows/create">Lend Book</a>
             </li>
           </ul>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
+              <a class="nav-link ajax-route" data-url="/borrows">Rentals</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/borrows">My Rentals</a>
+              <a class="nav-link ajax-route" data-url="/reservations">Reservations</a>
+            </li>
+          </ul>
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link ajax-route" data-url="/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ajax-route" data-url="/borrows">My Rentals</a>
             </li>
           </ul>
           @elseif (Auth::user()->hasRole('user'))
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
+              <a class="nav-link ajax-route" data-url="/profile">Profile</a>
             </li>
           </ul>
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="/userborrows">My rentals</a>
+              <a class="nav-link ajax-route" data-url="/userborrows">My rentals</a>
             </li>
           </ul>
           @endif
@@ -134,16 +135,11 @@
           </nav>
           @show
 
-        <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+        <main role="main" id="contents" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
           @yield('content')
         </main>
       </div>
     </div>
-    <script>
-    $(document).ready(function() {
-        $('#form2val').bootstrapValidator();
-    });
-    </script>
     @else
     <script type="text/javascript">
       window.onload = function() {
