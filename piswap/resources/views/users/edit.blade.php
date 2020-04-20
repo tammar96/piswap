@@ -15,7 +15,7 @@
     </ul>
   </div>
   @endif
-  <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('users.update-someone', $data['user']->email) }}">
+  <form id="form2val" class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('users.update-someone', $data['user']->email) }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
