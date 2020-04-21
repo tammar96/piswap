@@ -4,7 +4,7 @@
     Here you can add, edit and delete users.
   </span>
   <h2>Add new User to the IS</h2>
-    <button type="button" onclick="window.location.href='/admin/users/create'" class="btn btn-success" >Add User</button>
+    <a data-url="/users/create" class="btn btn-success ajax-route" >Add User</a>
   <br>
   <br>
 
@@ -33,7 +33,7 @@
               {{method_field('DELETE')}}
               {{ csrf_field() }}
               @if (Auth::user()->hasRole('admin') || (Auth::user()->role == 'librarian' && $key->role != 'admin'))
-              <button type="button" onclick="window.location.href='/admin/users/{{ $key->email }}/edit'" class="btn btn-warning" >Edit User</button>
+              <a data-url="/users/{{ $key->email }}/edit" class="btn btn-warning ajax-route" >Edit User</a>
               <button type="submit" class="btn btn-danger" >Delete User</button>
               @endif
             </form>

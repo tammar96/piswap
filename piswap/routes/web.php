@@ -43,6 +43,7 @@ Route::resource('users', 'UserController');
 Route::get('/profile', 'UserController@profile')->name('profile');
 Route::post('/profile/update', 'UserController@update')->name('profile.update');
 Route::post('/update-someone/{email}', 'UserController@updateSomeone')->name('users.update-someone');
+Route::delete('/destroy-someone/{email}', 'UserController@destroy')->name('users.destroy');
 
 //admin route
 Route::get('/admin/{category}/{view}/{someid}', 'UserController@indexAdmin'); // is there better way to register FE routes?
