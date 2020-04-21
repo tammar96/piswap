@@ -13,7 +13,7 @@
     </ul>
   </div>
   @endif
-  <form class="form-horizontal ajax-form" role="form" method="POST" data-url=="{{ route('books.store') }}">
+  <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('books.store') }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">

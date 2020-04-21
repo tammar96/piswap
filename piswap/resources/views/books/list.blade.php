@@ -3,7 +3,7 @@
     Here you can add, edit and delete books
   </span>
   <h2>Add new book to the inventory</h2>
-    <button type="button" onclick="window.location.href='{{ route('books.create') }}'" class="btn btn-success" >Add Book</button>
+    <a data-url="/books/create" class="btn btn-success ajax-route" >Add Book</a>
   <br>
   <br>
 
@@ -37,7 +37,7 @@
             <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('books.destroy', $key->isbn) }}">
               {{method_field('DELETE')}}
               {{ csrf_field() }}
-              <button type="button" onclick="window.location.href='admin/books/{{ $key->isbn }}/edit'" class="btn btn-warning" >Edit Book</button>
+              <a data-url="/books/{{ $key->isbn }}/edit" class="btn btn-warning ajax-route" >Edit Book</a>
               <button type="submit" class="btn btn-danger" >Delete Book</button>
             </form>
           </td>

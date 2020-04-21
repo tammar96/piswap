@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Book;
 use DB;
+use Validator;
+
 class BookController extends Controller
 {
     private $_rules = [
@@ -63,8 +65,14 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->_rules);
-        $this->validate($request, ['isbn' => 'unique:books']);
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('/books/create')->withErrors($validator)->withInput();
+        }
+        $validator = Validator::make($request->all(), ['isbn' => 'unique:books']);
+        if ($validator->fails()) {
+            return redirect('/books/create')->withErrors($validator)->withInput();
+        }
 
         $book = new Book();
         $book->isbn = $request->input('isbn');
@@ -170,7 +178,11 @@ class BookController extends Controller
     {
 
         $book = Book::find($id);
-        $this->validate($request, $this->_rules);
+
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('/books/'.$book->isbn.'/edit')->withErrors($validator)->withInput();
+        }
 
         $book->isbn = $request->input('isbn');
         $book->title = $request->input('title');
