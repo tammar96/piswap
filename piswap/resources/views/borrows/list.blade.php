@@ -4,7 +4,7 @@
     Here you can add, edit and delete borrows
   </span>
   <h2>Add new borrow</h2>
-    <button type="button" onclick="window.location.href='/admin/borrows/create'" class="btn btn-success" >Add Borrow</button>
+    <a data-url="/borrows/create" class="btn btn-success ajax-route" >Add Borrow</a>
   <br>
   <br>
 

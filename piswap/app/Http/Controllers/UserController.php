@@ -65,8 +65,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->_rules);
-        $this->validate($request, ['email' => 'unique:users']);
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('/users/create')->withErrors($validator)->withInput();
+        }
+        $validator = Validator::make($request->all(), ['email' => 'unique:users']);
+        if ($validator->fails()) {
+            return redirect('/users/create')->withErrors($validator)->withInput();
+        }
 
         $user = new User();
         $user->name = $request->input('name');
