@@ -110,7 +110,7 @@ class BookController extends Controller
             // Get the fields we expect
             $text = isset($filtratedArray['text']) ? $filtratedArray['text'] : "";
             $year = isset($filtratedArray['year']) ? "YEAR(date)=" . $filtratedArray['year'] : "1=1";
-            $availability = isset($filtratedArray['available']) ? $filtratedArray['available'] : 0;
+            $availability = isset($filtratedArray['available']) ? 1 : 0;
             // Edit the text in form the SQL expects
             $textParsed = "%" . $text . "%";
             

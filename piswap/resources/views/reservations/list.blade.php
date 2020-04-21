@@ -4,7 +4,16 @@
     Here you can check and delete reservations
   </span>
   <br>
-
+  @if ($errors->any())
+  <div class="alert alert-danger col-md-8">
+    <h4>These errors were found in the form:</h2>
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+  </div>
+  @endif
   <h2>List of Reservations</h2>
   <div class="table-responsive">
     <div class="form-group float-lg-right col-md-3" style="margin-top:5px;">

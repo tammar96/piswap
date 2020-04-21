@@ -10,6 +10,7 @@ use App\Book;
 use App\User;
 use App\Borrow;
 use Auth;
+use Validator;
 
 class ReservationController extends Controller
 {
@@ -200,6 +201,18 @@ class ReservationController extends Controller
         $reservation = Reservations::find($id);
         $user = User::find($reservation['user_email']);
         $book = Book::find($reservation['book_isbn']);
+
+        $validator = Validator::make([], []);
+        
+        $quantity = $book['quantity'];      
+        if($quantity <= 0)
+        {
+            $validator->getMessageBag()->add('quantity', 'Book is not currently on stock.');
+            return redirect('/reservations')->withErrors($validator)->withInput();
+        }
+
+        $book['quantity'] = $quantity - 1;
+        $book->save();
 
         $borrow = new Borrow();
         $borrow->date_from = (new DateTime('now'))->format('Y-m-d H:i:s');
