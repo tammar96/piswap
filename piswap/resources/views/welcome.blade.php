@@ -12,7 +12,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/profile') }}">Profile</a>
+                        <a href="{{ url('/admin/profile') }}">Profile</a>
                         <a {{-- class="nav-link" --}} href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">

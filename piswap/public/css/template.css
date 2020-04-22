@@ -111,16 +111,19 @@ h1 {
 .btn-success{
   border-color:#d964C4C !important;
   background-color: #d964C4C;
+  color: #fff !important;
 }
 
 .btn-success:hover{
   border-color:#d964C4C !important;
   background-color: #d964C4C;
+  color: #fff !important;
 }
 
 .btn-success:not([disabled]):not(.disabled).active, .btn-success:not([disabled]):not(.disabled):active, .show>.btn-success.dropdown-toggle {
   box-shadow: 0 0 0 0.2rem #62bbac !important;
   background-color: #d964C4C;
+  color: #fff !important;
 }
 
 .btn-primary{

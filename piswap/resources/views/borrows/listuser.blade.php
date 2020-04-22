@@ -1,14 +1,3 @@
-<!-- Stored in resources/views/child.blade.php -->
-
-@extends('layouts.test')
-
-@section('title', 'Borrowings list')
-
-@section('sidebar')
-    @parent
-@endsection
-
-@section('content')
   <h1>List of all borrowings and reservations</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
   </span>
@@ -33,7 +22,7 @@
           <td>{{ $fine[($key->id)] }},- &euro;</td>
           <td>
 
-            <form class="form-horizontal"  role="form" method="POST" action="{{route('borrows.userprolong', $key->id)}}">
+            <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{route('borrows.userprolong', $key->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-warning" >Prolong Borrowing</button>
@@ -65,4 +54,4 @@
       </tbody>
     </table>
   </div>
-@endsection
+

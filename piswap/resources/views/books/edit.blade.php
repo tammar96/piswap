@@ -1,14 +1,3 @@
-<!-- Stored in resources/views/child.blade.php -->
-
-@extends('layouts.test')
-
-@section('title', 'Edit Book')
-
-@section('sidebar')
-    @parent
-@endsection
-
-@section('content')
   <h1>Edit Book</h1>
   <span class=".text-left" style="margin-bottom: 15px; display: block;">
     Edit book attributes.
@@ -24,7 +13,7 @@
     </ul>
   </div>
   @endif
-  <form class="form-horizontal" role="form" method="POST" action="{{ route('books.update-book', $data['book']->isbn) }}">
+  <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('books.update-book', $data['book']->isbn) }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
@@ -138,4 +127,3 @@
       <button type="submit" class="btn btn-danger" >Save</button>
     </form>
   </form>
-@endsection

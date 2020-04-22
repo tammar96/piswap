@@ -10,6 +10,7 @@ use App\Reservations;
 use App\Book;
 use App\User;
 use Auth;
+use Validator;
 
 class BorrowController extends Controller
 {
@@ -96,7 +97,19 @@ class BorrowController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->_rules);
+        $validator = Validator::make($request->all(), $this->_rules);
+
+        $book = Book::find($request->input('isbn'));
+        $quantity = $book['quantity'];
+        if($quantity <= 0)
+        {
+            $validator->getMessageBag()->add('quantity', 'Book is not currently on stock.');
+            return redirect('/borrows/create')->withErrors($validator)->withInput();
+        }
+
+        if ($validator->fails()) {
+            return redirect('/borrows/create')->withErrors($validator)->withInput();
+        }
 
         $borrow = new Borrow();
         $borrow->date_from = (new DateTime('now'))->format('Y-m-d H:i:s');
@@ -104,7 +117,8 @@ class BorrowController extends Controller
 
         $user = User::find($request->input('reader'));
         $borrow->user()->associate($user);
-        $book = Book::find($request->input('isbn'));
+        $book['quantity'] = $quantity - 1;
+        $book->save();
         $borrow->book()->associate($book);
         $borrow->save();
 
@@ -154,7 +168,11 @@ class BorrowController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->_rules);
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('/borrows')->withErrors($validator)->withInput();
+        }
+
         $borrow = Borrow::find($id);
 
         $borrow->date = $request->input('date');
@@ -191,7 +209,6 @@ class BorrowController extends Controller
         $data = [
             'borrows' => Borrow::get(),
         ];
-        // TODO quantity + 1
         $fine = $this->countFine($data);
         return view('borrows.list')->with('data', $data)->with('fine', $fine);
     }

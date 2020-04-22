@@ -9,6 +9,7 @@ use App\User;
 use App\Borrow;
 use DB;
 use Auth;
+use Validator;
 
 class UserController extends Controller
 {
@@ -64,8 +65,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->_rules);
-        $this->validate($request, ['email' => 'unique:users']);
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('/users/create')->withErrors($validator)->withInput();
+        }
+        $validator = Validator::make($request->all(), ['email' => 'unique:users']);
+        if ($validator->fails()) {
+            return redirect('/users/create')->withErrors($validator)->withInput();
+        }
 
         $user = new User();
         $user->name = $request->input('name');
@@ -78,7 +85,7 @@ class UserController extends Controller
         $city = $request->input('city');
         $country = $request->input('country');
         $zipcode = $request->input('zipcode');
-        $user->address = implode(", ", array($street, $city, $zipcode));
+        $user->address = implode(", ", array($street, $city, $zipcode, $country));
         $user->save();
 
 
@@ -151,12 +158,18 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        $this->validate($request, $this->_rules);
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('profile')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
+
         $street = $request->input('street');
         $city = $request->input('city');
         $zipcode = $request->input('zipcode');
@@ -187,7 +200,7 @@ class UserController extends Controller
         // and
         // a librarian can not destory a user
         $user = User::find($email);
-        if ($email != Auth::user()->email && (Auth::user()->role == 'librarian' && $user->role == 'admin'))
+        if ($email != Auth::user()->email && (Auth::user()->role == 'librarian' || Auth::user()->role == 'admin'))
             User::Destroy($email);
 
         $data = [
@@ -235,11 +248,18 @@ class UserController extends Controller
     public function updateSomeone(Request $request, $email)
     {
         $user = User::find($email);
-        $this->validate($request, $this->_rules);
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('/users/'.$email.'/edit')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
+        $user->role = $request->input('role');
+
         $street = $request->input('street');
         $city = $request->input('city');
         $zipcode = $request->input('zipcode');
@@ -265,5 +285,10 @@ class UserController extends Controller
         }
 
         return $borrows;
+    }
+
+    public function indexAdmin()
+    {
+        return view('layouts/test');
     }
 }

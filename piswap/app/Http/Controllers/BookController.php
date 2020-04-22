@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Book;
 use DB;
+use Validator;
+
 class BookController extends Controller
 {
     private $_rules = [
@@ -63,8 +65,14 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, $this->_rules);
-        $this->validate($request, ['isbn' => 'unique:books']);
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('/books/create')->withErrors($validator)->withInput();
+        }
+        $validator = Validator::make($request->all(), ['isbn' => 'unique:books']);
+        if ($validator->fails()) {
+            return redirect('/books/create')->withErrors($validator)->withInput();
+        }
 
         $book = new Book();
         $book->isbn = $request->input('isbn');
@@ -78,7 +86,7 @@ class BookController extends Controller
         $book->department = $request->input('department');
         $book->genre = $request->input('genre');
         $book->quantity = $request->input('quantity');
-        $book->rack = $request->input('rack');
+        $book->rack = $request->input('location');
         $book->language = $request->input('language');
         $book->location = $request->input('location');
 
@@ -102,10 +110,10 @@ class BookController extends Controller
             // Get the fields we expect
             $text = isset($filtratedArray['text']) ? $filtratedArray['text'] : "";
             $year = isset($filtratedArray['year']) ? "YEAR(date)=" . $filtratedArray['year'] : "1=1";
-            $availability = isset($filtratedArray['available']) ? $filtratedArray['available'] : 0;
+            $availability = isset($filtratedArray['available']) ? 1 : 0;
             // Edit the text in form the SQL expects
             $textParsed = "%" . $text . "%";
-            
+
             // prepare order by
             $sortField = isset($filtratedArray['sortBy']) ? $filtratedArray['sortBy'] : "title";
             $sortDirection = isset($filtratedArray['sortDirection']) ? $filtratedArray['sortDirection'] : "";
@@ -170,7 +178,11 @@ class BookController extends Controller
     {
 
         $book = Book::find($id);
-        $this->validate($request, $this->_rules);
+
+        $validator = Validator::make($request->all(), $this->_rules);
+        if ($validator->fails()) {
+            return redirect('/books/'.$book->isbn.'/edit')->withErrors($validator)->withInput();
+        }
 
         $book->isbn = $request->input('isbn');
         $book->title = $request->input('title');
@@ -183,7 +195,7 @@ class BookController extends Controller
         $book->department = $request->input('department');
         $book->genre = $request->input('genre');
         $book->quantity = $request->input('quantity');
-        $book->rack = $request->input('rack');
+        $book->rack = $request->input('location');
         $book->language = $request->input('language');
         $book->location = $request->input('location');
 
