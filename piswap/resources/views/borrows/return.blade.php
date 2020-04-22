@@ -15,7 +15,7 @@
         <p>{{ $fine }},- &euro;</p>
       </div>
     </div>
-    <form class="form-horizontal ajax-form" role="form" method="POST" data-url=="{{route('borrows.destroy', $borrow->id)}}">
+    <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{route('borrows.destroy', $borrow->id)}}">
               {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="submit" class="btn btn-warning" >Paid</button>
