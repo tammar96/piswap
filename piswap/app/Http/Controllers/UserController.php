@@ -85,7 +85,7 @@ class UserController extends Controller
         $city = $request->input('city');
         $country = $request->input('country');
         $zipcode = $request->input('zipcode');
-        $user->address = implode(", ", array($street, $city, $zipcode));
+        $user->address = implode(", ", array($street, $city, $zipcode, $country));
         $user->save();
 
 
