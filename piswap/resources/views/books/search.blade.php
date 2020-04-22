@@ -39,7 +39,7 @@
           <td>{{ $key->language }}</td>
           <td>{{ $key->quantity}}</td>
           <td>
-            <form class="form-horizontal ajax-form" role="form" method="POST" data-url=="{{ route('books.reserve', $key->isbn) }}">
+            <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('books.reserve', $key->isbn) }}">
               {{method_field('POST')}}
               {{ csrf_field() }}
               <button type="button" onclick="window.location.href='/admin/books/{{ $key->isbn }}/reserve'" class="btn btn-secondary" >Reserve Book</button>
