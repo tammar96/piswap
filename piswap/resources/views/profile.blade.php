@@ -50,24 +50,6 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-3">
-      <label for="role">Role</label>
-          <select id="role" class="form-control" name="role">
-          @if (Auth::user()->hasRole('admin'))
-            @foreach(array("user", "librarian", "admin") as $role)
-              @if( $data['user']->role == $role)
-              <option value="{{$role}}" selected>{{$role}}</option>
-              @else
-              <option value="{{$role}}">{{$role}}</option>
-              @endif
-            @endforeach
-          @else
-            <option value="user" selected>user</option>
-          @endif
-        </select>
-      </div>
-    </div>
-    <div class="form-row">
       <div class="form-group col-md-6 required">
         <label class="control-label" for="street">Street & house number</label>
         <input type="text" class="form-control" id="street" placeholder="Street Address & House number" name="street" value="{{ $data['street'] }}" required
