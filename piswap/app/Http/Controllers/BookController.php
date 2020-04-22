@@ -86,7 +86,7 @@ class BookController extends Controller
         $book->department = $request->input('department');
         $book->genre = $request->input('genre');
         $book->quantity = $request->input('quantity');
-        $book->rack = $request->input('rack');
+        $book->rack = $request->input('location');
         $book->language = $request->input('language');
         $book->location = $request->input('location');
 
@@ -113,7 +113,7 @@ class BookController extends Controller
             $availability = isset($filtratedArray['available']) ? 1 : 0;
             // Edit the text in form the SQL expects
             $textParsed = "%" . $text . "%";
-            
+
             // prepare order by
             $sortField = isset($filtratedArray['sortBy']) ? $filtratedArray['sortBy'] : "title";
             $sortDirection = isset($filtratedArray['sortDirection']) ? $filtratedArray['sortDirection'] : "";
@@ -195,7 +195,7 @@ class BookController extends Controller
         $book->department = $request->input('department');
         $book->genre = $request->input('genre');
         $book->quantity = $request->input('quantity');
-        $book->rack = $request->input('rack');
+        $book->rack = $request->input('location');
         $book->language = $request->input('language');
         $book->location = $request->input('location');
 

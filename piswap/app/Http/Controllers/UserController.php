@@ -169,6 +169,8 @@ class UserController extends Controller
         $user->surname = $request->input('surname');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
+        $user->role = $request->input('role');
+
         $street = $request->input('street');
         $city = $request->input('city');
         $zipcode = $request->input('zipcode');
