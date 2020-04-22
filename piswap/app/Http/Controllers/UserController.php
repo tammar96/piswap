@@ -200,7 +200,7 @@ class UserController extends Controller
         // and
         // a librarian can not destory a user
         $user = User::find($email);
-        if ($email != Auth::user()->email && (Auth::user()->role == 'librarian' && $user->role == 'admin'))
+        if ($email != Auth::user()->email && (Auth::user()->role == 'librarian' || Auth::user()->role == 'admin'))
             User::Destroy($email);
 
         $data = [
