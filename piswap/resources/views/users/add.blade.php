@@ -13,21 +13,21 @@
     </ul>
   </div>
   @endif
-  <form class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('users.store') }}">
+  <form id="form2val" class="form-horizontal ajax-form" role="form" method="POST" data-url="{{ route('users.store') }}">
   {{ csrf_field() }}
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ old('name') }}"
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z\s]+$"
+         data-bv-regexp-regexp="^[^\s][A-z\s]+$"
          data-bv-regexp-message="The name can consist of alphabetical characters and spaces only">
       </div>
       <div class="form-group col-md-4">
         <label for="surname">Surname</label>
         <input type="text" class="form-control" id="surname" placeholder="Surname" name="surname" value="{{ old('surname') }}"
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z\s]+$"
+         data-bv-regexp-regexp="^[^\s][A-z\s]+$"
          data-bv-regexp-message="The surname can consist of alphabetical characters and spaces only">
       </div>
     </div>
@@ -67,7 +67,7 @@
         <label class="control-label" for="street">Street</label>
         <input type="text" class="form-control" id="street" placeholder="Street Address & House number" name="street" value="{{ old('street') }}" required
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z0-9\s\/\-]+$"
+         data-bv-regexp-regexp="^[^\s\&][A-z0-9\s\/\-]+$"
          data-bv-regexp-message="The street can consist of alphabetical characters, spaces, backslash and dash only">
       </div>
     </div>
@@ -76,12 +76,12 @@
         <label class="control-label" for="city">City</label>
         <input type="text" class="form-control" id="city" placeholder="City" name="city" required="required" value="{{ old('city') }}"
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z\s\&]+$"
+         data-bv-regexp-regexp="^[^\s\&][A-z\s\&]+$"
          data-bv-regexp-message="The city can consist alphanumerical characters and spaces only">
       </div>
       <div class="form-group required col-md-2">
         <label class="control-label" for="zipcode">ZIP code</label>
-        <input type="text" class="form-control" id="zipcode" placeholder="000 00" name="zipcode" required="required" value="{{ old('zipcode') }}"
+        <input type="text" class="form-control" id="zipcode" placeholder="00000" name="zipcode" required="required" value="{{ old('zipcode') }}"
         data-bv-regexp="true"
          data-bv-regexp-regexp="^[0-9]{5}$"
          data-bv-regexp-message="The zipcode can consist 5 digits only">
@@ -90,7 +90,7 @@
         <label class="control-label" for="country">Country</label>
         <input type="text" class="form-control" id="country" placeholder="United Kingdom" name="country" required="required" value="{{ old('country') }}"
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z\s]+$"
+         data-bv-regexp-regexp="^[^\s][A-z\s]+$"
          data-bv-regexp-message="The country can consist alphanumerical characters and spaces only">
       </div>
     </div>

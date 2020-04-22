@@ -22,14 +22,14 @@
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{$data['user']->name}}"
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z\s]+$"
+         data-bv-regexp-regexp="^[^\s][A-z\s]+$"
          data-bv-regexp-message="The name can consist of alphabetical characters and spaces only">
       </div>
       <div class="form-group col-md-4">
         <label for="surname">Surname</label>
         <input type="text" class="form-control" id="surname" placeholder="Surname" name="surname" value="{{$data['user']->surname}}"
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z\s]+$"
+         data-bv-regexp-regexp="^[^\s][A-z\s]+$"
          data-bv-regexp-message="The surname can consist of alphabetical characters and spaces only">
       </div>
     </div>
@@ -73,7 +73,7 @@
         <label class="control-label" for="address">Street</label>
         <input type="text" class="form-control" id="address" placeholder="Street Address & House number" name="street" value="{{$data['street']}}" required
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z0-9\s\/\-]+$"
+         data-bv-regexp-regexp="^[^\s\&][A-z0-9\s\/\-]+$"
          data-bv-regexp-message="The street can consist of alphabetical characters, spaces, backslash and dash only">
       </div>
     </div>
@@ -82,21 +82,21 @@
         <label class="control-label" for="city">City</label>
         <input type="text" class="form-control" id="city" placeholder="City" name="city" required="required" value="{{$data['city']}}"
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z\s\&]+$"
+         data-bv-regexp-regexp="^[^\s\&][A-z\s\&]+$"
          data-bv-regexp-message="The city can consist alphanumerical characters and spaces only">
       </div>
       <div class="form-group required col-md-2">
         <label class="control-label" for="zipcode">ZIP code</label>
-        <input type="text" class="form-control" id="zipcode" placeholder="000 00" name="zipcode" required="required" value="{{$data['zipcode']}}"
+        <input type="text" class="form-control" id="zipcode" placeholder="00000" name="zipcode" required="required" value="{{$data['zipcode']}}"
         data-bv-regexp="true"
          data-bv-regexp-regexp="^[0-9]{5}$"
          data-bv-regexp-message="The zipcode can consist 5 digits only">
       </div>
       <div class="form-group required col-md-2">
         <label class="control-label" for="country">Country</label>
-        <input type="text" class="form-control" id="country" placeholder="000 00" name="country" required="required" value="{{ $data['country'] }}"
+        <input type="text" class="form-control" id="country" placeholder="Czechia" name="country" required="required" value="{{ $data['country'] }}"
         data-bv-regexp="true"
-         data-bv-regexp-regexp="^[A-z\s]+$"
+         data-bv-regexp-regexp="^[^\s][A-z\s]+$"
          data-bv-regexp-message="The country can consist alphanumerical characters and spaces only">
       </div>
     </div>
