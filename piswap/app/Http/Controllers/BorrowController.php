@@ -99,8 +99,8 @@ class BorrowController extends Controller
     {
         $validator = Validator::make($request->all(), $this->_rules);
 
-        $book = Book::find($request->input('isbn'));  
-        $quantity = $book['quantity'];      
+        $book = Book::find($request->input('isbn'));
+        $quantity = $book['quantity'];
         if($quantity <= 0)
         {
             $validator->getMessageBag()->add('quantity', 'Book is not currently on stock.');
@@ -116,7 +116,7 @@ class BorrowController extends Controller
         $borrow->date_to = (new DateTime('now'))->add(new DateInterval('P30D'))->format('Y-m-d H:i:s');
 
         $user = User::find($request->input('reader'));
-        $borrow->user()->associate($user);   
+        $borrow->user()->associate($user);
         $book['quantity'] = $quantity - 1;
         $book->save();
         $borrow->book()->associate($book);
@@ -209,7 +209,6 @@ class BorrowController extends Controller
         $data = [
             'borrows' => Borrow::get(),
         ];
-        // TODO quantity + 1
         $fine = $this->countFine($data);
         return view('borrows.list')->with('data', $data)->with('fine', $fine);
     }
