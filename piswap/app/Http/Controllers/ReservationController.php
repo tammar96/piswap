@@ -96,7 +96,7 @@ class ReservationController extends Controller
     public function show($id)
     {
         $data = [
-            'reservation' => Reservation::find($id)
+            'reservation' => Reservations::find($id)
         ];
 
         // return view('borrows.details')->with('data', $data);
@@ -133,9 +133,9 @@ class ReservationController extends Controller
 
     public function destroyAPI($id)
     {
-        Reservation::destroy($id);
+        Reservations::destroy($id);
         $data = [
-            'reservations' => Reservation::get()
+            'reservations' => Reservations::get()
         ];
     }
 
@@ -148,7 +148,7 @@ class ReservationController extends Controller
     public function edit($id)
     {
         $data = [
-            'reservation' => Reservation::find($id)
+            'reservation' => Reservations::find($id)
         ];
 
         // return view('reservations.edit')->with('data', $data);
@@ -165,7 +165,7 @@ class ReservationController extends Controller
     {
         $this->validate($request, $this->_rules);
 
-        $reservation = Reservation::find($id);
+        $reservation = Reservations::find($id);
         $reservation->date = $request->input('date');
         $user = User::find($request->input('user_email'));
         $reservation->user()->associate($user);
